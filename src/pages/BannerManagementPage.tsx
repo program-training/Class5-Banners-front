@@ -1,5 +1,6 @@
 import { Typography } from "@mui/material";
 import { Box } from "@mui/system";
+import { Outlet } from "react-router-dom";
 
 const BannerManagementPage = () => {
   return (
@@ -10,6 +11,7 @@ const BannerManagementPage = () => {
       {/* <Link to={'/SignUp'} component={<SignUpPage/>} >
           {Children}
         </Link> */}
+      <Outlet />
     </Box>
   );
 };
