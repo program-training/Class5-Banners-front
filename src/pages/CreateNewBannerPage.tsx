@@ -20,7 +20,10 @@ const CenteredBox = styled(Box)({
 });
 
 const CreateNewBannerPage = () => {
-    const [selectedProduct] = useState<Product | null>(null);
+    const [selectedProduct, setSelectedProduct] = useState<Product | null>(
+        null
+    );
+
     const [bannerURL, setBannerURL] = useState("");
     const handleSave = () => {};
 
@@ -41,6 +44,12 @@ const CreateNewBannerPage = () => {
                 renderInput={(params) => (
                     <TextField {...params} label="Product Title" />
                 )}
+                onChange={(_, value) => {
+                    const selected = sampleProducts.find(
+                        (product) => product.title === value
+                    );
+                    setSelectedProduct(selected || null);
+                }}
             />
             {selectedProduct && (
                 <BannerCard selectedProduct={selectedProduct} />
