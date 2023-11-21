@@ -5,33 +5,34 @@ import { useState } from "react";
 type Props = {
     setIsValidConfirmPassword: Dispatch<SetStateAction<boolean>>;
     prevPassword: string;
-    IsValidConfirmPassword: boolean;
+    isValidConfirmPassword: boolean;
 };
 const PasswordInputs = ({
     setIsValidConfirmPassword,
     prevPassword,
-    IsValidConfirmPassword,
+    isValidConfirmPassword,
 }: Props) => {
     const [showPassword, setShowPassword] = useState(false);
     const [password, setPassword] = useState("");
 
     function handlePasswordChange(value: string): void {
-        setPassword(value);
-        setIsValidConfirmPassword(password == prevPassword);
-
-        console.log("new: ", password, "prev: ", prevPassword);
+        setPassword(() => {
+            const updatedPassword = value;
+            setIsValidConfirmPassword(updatedPassword === prevPassword);
+            return updatedPassword;
+        });
     }
 
     return (
         <TextField
-            label="Password"
+            label="ConfirmPassword"
             variant="outlined"
             type={showPassword ? "text" : "password"}
             fullWidth
             value={password}
             onChange={(e) => handlePasswordChange(e.target.value)}
-            error={!IsValidConfirmPassword}
-            helperText={!IsValidConfirmPassword && "Passwords doesn't match"}
+            error={!isValidConfirmPassword}
+            helperText={!isValidConfirmPassword && "Passwords doesn't match"}
             style={{ marginBottom: "10px" }}
             InputProps={{
                 endAdornment: (

@@ -1,14 +1,19 @@
 import { Email } from "@mui/icons-material";
 import { TextField } from "@mui/material";
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction } from "react";
 import { validateEmail } from "../utils/functions";
 type Props = {
+    email: string;
+    setEmail: Dispatch<SetStateAction<string>>;
+    isValidEmail: boolean;
     setIsValidEmail: Dispatch<SetStateAction<boolean>>;
 };
-const EmailInput = ({ setIsValidEmail }: Props) => {
-    const [email, setEmail] = useState("");
-    const [isValidEmail] = useState(true);
-
+const EmailInput = ({
+    setIsValidEmail,
+    email,
+    setEmail,
+    isValidEmail,
+}: Props) => {
     const handleEmailChange = (value: string) => {
         setEmail(value);
         setIsValidEmail(validateEmail(value));

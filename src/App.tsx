@@ -1,11 +1,11 @@
-import { Stack } from "@mui/material";
+import Router from "./router/RouterDOM";
 
 function App() {
-  return (
-    <>
-      <Stack direction={"column"}></Stack>
-    </>
-  );
+    return (
+        <>
+            <Router />
+        </>
+    );
 }
 
 export default App;
