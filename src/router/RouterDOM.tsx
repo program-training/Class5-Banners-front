@@ -10,6 +10,8 @@ import ResetPasswordPage from "../pages/ResetPasswordPage";
 import EditUserPage from "../pages/EditUserPage";
 import CreateNewBannerPage from "../pages/CreateNewBannerPage";
 import EditBannerPage from "../pages/EditBannerPage";
+import Header from "../components/Header";
+import MyBannersPage from "../pages/MyBannersPage";
 
 const RouterDom = () => {
   return (
@@ -19,7 +21,9 @@ const RouterDom = () => {
       <Route path="/forget-password/:userID" element={<ForgetPasswordPage />} />
       <Route path="/reset-password/:userID" element={<ResetPasswordPage />} />
 
-      <Route path="/banners" element={<BannerManagementPage />}>
+      <Route path="/banners" element={<Header />}>
+        <Route path="" element={<BannerManagementPage />} />
+        <Route path="my-banners" element={<MyBannersPage />} />
         <Route path="create" element={<CreateNewBannerPage />} />
         <Route path="edit/:productID" element={<EditBannerPage />} />
         <Route path="products/:productID" element={<SignUpPage />} />

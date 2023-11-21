@@ -8,7 +8,7 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import Avatar from "@mui/material/Avatar";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Outlet } from "react-router-dom";
 import { Extension } from "@mui/icons-material";
 import DeleteProfileButton from "./Deletedialog";
 
@@ -27,11 +27,11 @@ const Header = () => {
   };
 
   const handleDisplayProfile = () => {
-    navigate("show-user");
+    navigate("/users/show/bla-bla");
   };
 
   const handleEditProfile = () => {
-    navigate("Edit-user");
+    navigate("Edit/bla-bla");
   };
 
   const handleLogout = () => {
@@ -43,68 +43,71 @@ const Header = () => {
   // };
 
   return (
-    <AppBar position="static">
-      <Toolbar disableGutters>
-        <IconButton
-          onClick={() => {
-            navigate("banner-management");
-          }}
-          size="large"
-          aria-label="go to banner management page"
-          color="inherit"
-        >
-          <Extension />
-        </IconButton>
-        <Box sx={{ flexGrow: 1 }} />
-        <Button
-          onClick={() => {
-            navigate("my-banners");
-          }}
-          variant="outlined"
-          sx={{
-            fontFamily: "monospace",
-            fontWeight: 700,
-            letterSpacing: ".3rem",
-            color: "inherit",
-            textDecoration: "none",
-          }}
-        >
-          My Banners
-        </Button>
-
-        <Box sx={{ flexGrow: 1 }} />
-
-        <Tooltip title="Open user menu">
-          <IconButton onClick={handleOpenUserMenu} sx={{ p: 1 }}>
-            <Avatar alt="User" src="/static/images/avatar/2.jpg" />
+    <>
+      <AppBar position="static">
+        <Toolbar disableGutters>
+          <IconButton
+            onClick={() => {
+              navigate("");
+            }}
+            size="large"
+            aria-label="go to banner management page"
+            color="inherit"
+          >
+            <Extension />
           </IconButton>
-        </Tooltip>
-        <Menu
-          sx={{ mt: "45px" }}
-          id="menu-appbar"
-          anchorEl={anchorElUser}
-          anchorOrigin={{
-            vertical: "top",
-            horizontal: "right",
-          }}
-          keepMounted
-          transformOrigin={{
-            vertical: "top",
-            horizontal: "right",
-          }}
-          open={Boolean(anchorElUser)}
-          onClose={handleCloseUserMenu}
-        >
-          <MenuItem onClick={handleDisplayProfile}>Display Profile</MenuItem>
-          <MenuItem onClick={handleEditProfile}>Edit Profile</MenuItem>
-          <MenuItem onClick={handleLogout}>Logout</MenuItem>
-          <MenuItem onClick={DeleteProfileButton}>Delete Profile</MenuItem>
-          <MenuItem>
-            <DeleteProfileButton />
-          </MenuItem>
-        </Menu>
-      </Toolbar>
-    </AppBar>
+          <Box sx={{ flexGrow: 1 }} />
+          <Button
+            onClick={() => {
+              navigate("my-banners");
+            }}
+            variant="outlined"
+            sx={{
+              fontFamily: "monospace",
+              fontWeight: 700,
+              letterSpacing: ".3rem",
+              color: "inherit",
+              textDecoration: "none",
+            }}
+          >
+            My Banners
+          </Button>
+
+          <Box sx={{ flexGrow: 1 }} />
+
+          <Tooltip title="Open user menu">
+            <IconButton onClick={handleOpenUserMenu} sx={{ p: 1 }}>
+              <Avatar />
+            </IconButton>
+          </Tooltip>
+          <Menu
+            sx={{ mt: "45px" }}
+            id="menu-appbar"
+            anchorEl={anchorElUser}
+            anchorOrigin={{
+              vertical: "top",
+              horizontal: "right",
+            }}
+            keepMounted
+            transformOrigin={{
+              vertical: "top",
+              horizontal: "right",
+            }}
+            open={Boolean(anchorElUser)}
+            onClose={handleCloseUserMenu}
+          >
+            <MenuItem onClick={handleDisplayProfile}>Display Profile</MenuItem>
+            <MenuItem onClick={handleEditProfile}>Edit Profile</MenuItem>
+            <MenuItem onClick={handleLogout}>Logout</MenuItem>
+            <MenuItem onClick={DeleteProfileButton}>Delete Profile</MenuItem>
+            <MenuItem>
+              <DeleteProfileButton />
+            </MenuItem>
+          </Menu>
+        </Toolbar>
+      </AppBar>
+      <Outlet />
+    </>
   );
 };
 
