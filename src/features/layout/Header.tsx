@@ -10,7 +10,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Avatar from "@mui/material/Avatar";
 import { useNavigate, Outlet } from "react-router-dom";
 import { Extension } from "@mui/icons-material";
-import DeleteProfileButton from "./Deletedialog";
+import DeleteProfileButton from "../users/components/Deletedialog";
 
 const Header = () => {
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(

@@ -1,17 +1,16 @@
 import { Routes, Route } from "react-router-dom";
-import SignUpPage from "../pages/SignUpPage";
-import BannerManagementPage from "../pages/BannerManagementPage";
-import ShowUserPage from "../pages/ShowUserPage";
+import SignUpPage from "../users/pages/SignUpPage";
+import BannerManagementPage from "../banners/pages/BannerManagementPage";
+import ShowUserPage from "../users/pages/ShowUserPage";
 import ErrorPage from "../pages/ErrorPage";
-import LogInPage from "../pages/LogInPage";
-import BannerPage from "../pages/BannerPage";
-import ForgetPasswordPage from "../pages/ForgetPasswordPage";
-import ResetPasswordPage from "../pages/ResetPasswordPage";
-import EditUserPage from "../pages/EditUserPage";
-import CreateNewBannerPage from "../pages/CreateNewBannerPage";
-import EditBannerPage from "../pages/EditBannerPage";
-import Header from "../components/Header";
-import MyBannersPage from "../pages/MyBannersPage";
+import LogInPage from "../users/pages/LogInPage";
+import ForgetPasswordPage from "../users/pages/ForgetPasswordPage";
+import ResetPasswordPage from "../users/pages/ResetPasswordPage";
+import EditUserPage from "../users/pages/EditUserPage";
+import CreateNewBannerPage from "../banners/pages/CreateNewBannerPage";
+import EditBannerPage from "../banners/pages/EditBannerPage";
+import Header from "../layout/Header";
+import MyBannersPage from "../banners/pages/MyBannersPage";
 
 const RouterDom = () => {
   return (
@@ -27,7 +26,7 @@ const RouterDom = () => {
         <Route path="create" element={<CreateNewBannerPage />} />
         <Route path="edit/:productID" element={<EditBannerPage />} />
         <Route path="products/:productID" element={<SignUpPage />} />
-        <Route path="categories/:categoryName" element={<BannerPage />} />
+        <Route path="categories/:categoryName" element={<SignUpPage />} />
       </Route>
 
       <Route path="/managements" element={<BannerManagementPage />} />
