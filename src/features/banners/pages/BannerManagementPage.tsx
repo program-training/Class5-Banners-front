@@ -1,35 +1,57 @@
-import { Typography } from "@mui/material";
-import { Box } from "@mui/system";
-import { Link } from "react-router-dom";
-import { AddCircle } from "@mui/icons-material";
-import { Autocomplete, TextField } from "@mui/material";
+import {
+    Typography,
+    Container,
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogContentText,
+    Button,
+} from "@mui/material";
+import { useState } from "react";
+import { BannerTable } from "../components/BannerTable";
+import { sampleProducts } from "../../utils/temporaryData";
+import BannerManagementTop from "../components/BannerManagementTop";
 
 const BannerManagementPage = () => {
-  return (
-    <Box>
-      <Typography variant="h2"> Banner Shop </Typography>
-      <Typography variant="h5"> Banner management </Typography>
-      <Autocomplete
-        freeSolo
-        disableClearable
-        options={["1", "2", "3"]}
-        renderInput={(params) => (
-          <TextField
-            {...params}
-            label="Search"
-            InputProps={{
-              ...params.InputProps,
-              type: "search",
-            }}
-          />
-        )}
-      />
+    const [openDialog, setOpenDialog] = useState(false);
+    const [selectedBanner, setSelectedBanner] = useState<number | null>(null);
 
-      <Link to={"create"}>
-        צור באנר <AddCircle />
-      </Link>
-    </Box>
-  );
+    const handleDeleteBanner = () => {
+        setOpenDialog(false);
+        console.log(`Banner with ID ${selectedBanner} deleted.`);
+    };
+
+    return (
+        <Container maxWidth="md">
+            <Typography variant="h2" padding={2} align="center">
+                Banner Shop
+            </Typography>
+            <BannerManagementTop />
+            <BannerTable
+                data={sampleProducts}
+                setOpenDialog={setOpenDialog}
+                setSelectedBanner={setSelectedBanner}
+            />
+            <Dialog open={openDialog} onClose={() => setOpenDialog(false)}>
+                <DialogContent>
+                    <DialogContentText>
+                        Are you sure you want to delete this banner?
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button
+                        onClick={() => setOpenDialog(false)}
+                        color="primary"
+                    >
+                        Cancel
+                    </Button>
+                    <Button onClick={handleDeleteBanner} color="secondary">
+                        Delete
+                    </Button>
+                </DialogActions>
+            </Dialog>
+        </Container>
+    );
 };
 
 export default BannerManagementPage;

@@ -4,6 +4,9 @@ export const sampleProducts = [
         title: "Product 1",
         description: "Description for Product 1",
         image: "https://via.placeholder.com/150",
+        creatorName: "John Doe",
+        creationDate: "2023-11-22",
+        note: "on sale",
     },
     {
         ID: 2,
