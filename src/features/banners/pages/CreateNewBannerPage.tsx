@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 import { styled } from "@mui/system";
 import { sampleProducts } from "../../utils/temporaryData";
-import { Product } from "../interface/interfaces";
+import { ProductInterface } from "../interface/interfaces";
 import BannerCard from "../components/BannerCard";
 const CenteredBox = styled(Box)({
   display: "flex",
@@ -20,7 +20,8 @@ const CenteredBox = styled(Box)({
 });
 
 const CreateNewBannerPage = () => {
-  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  const [selectedProduct, setSelectedProduct] =
+    useState<ProductInterface | null>(null);
 
   const [bannerURL, setBannerURL] = useState("");
   const handleSave = () => {};
