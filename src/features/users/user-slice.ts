@@ -16,16 +16,16 @@ export const counterSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    setUser: (state, action: PayloadAction<UserLoginI>) => {
+    setUser: (state, action: PayloadAction<UserLoginI>) => {      
       state = action.payload
       localStorage.setItem('user', JSON.stringify(action.payload))
     },
     logOut: (state) => {
-        counterSlice.caseReducers.setUser(state, loggedOut)
+        counterSlice.caseReducers.setUser(state, { payload: loggedOut, type: 'user/setUser' })
     }
   },
 })
 
-export const { setUser } = counterSlice.actions
+export const { setUser, logOut } = counterSlice.actions
 
 export default counterSlice.reducer

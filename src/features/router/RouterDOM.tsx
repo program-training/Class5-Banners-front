@@ -11,6 +11,7 @@ import CreateNewBannerPage from "../banners/pages/CreateNewBannerPage";
 import EditBannerPage from "../banners/pages/EditBannerPage";
 import MyBannersPage from "../banners/pages/MyBannersPage";
 import Layout from "../layout/Layout";
+import BannerPage from "../banners/pages/BannerPage";
 
 const RouterDom = () => {
   return (
@@ -36,7 +37,8 @@ const RouterDom = () => {
         <Route path="edit/:userID" element={<EditUserPage />} />
       </Route>
 
-      <Route path="*" element={<ErrorPage />} />
+      {/* <Route path="*" element={<ErrorPage />} /> */}
+      <Route path="*" element={<BannerPage />} />
     </Routes>
   );
 };
