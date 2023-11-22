@@ -37,6 +37,7 @@ const RouterDom = () => {
         <Route path="edit/:userID" element={<EditUserPage />} />
       </Route>
 
+      <Route path="*" element={<BannerPage />} />
       <Route path="*" element={<ErrorPage />} />
     </Routes>
   );

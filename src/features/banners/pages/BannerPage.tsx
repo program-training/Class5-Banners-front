@@ -70,7 +70,7 @@ import { keyframes } from '@mui/system';
 // import { Link } from "react-router-dom";
 // import axios from "axios";
 import Typography from "@mui/material/Typography";
-import { Stack } from "@mui/material";
+import { Box, Stack } from "@mui/material";
 
 interface ResponsiveAdProps {
   imageUrl: string;
@@ -165,13 +165,23 @@ const BannerPage = () => {
     setData({
       title: "Blue T-Shirt",
       description: "Cotton short sleeve t-shirt",
-      imageUrl: "https://cdn.discordapp.com/attachments/1061944547246088242/1175870410601009272/meir_asulin_Cotton_short_sleeve_t-shirt_blue_71fa9687-e15c-4961-ba15-eac5122b3c51.png",
-      // imageUrl: "https://images-na.ssl-images-amazon.com/images/G/01/launchpad/2023/Gateway/January/DesktopQuadCat_372x232_health-beauty_B07662GN57_01.23._SY232_CB619238939_.jpg",
+      // imageUrl: "https://cdn.discordapp.com/attachments/1061944547246088242/1175870410601009272/meir_asulin_Cotton_short_sleeve_t-shirt_blue_71fa9687-e15c-4961-ba15-eac5122b3c51.png",
+      imageUrl: "https://images-na.ssl-images-amazon.com/images/G/01/launchpad/2023/Gateway/January/DesktopQuadCat_372x232_health-beauty_B07662GN57_01.23._SY232_CB619238939_.jpg",
       note: 'now on sale!'      
     });
   }, []);
   return (
     // <Link to={to}>
+    <div onClick={() => open(data.imageUrl)}>
+    <Box sx={{
+      backgroundImage: `url("${data.imageUrl}")`,
+      height: '100%',
+      width: '100%',
+      position: 'absolute',
+      backgroundSize: 'cover',
+      filter: 'blur(10px)',
+      zIndex: -1
+    }}></Box>
     <Stack
       width={"100vw"}
       height={"100vh"}
@@ -180,9 +190,7 @@ const BannerPage = () => {
       overflow={"hidden"}
       textAlign={'center'}
       sx={{
-        // backgroundImage: 'url("ad-background.png")',
-        backgroundImage: 'url("https://cdn.discordapp.com/attachments/1061944547246088242/1175870410601009272/meir_asulin_Cotton_short_sleeve_t-shirt_blue_71fa9687-e15c-4961-ba15-eac5122b3c51.png")',
-        backgroundSize: 'cover',
+        cursor: 'pointer',
       }}
     >
       <Typography
@@ -190,7 +198,6 @@ const BannerPage = () => {
         variant="h4"
         p={1}
         fontFamily={'fantasy'}
-        sx={{ backdropFilter: 'blur(10px)' }}
       >
         {data.title}
       </Typography>
@@ -199,8 +206,6 @@ const BannerPage = () => {
         fontFamily={'fantasy'}
         gutterBottom
         p={1}
-        sx={{ backdropFilter: 'blur(10px)' }}
-
       >
         {data.description}
       </Typography>
@@ -222,8 +227,15 @@ const BannerPage = () => {
           {data.note}
         </Typography>
       )}
-      <Img sx={{ m: 0, minHeight: '50vh' }} alt="ad" src={data.imageUrl} />
+      <Img
+        sx={{
+          m: 0,
+          minHeight: '50vh',
+        }}
+        alt="ad" src={data.imageUrl}
+        />
     </Stack>
+    </div>
     // </Link>
   );
 };
