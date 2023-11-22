@@ -1,7 +1,7 @@
 import BottomNavigation from "@mui/material/BottomNavigation";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 import {
-  AlternateEmail,
+  Email,
   Extension,
   Facebook,
   Instagram,
@@ -16,8 +16,6 @@ const Footer = () => {
   return (
     <BottomNavigation
       sx={{
-        position: "fixed",
-        bottom: 0,
         width: "100%",
         backgroundColor: "lightsteelblue",
         zIndex: 2,
@@ -30,10 +28,7 @@ const Footer = () => {
         icon={<Extension />}
       />
       <BottomNavigationAction label="050-7233332" icon={<Phone />} />
-      <BottomNavigationAction
-        label="Company@Banners.com"
-        icon={<AlternateEmail />}
-      />
+      <BottomNavigationAction label="Company@Banners.com" icon={<Email />} />
       <Box display={"flex"}>
         <BottomNavigationAction icon={<Twitter />} />
         <BottomNavigationAction icon={<Instagram />} />

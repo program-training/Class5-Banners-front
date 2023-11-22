@@ -1,5 +1,5 @@
 import { Card, CardMedia, CardContent, Typography } from "@mui/material";
-import { ProductInterface } from "../interface/interfaces";
+import { ProductInterface } from "../interface/ProductInterface";
 type Props = { selectedProduct: ProductInterface };
 const BannerCard = ({ selectedProduct }: Props) => {
   return (
