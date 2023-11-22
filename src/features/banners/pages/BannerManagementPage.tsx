@@ -1,6 +1,6 @@
 import {
     Typography,
-    Box,
+    Container,
     Dialog,
     DialogActions,
     DialogContent,
@@ -17,26 +17,21 @@ const BannerManagementPage = () => {
     const [selectedBanner, setSelectedBanner] = useState<number | null>(null);
 
     const handleDeleteBanner = () => {
-        // Implement deletion logic here
         setOpenDialog(false);
-        // Placeholder log for deletion confirmation
         console.log(`Banner with ID ${selectedBanner} deleted.`);
     };
 
     return (
-        <Box display="flex" flexDirection="column" alignItems="center">
-            <Typography variant="h2" padding={2}>
+        <Container maxWidth="md">
+            <Typography variant="h2" padding={2} align="center">
                 Banner Shop
             </Typography>
             <BannerManagementTop />
-
             <BannerTable
                 data={sampleProducts}
                 setOpenDialog={setOpenDialog}
                 setSelectedBanner={setSelectedBanner}
             />
-
-            {/* Delete confirmation dialog */}
             <Dialog open={openDialog} onClose={() => setOpenDialog(false)}>
                 <DialogContent>
                     <DialogContentText>
@@ -55,7 +50,7 @@ const BannerManagementPage = () => {
                     </Button>
                 </DialogActions>
             </Dialog>
-        </Box>
+        </Container>
     );
 };
 

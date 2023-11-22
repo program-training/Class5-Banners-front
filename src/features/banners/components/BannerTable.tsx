@@ -1,5 +1,6 @@
 import { Delete, Edit } from "@mui/icons-material";
 import {
+    styled,
     TableContainer,
     Box,
     Table,
@@ -16,6 +17,20 @@ type Props = {
     setOpenDialog: Dispatch<SetStateAction<boolean>>;
     setSelectedBanner: Dispatch<SetStateAction<number | null>>;
 };
+// Styled components for TableCell and TableRow
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+    textAlign: "center",
+    padding: theme.spacing(1),
+}));
+
+const StyledTableRow = styled(TableRow)(({ theme }) => ({
+    "&:nth-of-type(odd)": {
+        backgroundColor: theme.palette.action.hover,
+    },
+    "&:hover": {
+        backgroundColor: theme.palette.action.selected,
+    },
+}));
 
 export const BannerTable = ({
     data,
@@ -32,18 +47,22 @@ export const BannerTable = ({
             <Table>
                 <TableHead>
                     <TableRow>
-                        <TableCell align="center">Image</TableCell>
-                        <TableCell align="center">Creator</TableCell>
-                        <TableCell align="center">Creation Date</TableCell>
-                        <TableCell align="center">Status</TableCell>
-                        <TableCell align="center">Delete</TableCell>
-                        <TableCell align="center">Edit</TableCell>
+                        <StyledTableCell align="center">Image</StyledTableCell>
+                        <StyledTableCell align="center">
+                            Creator
+                        </StyledTableCell>
+                        <StyledTableCell align="center">
+                            Creation Date
+                        </StyledTableCell>
+                        <StyledTableCell align="center">Status</StyledTableCell>
+                        <StyledTableCell align="center">Delete</StyledTableCell>
+                        <StyledTableCell align="center">Edit</StyledTableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
                     {data.map((banner) => (
-                        <TableRow key={banner.ID}>
-                            <TableCell align="center">
+                        <StyledTableRow key={banner.ID}>
+                            <StyledTableCell align="center">
                                 {/* Display banner image here */}
                                 <img
                                     src={banner.image}
@@ -51,15 +70,17 @@ export const BannerTable = ({
                                     width="50"
                                     height="50"
                                 />
-                            </TableCell>
-                            <TableCell align="center">
+                            </StyledTableCell>
+                            <StyledTableCell align="center">
                                 {banner.creatorName}
-                            </TableCell>
-                            <TableCell align="center">
+                            </StyledTableCell>
+                            <StyledTableCell align="center">
                                 {banner.dateOfCreation}
-                            </TableCell>
-                            <TableCell align="center">{banner.note}</TableCell>
-                            <TableCell align="center">
+                            </StyledTableCell>
+                            <StyledTableCell align="center">
+                                {banner.note}
+                            </StyledTableCell>
+                            <StyledTableCell align="center">
                                 <IconButton
                                     onClick={() =>
                                         handleOpenDeleteDialog(banner.ID)
@@ -67,13 +88,13 @@ export const BannerTable = ({
                                 >
                                     <Delete />
                                 </IconButton>
-                            </TableCell>
-                            <TableCell align="center">
+                            </StyledTableCell>
+                            <StyledTableCell align="center">
                                 <IconButton>
                                     <Edit />
                                 </IconButton>
-                            </TableCell>
-                        </TableRow>
+                            </StyledTableCell>
+                        </StyledTableRow>
                     ))}
                 </TableBody>
             </Table>
