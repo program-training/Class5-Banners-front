@@ -9,8 +9,8 @@ import ResetPasswordPage from "../users/pages/ResetPasswordPage";
 import EditUserPage from "../users/pages/EditUserPage";
 import CreateNewBannerPage from "../banners/pages/CreateNewBannerPage";
 import EditBannerPage from "../banners/pages/EditBannerPage";
-import Header from "../layout/Header";
 import MyBannersPage from "../banners/pages/MyBannersPage";
+import Layout from "../layout/Layout";
 
 const RouterDom = () => {
   return (
@@ -20,9 +20,9 @@ const RouterDom = () => {
       <Route path="/forget-password/:userID" element={<ForgetPasswordPage />} />
       <Route path="/reset-password/:userID" element={<ResetPasswordPage />} />
 
-      <Route path="/banners" element={<Header />}>
+      <Route path="/banners" element={<Layout />}>
         <Route path="" element={<BannerManagementPage />} />
-        <Route path="my-banners" element={<MyBannersPage />} />
+        <Route path="my-banners/:userID" element={<MyBannersPage />} />
         <Route path="create" element={<CreateNewBannerPage />} />
         <Route path="edit/:productID" element={<EditBannerPage />} />
         <Route path="products/:productID" element={<SignUpPage />} />

@@ -8,7 +8,7 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import Avatar from "@mui/material/Avatar";
-import { useNavigate, Outlet } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Extension } from "@mui/icons-material";
 import DeleteProfileButton from "../users/components/Deletedialog";
 
@@ -59,7 +59,7 @@ const Header = () => {
           <Box sx={{ flexGrow: 1 }} />
           <Button
             onClick={() => {
-              navigate("my-banners");
+              navigate("my-banners/bla-bla");
             }}
             variant="outlined"
             sx={{
@@ -106,7 +106,6 @@ const Header = () => {
           </Menu>
         </Toolbar>
       </AppBar>
-      <Outlet />
     </>
   );
 };
