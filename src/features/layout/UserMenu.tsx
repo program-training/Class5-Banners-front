@@ -21,12 +21,12 @@ const UserMenu = () => {
   };
 
   const handleDisplayProfile = () => {
-    navigate("/users/show/bla-bla");
+    navigate("/user/show");
     handleCloseUserMenu();
   };
 
   const handleEditProfile = () => {
-    navigate("/users/Edit");
+    navigate("/user/Edit");
     handleCloseUserMenu();
   };
 
