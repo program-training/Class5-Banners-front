@@ -17,12 +17,10 @@ type Props = {
 
 const BannerManagementTop = ({ setBanners }: Props) => {
     const [, setSearchValue] = useState<string>("");
-
     const navigate = useNavigate();
 
     const handleSearch = (value: string) => {
         setSearchValue(value);
-        // Filter banners based on the search value
         const filteredBanners = banners.filter(
             (banner) =>
                 banner.title.toLowerCase().includes(value.toLowerCase()) ||
@@ -41,8 +39,8 @@ const BannerManagementTop = ({ setBanners }: Props) => {
                 display="flex"
                 alignItems="center"
                 justifyContent="space-between"
-                px={2} // Adds horizontal padding
-                mt={2} // Adds top margin
+                px={2}
+                mt={2}
             >
                 <Box width={200}>
                     <Autocomplete
@@ -62,7 +60,7 @@ const BannerManagementTop = ({ setBanners }: Props) => {
                             />
                         )}
                         onChange={(_, value) => {
-                            handleSearch(value);
+                            handleSearch(value || "");
                         }}
                     />
                 </Box>
