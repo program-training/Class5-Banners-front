@@ -61,8 +61,7 @@ const BannerManagementTop = ({ setBanners }: Props) => {
                                 }}
                             />
                         )}
-                        onChange={(event, value) => {
-                            // Handle change here if needed
+                        onChange={(_, value) => {
                             handleSearch(value);
                         }}
                     />
