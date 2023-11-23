@@ -6,6 +6,6 @@ export interface BannerInterface {
         alt: string;
     };
     text: string;
-    createdAt: Date;
+    createdAt: string;
     author: string;
 }
