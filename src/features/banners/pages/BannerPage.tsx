@@ -179,7 +179,6 @@ const BannerPage = () => {
       width: '100%',
       position: 'absolute',
       backgroundSize: 'cover',
-      filter: 'blur(10px)',
       zIndex: -1
     }}></Box>
     <Stack
