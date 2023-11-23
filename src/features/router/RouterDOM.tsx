@@ -16,6 +16,11 @@ import BannerPage from "../banners/pages/BannerPage";
 const RouterDom = () => {
   return (
     <Routes>
+      <Route path="/banners">
+        <Route path="products/:productID" element={<ErrorPage />} />
+        <Route path="categories/:categoryName" element={<BannerPage />} />
+      </Route>
+
       <Route path="/" element={<Layout />}>
         <Route path="" element={<BannerManagementPage />} />
         <Route path="my-banners/" element={<MyBannersPage />} />
@@ -27,18 +32,13 @@ const RouterDom = () => {
         <Route path="user/show/" element={<ShowUserPage />} />
         <Route path="user/edit/" element={<EditUserPage />} />
         <Route
-          path="forget-password/:userID"
+          path="user/forget-password/"
           element={<ForgetPasswordPage />}
         />
-        <Route path="reset-password/:userID" element={<ResetPasswordPage />} />
+        <Route path="reset-password/" element={<ResetPasswordPage />} />
       </Route>
 
-      <Route path="/banners">
-        <Route path="products/:productID" element={<ErrorPage />} />
-        <Route path="categories/:categoryName" element={<BannerPage />} />
-      </Route>
 
-      <Route path="*" element={<BannerPage />} />
       <Route path="*" element={<ErrorPage />} />
     </Routes>
   );
