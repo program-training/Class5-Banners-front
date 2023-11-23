@@ -1,4 +1,5 @@
 import { BannerInterface } from "../banners/interface/BannerInterface";
+import { ProductInterface } from "../banners/interface/ProductInterface";
 
 export const banners: BannerInterface[] = [
     {
@@ -39,4 +40,24 @@ export const banners: BannerInterface[] = [
     // Add more objects as needed
 ];
 
-export default banners;
+export const sampleProducts: ProductInterface[] = [
+    {
+        ID: 1,
+        title: "Product 1",
+        description: "Description for Product 1",
+        image: "https://via.placeholder.com/150",
+    },
+    {
+        ID: 2,
+        title: "Product 2",
+        description: "Description for Product 2",
+        image: "https://via.placeholder.com/150",
+    },
+    {
+        ID: 3,
+        title: "Product 3",
+        description: "Description for Product 3",
+        image: "https://via.placeholder.com/150",
+    },
+    // Add more products as needed
+];
