@@ -1,95 +1,97 @@
 import React from "react";
 import { styled } from "@mui/system";
-import { Link } from "react-router-dom";
 import Typography from "@mui/material/Typography";
 import { Box, Stack } from "@mui/material";
 const Img = styled("img")({
-  margin: "auto",
-  display: "block",
-  // maxWidth: "100%",
-  // minWidth: "100%",
-  maxHeight: "100%",
-  minHeight: "100%",
-  // height: "100%",
-  objectFit: "cover",
+    margin: "auto",
+    display: "block",
+    // maxWidth: "100%",
+    // minWidth: "100%",
+    maxHeight: "100%",
+    minHeight: "100%",
+    // height: "100%",
+    objectFit: "cover",
 });
 interface ResponsiveAdProps {
-  imageUrl: string;
-  title: string;
-  description: string;
-  note?: string;
-  to?: string;
+    imageUrl: string;
+    title: string;
+    description: string;
+    note?: string;
+    to?: string;
 }
 const BannerHorizontalPage: React.FC<ResponsiveAdProps> = ({
-  imageUrl,
-  title,
-  description,
-  note,
-  to = "/",
+    imageUrl,
+    title,
+    description,
+    note,
 }) => {
-  return (
-    // <Link to={to}>
-    <Stack
-      width={"100vw"}
-      height={"100vh"}
-      alignItems={"center"}
-      justifyContent={"space-between"}
-      overflow={"hidden"}
-    >
-      {note && (
-        <Typography
-          variant="body2"
-          color="text.secondary"
-          sx={{ fontSize: "1rem", color: "#777" }}
+    return (
+        // <Link to={to}>
+        <Stack
+            width={"100vw"}
+            height={"100vh"}
+            alignItems={"center"}
+            justifyContent={"space-between"}
+            overflow={"hidden"}
         >
-          {note}
-        </Typography>
-      )}
-      <Box
-        display={"flex"}
-        width={"100vw"}
-        height={"100vh"}
-        alignItems={"stretch"}
-        justifyContent={"space-between"}
-        overflow={"hidden"}
-      >
-        <Box alignItems={"center"} display={"flex"} flexDirection={"row"}>
-          <Typography
-            gutterBottom
-            variant="h6"
-            component="div"
-            sx={{
-              fontSize: "2rem",
-              fontWeight: "bold",
-              color: "#8F31B5",
-            }}
-          >
-            {title}
-          </Typography>
-          <Typography
-            variant="body1"
-            gutterBottom
-            sx={{ fontSize: "1.2rem", color: "#333", p: 3 }}
-          >
-            {description}
-          </Typography>
-        </Box>
-        <Img
-          sx={{
-            m: 0,
-            width: "100vw",
-            height: "100vh",
-            alignItems: "stretch",
-            justifyContent: "space-between",
-            overflow: "hidden",
-          }}
-          alt="ad"
-          src={imageUrl}
-        />
-      </Box>
-    </Stack>
-    // </Link>
-  );
+            {note && (
+                <Typography
+                    variant="body2"
+                    color="text.secondary"
+                    sx={{ fontSize: "1rem", color: "#777" }}
+                >
+                    {note}
+                </Typography>
+            )}
+            <Box
+                display={"flex"}
+                width={"100vw"}
+                height={"100vh"}
+                alignItems={"stretch"}
+                justifyContent={"space-between"}
+                overflow={"hidden"}
+            >
+                <Box
+                    alignItems={"center"}
+                    display={"flex"}
+                    flexDirection={"row"}
+                >
+                    <Typography
+                        gutterBottom
+                        variant="h6"
+                        component="div"
+                        sx={{
+                            fontSize: "2rem",
+                            fontWeight: "bold",
+                            color: "#8F31B5",
+                        }}
+                    >
+                        {title}
+                    </Typography>
+                    <Typography
+                        variant="body1"
+                        gutterBottom
+                        sx={{ fontSize: "1.2rem", color: "#333", p: 3 }}
+                    >
+                        {description}
+                    </Typography>
+                </Box>
+                <Img
+                    sx={{
+                        m: 0,
+                        width: "100vw",
+                        height: "100vh",
+                        alignItems: "stretch",
+                        justifyContent: "space-between",
+                        overflow: "hidden",
+                    }}
+                    alt="ad"
+                    src={imageUrl}
+                />
+            </Box>
+        </Stack>
+        // </Link>
+    );
 };
 export default BannerHorizontalPage;
 // קוד עם axios

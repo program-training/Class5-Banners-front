@@ -26,7 +26,7 @@ const UserMenu = () => {
   };
 
   const handleEditProfile = () => {
-    navigate("/users/Edit/bla-bla");
+    navigate("/users/Edit");
     handleCloseUserMenu();
   };
 
