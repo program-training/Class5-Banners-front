@@ -3,6 +3,7 @@ import { BannerInterface } from "../banners/interface/BannerInterface";
 export const banners: BannerInterface[] = [
     {
         _id: "1",
+        title: "Product 1",
         image: {
             url: "https://example.com/image1.jpg",
             alt: "Banner 1",
@@ -13,6 +14,8 @@ export const banners: BannerInterface[] = [
     },
     {
         _id: "2",
+        title: "Product 2",
+
         image: {
             url: "https://example.com/image2.jpg",
             alt: "Banner 2",
@@ -23,6 +26,8 @@ export const banners: BannerInterface[] = [
     },
     {
         _id: "3",
+        title: "Product 3",
+
         image: {
             url: "https://example.com/image3.jpg",
             alt: "Banner 3",
