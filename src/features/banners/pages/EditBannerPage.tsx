@@ -95,7 +95,7 @@ const EditBannerPage = () => {
           <Button
             variant="contained"
             color="secondary"
-            onClick={() => navigate("")}
+            onClick={() => navigate("/")}
           >
             Cancel
           </Button>
