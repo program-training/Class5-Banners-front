@@ -17,6 +17,11 @@ const RouterDom = () => {
   return (
     <Routes>
 
+      <Route path="banners">
+        <Route path="products/:productID" element={<BannerPage />} />
+        <Route path="categories/:categoryName" element={<BannerPage />} />
+      </Route>
+
       <Route path="/" element={<Layout />}>
         <Route path="" element={<BannerManagementPage />} />
         <Route path="my-banners/" element={<MyBannersPage />} />
@@ -32,13 +37,6 @@ const RouterDom = () => {
           element={<ForgetPasswordPage />}
         />
         <Route path="reset-password/" element={<ResetPasswordPage />} />
-      </Route>
-
-
-
-      <Route path="banners">
-        <Route path="products/:productID" element={<BannerPage />} />
-        <Route path="categories/:categoryName" element={<BannerPage />} />
       </Route>
 
       <Route path="*" element={<ErrorPage />} />
