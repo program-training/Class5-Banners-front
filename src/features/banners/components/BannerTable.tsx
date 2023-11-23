@@ -10,12 +10,11 @@ import {
     TableBody,
     IconButton,
 } from "@mui/material";
-import { ProductInterface } from "../interface/interfaces";
 import { Dispatch, SetStateAction } from "react";
+import { BannerInterface } from "../interface/BannerInterface";
 type Props = {
-    data: ProductInterface[];
+    data: BannerInterface[];
     setOpenDialog: Dispatch<SetStateAction<boolean>>;
-    setSelectedBanner: Dispatch<SetStateAction<number | null>>;
 };
 // Styled components for TableCell and TableRow
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -32,13 +31,8 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     },
 }));
 
-export const BannerTable = ({
-    data,
-    setOpenDialog,
-    setSelectedBanner,
-}: Props) => {
-    const handleOpenDeleteDialog = (bannerId: number) => {
-        setSelectedBanner(bannerId);
+export const BannerTable = ({ data, setOpenDialog }: Props) => {
+    const handleOpenDeleteDialog = () => {
         setOpenDialog(true);
     };
 
@@ -61,30 +55,28 @@ export const BannerTable = ({
                 </TableHead>
                 <TableBody>
                     {data.map((banner) => (
-                        <StyledTableRow key={banner.ID}>
+                        <StyledTableRow key={banner._id}>
                             <StyledTableCell align="center">
                                 {/* Display banner image here */}
                                 <img
-                                    src={banner.image}
-                                    alt="Banner"
+                                    src={banner.image.url}
+                                    alt={banner.image.alt}
                                     width="50"
                                     height="50"
                                 />
                             </StyledTableCell>
                             <StyledTableCell align="center">
-                                {banner.creatorName}
+                                {banner.author}
                             </StyledTableCell>
                             <StyledTableCell align="center">
-                                {banner.dateOfCreation}
+                                {String(banner.createdAt)}
                             </StyledTableCell>
                             <StyledTableCell align="center">
-                                {banner.note}
+                                {banner.text}
                             </StyledTableCell>
                             <StyledTableCell align="center">
                                 <IconButton
-                                    onClick={() =>
-                                        handleOpenDeleteDialog(banner.ID)
-                                    }
+                                    onClick={() => handleOpenDeleteDialog()}
                                 >
                                     <Delete />
                                 </IconButton>
