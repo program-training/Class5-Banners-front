@@ -7,8 +7,10 @@ import {
     Button,
 } from "@mui/material";
 import { banners } from "../../utils/temporaryData";
+import { useNavigate } from "react-router-dom";
 
 const BannerManagementTop = () => {
+    const navigate = useNavigate()
     return (
         <>
             <Typography variant="h2" padding={2} align="center">
@@ -42,7 +44,7 @@ const BannerManagementTop = () => {
                     />
                 </Box>
                 <Typography variant="h5">Edit or Delete Banners</Typography>
-                <Button>
+                <Button onClick={() => navigate('/create')}>
                     <Typography pr={2}>Create Banner</Typography>
                     <AddCircle />
                 </Button>

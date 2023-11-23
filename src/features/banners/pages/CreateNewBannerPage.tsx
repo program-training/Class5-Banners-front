@@ -10,6 +10,11 @@ import { styled } from "@mui/system";
 import { sampleProducts } from "../../utils/temporaryData";
 import { ProductInterface } from "../interface/ProductInterface";
 import BannerCard from "../components/BannerCard";
+import axios from "axios";
+
+const BACK_HOST = "127.0.0.1";
+const BACK_PORT = "2121";
+
 const CenteredBox = styled(Box)({
     display: "flex",
     flexDirection: "column",
@@ -24,7 +29,19 @@ const CreateNewBannerPage = () => {
         useState<ProductInterface | null>(null);
 
     const [bannerURL, setBannerURL] = useState("");
-    const handleSave = () => {};
+    const handleSave = () => {
+        axios
+            .post(`http://${BACK_HOST}:${BACK_PORT}/api/banners/new`, {
+                banner: {
+                    productID: `test-${Math.random()}`,
+                    title: "test",
+                    description: "test",
+                    imageURL: "test",
+                    note: "test",
+                },
+            })
+            .then((res) => console.log("response:", res));
+    };
 
     return (
         <CenteredBox>
