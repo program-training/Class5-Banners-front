@@ -1,24 +1,37 @@
-export const sampleProducts = [
+import { BannerInterface } from "../banners/interface/BannerInterface";
+
+export const banners: BannerInterface[] = [
     {
-        ID: 1,
-        title: "Product 1",
-        description: "Description for Product 1",
-        image: "https://via.placeholder.com/150",
-        creatorName: "John Doe",
-        creationDate: "2023-11-22",
-        note: "on sale",
+        _id: "1",
+        image: {
+            url: "https://example.com/image1.jpg",
+            alt: "Banner 1",
+        },
+        text: "First banner",
+        createdAt: new Date("2023-11-20"),
+        author: "John Doe",
     },
     {
-        ID: 2,
-        title: "Product 2",
-        description: "Description for Product 2",
-        image: "https://via.placeholder.com/150",
+        _id: "2",
+        image: {
+            url: "https://example.com/image2.jpg",
+            alt: "Banner 2",
+        },
+        text: "Second banner",
+        createdAt: new Date("2023-11-18"),
+        author: "Jane Smith",
     },
     {
-        ID: 3,
-        title: "Product 3",
-        description: "Description for Product 3",
-        image: "https://via.placeholder.com/150",
+        _id: "3",
+        image: {
+            url: "https://example.com/image3.jpg",
+            alt: "Banner 3",
+        },
+        text: "Third banner",
+        createdAt: new Date("2023-11-15"),
+        author: "Alice Johnson",
     },
-    // Add more products as needed
+    // Add more objects as needed
 ];
+
+export default banners;
