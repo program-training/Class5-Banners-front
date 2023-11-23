@@ -6,7 +6,7 @@ import {
     Typography,
     Button,
 } from "@mui/material";
-import { sampleProducts } from "../../utils/temporaryData";
+import { banners } from "../../utils/temporaryData";
 
 const BannerManagementTop = () => {
     return (
@@ -26,7 +26,9 @@ const BannerManagementTop = () => {
                     <Autocomplete
                         freeSolo
                         disableClearable
-                        options={sampleProducts.map((banner) => banner.title)}
+                        options={banners
+                            .map((banner) => banner.title)
+                            .concat(banners.map((banner) => banner.author))}
                         renderInput={(params) => (
                             <TextField
                                 {...params}
