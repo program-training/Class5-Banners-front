@@ -1,3 +1,5 @@
+// add column Title
+
 import { Delete, Edit } from "@mui/icons-material";
 import {
     styled,
@@ -12,10 +14,13 @@ import {
 } from "@mui/material";
 import { Dispatch, SetStateAction } from "react";
 import { BannerInterface } from "../interface/BannerInterface";
+import { useNavigate } from "react-router-dom";
+
 type Props = {
     data: BannerInterface[];
     setOpenDialog: Dispatch<SetStateAction<boolean>>;
 };
+
 // Styled components for TableCell and TableRow
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     textAlign: "center",
@@ -32,6 +37,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 export const BannerTable = ({ data, setOpenDialog }: Props) => {
+    const navigate = useNavigate();
     const handleOpenDeleteDialog = () => {
         setOpenDialog(true);
     };
@@ -42,6 +48,7 @@ export const BannerTable = ({ data, setOpenDialog }: Props) => {
                 <TableHead>
                     <TableRow>
                         <StyledTableCell align="center">Image</StyledTableCell>
+                        <StyledTableCell align="center">Title</StyledTableCell>
                         <StyledTableCell align="center">
                             Creator
                         </StyledTableCell>
@@ -66,6 +73,9 @@ export const BannerTable = ({ data, setOpenDialog }: Props) => {
                                 />
                             </StyledTableCell>
                             <StyledTableCell align="center">
+                                {banner.title}
+                            </StyledTableCell>
+                            <StyledTableCell align="center">
                                 {banner.author}
                             </StyledTableCell>
                             <StyledTableCell align="center">
@@ -82,7 +92,11 @@ export const BannerTable = ({ data, setOpenDialog }: Props) => {
                                 </IconButton>
                             </StyledTableCell>
                             <StyledTableCell align="center">
-                                <IconButton>
+                                <IconButton
+                                    onClick={() =>
+                                        navigate(`edit/${banner._id}`)
+                                    }
+                                >
                                     <Edit />
                                 </IconButton>
                             </StyledTableCell>
