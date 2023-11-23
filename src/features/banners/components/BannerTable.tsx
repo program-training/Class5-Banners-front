@@ -1,3 +1,5 @@
+// add column Title
+
 import { Delete, Edit } from "@mui/icons-material";
 import {
     styled,
@@ -42,6 +44,7 @@ export const BannerTable = ({ data, setOpenDialog }: Props) => {
                 <TableHead>
                     <TableRow>
                         <StyledTableCell align="center">Image</StyledTableCell>
+                        <StyledTableCell align="center">Title</StyledTableCell>
                         <StyledTableCell align="center">
                             Creator
                         </StyledTableCell>
@@ -64,6 +67,9 @@ export const BannerTable = ({ data, setOpenDialog }: Props) => {
                                     width="50"
                                     height="50"
                                 />
+                            </StyledTableCell>
+                            <StyledTableCell align="center">
+                                {banner.title}
                             </StyledTableCell>
                             <StyledTableCell align="center">
                                 {banner.author}
