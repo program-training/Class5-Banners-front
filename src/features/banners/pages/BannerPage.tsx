@@ -163,10 +163,10 @@ const BannerPage = () => {
     //   console.error("Error fetching data:", error);
     // }
     setData({
-      title: "Blue T-Shirt",
-      description: "Cotton short sleeve t-shirt",
+      title: "Wireless Headphones",
+      description: "Bluetooth over-ear headphones",
       // imageUrl: "https://cdn.discordapp.com/attachments/1061944547246088242/1175870410601009272/meir_asulin_Cotton_short_sleeve_t-shirt_blue_71fa9687-e15c-4961-ba15-eac5122b3c51.png",
-      imageUrl: "https://images-na.ssl-images-amazon.com/images/G/01/launchpad/2023/Gateway/January/DesktopQuadCat_372x232_health-beauty_B07662GN57_01.23._SY232_CB619238939_.jpg",
+      imageUrl: "https://cdn.discordapp.com/attachments/1061944547246088242/1175872330061316229/meir_asulin_Wireless_Headphones._Bluetooth_over-ear_headphones._400d5722-da66-4549-8017-9de6650b5a2f.png",
       note: 'now on sale!'      
     });
   }, []);
