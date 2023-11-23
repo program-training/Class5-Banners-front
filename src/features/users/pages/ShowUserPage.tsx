@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
@@ -10,10 +10,11 @@ const ShowUserPage = () => {
   const user = useAppSelector((state) => state.user);
 
   const [data, setData] = useState({ username: "", email: "", isAdmin: false });
-  if (!user.loggedIn) {
-    navigate("/my-banners/bla-bla");
-  }
+
   useEffect(() => {
+    if (!user.loggedIn) {
+      navigate("/user/login");
+    }
     try {
       axios.get("YOUR_API_ENDPOINT").then((response) => setData(response.data));
     } catch (error) {

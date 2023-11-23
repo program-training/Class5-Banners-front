@@ -17,7 +17,7 @@ const EditProfilePage = () => {
 
   useEffect(() => {
     if (!user.loggedIn) {
-      navigate("/login");
+      navigate("/user/login");
     } else {
       axios.get("/api/user").then((response) => {
         setUserData(response.data);
