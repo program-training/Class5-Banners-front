@@ -16,19 +16,20 @@ import BannerPage from "../banners/pages/BannerPage";
 const RouterDom = () => {
   return (
     <Routes>
-
       <Route path="/" element={<Layout />}>
-
         <Route path="" element={<BannerManagementPage />} />
         <Route path="my-banners/:userID" element={<MyBannersPage />} />
         <Route path="create" element={<CreateNewBannerPage />} />
-        <Route path="edit/:productID" element={<EditBannerPage />} />
+        <Route path="edit/:bannerID" element={<EditBannerPage />} />
         <Route path="products/:productID" element={<SignUpPage />} />
         <Route path="categories/:categoryName" element={<SignUpPage />} />
 
         <Route path="/sign-up" element={<SignUpPage />} />
         <Route path="/login" element={<LogInPage />} />
-        <Route path="/forget-password/:userID" element={<ForgetPasswordPage />} />
+        <Route
+          path="/forget-password/:userID"
+          element={<ForgetPasswordPage />}
+        />
         <Route path="/reset-password/:userID" element={<ResetPasswordPage />} />
       </Route>
 
