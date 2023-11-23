@@ -197,6 +197,7 @@ const BannerPage = () => {
         variant="h4"
         p={1}
         fontFamily={'fantasy'}
+        color={'white'}
       >
         {data.title}
       </Typography>
@@ -204,7 +205,11 @@ const BannerPage = () => {
         variant="subtitle1"
         fontFamily={'fantasy'}
         gutterBottom
+        color={'white'}
         p={1}
+        sx={{
+          textShadow: '1px 1px black'
+        }}
       >
         {data.description}
       </Typography>
@@ -212,11 +217,13 @@ const BannerPage = () => {
         <Typography
           variant="body1"
           fontFamily={'cursive'}
-          borderRadius={'10000px'}
+          borderRadius={'px'}
           p={1}
+          color={'lightyellow'}
           // m={1}
           sx={{
-            backgroundColor: 'red',
+            textShadow: '2px 2px black',
+            fontSize: '1.5rem',
             position: 'absolute',
             bottom: 0,
             translate: '0 -100%',
