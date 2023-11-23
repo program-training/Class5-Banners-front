@@ -22,15 +22,15 @@ const RouterDom = () => {
         <Route path="create" element={<CreateNewBannerPage />} />
         <Route path="edit/:bannerID" element={<EditBannerPage />} />
 
-        <Route path="/user/sign-up" element={<SignUpPage />} />
-        <Route path="/user/login" element={<LogInPage />} />
-        <Route path="/user/show/" element={<ShowUserPage />} />
-        <Route path="/user/edit/" element={<EditUserPage />} />
+        <Route path="user/sign-up" element={<SignUpPage />} />
+        <Route path="user/login" element={<LogInPage />} />
+        <Route path="user/show/" element={<ShowUserPage />} />
+        <Route path="user/edit/" element={<EditUserPage />} />
         <Route
-          path="/forget-password/:userID"
+          path="forget-password/:userID"
           element={<ForgetPasswordPage />}
         />
-        <Route path="/reset-password/:userID" element={<ResetPasswordPage />} />
+        <Route path="reset-password/:userID" element={<ResetPasswordPage />} />
       </Route>
 
       <Route path="/banners">
