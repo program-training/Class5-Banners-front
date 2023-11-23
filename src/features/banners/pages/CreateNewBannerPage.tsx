@@ -7,9 +7,15 @@ import {
   TextField,
 } from "@mui/material";
 import { styled } from "@mui/system";
-import { sampleProducts } from "../../utils/temporaryData";
+import { banners } from "../../utils/temporaryData";
 import { ProductInterface } from "../interface/ProductInterface";
 import BannerCard from "../components/BannerCard";
+import axios from "axios";
+import { BannerInterface } from "../interface/BannerInterface";
+
+const BACK_HOST = '127.0.0.1'
+const BACK_PORT = '2121'
+
 const CenteredBox = styled(Box)({
   display: "flex",
   flexDirection: "column",
@@ -21,10 +27,15 @@ const CenteredBox = styled(Box)({
 
 const CreateNewBannerPage = () => {
   const [selectedProduct, setSelectedProduct] =
-    useState<ProductInterface | null>(null);
+    useState<BannerInterface | null>(null);
 
   const [bannerURL, setBannerURL] = useState("");
-  const handleSave = () => {};
+  const handleSave = () => {
+    axios.post(`http://${BACK_HOST}:${BACK_PORT}/api/banners/new`, {
+      banner:
+        {productID: `test-${Math.random()}` , title: 'test', description: 'test', imageURL: 'test', note: 'test'}
+    }).then(res => console.log('response:', res))
+  };
 
   return (
     <CenteredBox>
@@ -39,20 +50,20 @@ const CreateNewBannerPage = () => {
       <Autocomplete
         disablePortal
         id="combo-box-demo"
-        options={sampleProducts}
+        options={banners}
         sx={{ width: 300 }}
         getOptionLabel={(option) => option.title} // Assuming 'title' is the label property
         renderInput={(params) => (
           <TextField {...params} label="Product Title" />
         )}
         onChange={(_, value) => {
-          const selected = sampleProducts.find(
-            (product) => product.ID === value?.ID
+          const selected = banners.find(
+            (product) => product._id === value?._id
           );
           setSelectedProduct(selected || null);
         }}
       />
-      {selectedProduct && <BannerCard selectedProduct={selectedProduct} />}
+      {selectedProduct && <BannerCard selectedProduct={selectedProduct as any} />}
       <Box marginBottom={5}>
         <Button variant="contained" color="primary" onClick={handleSave}>
           Save
