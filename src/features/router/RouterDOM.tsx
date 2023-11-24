@@ -16,31 +16,29 @@ import BannerPage from "../banners/pages/BannerPage";
 const RouterDom = () => {
   return (
     <Routes>
+
+      <Route path="banners">
+        <Route path="products/:productID" element={<BannerPage />} />
+        <Route path="categories/:categoryName" element={<BannerPage />} />
+      </Route>
+
       <Route path="/" element={<Layout />}>
         <Route path="" element={<BannerManagementPage />} />
-        <Route path="my-banners/:userID" element={<MyBannersPage />} />
+        <Route path="my-banners/" element={<MyBannersPage />} />
         <Route path="create" element={<CreateNewBannerPage />} />
         <Route path="edit/:bannerID" element={<EditBannerPage />} />
-        <Route path="products/:productID" element={<SignUpPage />} />
-        <Route path="categories/:categoryName" element={<SignUpPage />} />
 
-        <Route path="/sign-up" element={<SignUpPage />} />
-        <Route path="/login" element={<LogInPage />} />
+        <Route path="user/sign-up" element={<SignUpPage />} />
+        <Route path="user/login" element={<LogInPage />} />
+        <Route path="user/show/" element={<ShowUserPage />} />
+        <Route path="user/edit/" element={<EditUserPage />} />
         <Route
-          path="/forget-password/:userID"
+          path="user/forget-password/"
           element={<ForgetPasswordPage />}
         />
-        <Route path="/reset-password/:userID" element={<ResetPasswordPage />} />
+        <Route path="reset-password/" element={<ResetPasswordPage />} />
       </Route>
 
-      <Route path="/managements" element={<BannerManagementPage />} />
-
-      <Route path="/users" element={<ShowUserPage />}>
-        <Route path="show/:userID" element={<ShowUserPage />} />
-        <Route path="edit/:userID" element={<EditUserPage />} />
-      </Route>
-
-      <Route path="*" element={<BannerPage />} />
       <Route path="*" element={<ErrorPage />} />
     </Routes>
   );

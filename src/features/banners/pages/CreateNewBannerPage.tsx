@@ -11,8 +11,6 @@ import { ProductInterface } from "../interface/ProductInterface";
 import BannerCard from "../components/BannerCard";
 import axios from "axios";
 import { centeredBox } from "../../utils/styles";
-const BACK_HOST = "127.0.0.1";
-const BACK_PORT = "2121";
 
 const CreateNewBannerPage = () => {
     const [selectedProduct, setSelectedProduct] =
@@ -20,15 +18,20 @@ const CreateNewBannerPage = () => {
     const [bannerURL, setBannerURL] = useState("");
     const handleSave = () => {
         axios
-            .post(`http://${BACK_HOST}:${BACK_PORT}/api/banners/new`, {
-                banner: {
-                    productID: `test-${Math.random()}`,
-                    title: "test",
-                    description: "test",
-                    imageURL: "test",
-                    note: "test",
-                },
-            })
+            .post(
+                `${import.meta.env.VITE_SERVER_HOST}:${
+                    import.meta.env.VITE_SERVER_PORT
+                }/api/banners/new`,
+                {
+                    banner: {
+                        productID: `test-${Math.random()}`,
+                        title: "test",
+                        description: "test",
+                        imageURL: "test",
+                        note: "test",
+                    },
+                }
+            )
             .then((res) => console.log("response:", res));
     };
 
