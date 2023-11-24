@@ -11,6 +11,7 @@ import { ProductInterface } from "../interface/ProductInterface";
 import BannerCard from "../components/BannerCard";
 import axios from "axios";
 import { centeredBox } from "../../utils/styles";
+import CancelButton from "../components/CancelButton";
 
 const CreateNewBannerPage = () => {
     const [selectedProduct, setSelectedProduct] =
@@ -37,8 +38,10 @@ const CreateNewBannerPage = () => {
 
     return (
         <Box sx={centeredBox}>
-            <Typography variant="h2">Banner Shop</Typography>
-            <Typography variant="h5">Create New Banner</Typography>
+            <Typography variant="h2">Create Banner</Typography>
+            <Typography variant="h5">
+                Create your own Banners with any link you want!
+            </Typography>
             <TextField
                 sx={{ width: "300px" }}
                 label="Banner URL"
@@ -72,13 +75,7 @@ const CreateNewBannerPage = () => {
                 >
                     Save
                 </Button>
-                <Button
-                    variant="contained"
-                    color="secondary"
-                    style={{ marginLeft: "10px" }}
-                >
-                    Cancel
-                </Button>
+                <CancelButton />
             </Box>
         </Box>
     );
