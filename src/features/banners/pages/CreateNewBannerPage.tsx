@@ -6,28 +6,17 @@ import {
     Autocomplete,
     TextField,
 } from "@mui/material";
-import { styled } from "@mui/system";
 import { sampleProducts } from "../../utils/temporaryData";
 import { ProductInterface } from "../interface/ProductInterface";
 import BannerCard from "../components/BannerCard";
 import axios from "axios";
-
+import { centeredBox } from "../../utils/styles";
 const BACK_HOST = "127.0.0.1";
 const BACK_PORT = "2121";
-
-const CenteredBox = styled(Box)({
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    gap: "20px",
-    textAlign: "center",
-    paddingTop: "50px", // Adjust as needed for spacing
-});
 
 const CreateNewBannerPage = () => {
     const [selectedProduct, setSelectedProduct] =
         useState<ProductInterface | null>(null);
-
     const [bannerURL, setBannerURL] = useState("");
     const handleSave = () => {
         axios
@@ -44,7 +33,7 @@ const CreateNewBannerPage = () => {
     };
 
     return (
-        <CenteredBox>
+        <Box sx={centeredBox}>
             <Typography variant="h2">Banner Shop</Typography>
             <Typography variant="h5">Create New Banner</Typography>
             <TextField
@@ -88,7 +77,7 @@ const CreateNewBannerPage = () => {
                     Cancel
                 </Button>
             </Box>
-        </CenteredBox>
+        </Box>
     );
 };
 
