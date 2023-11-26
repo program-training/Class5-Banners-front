@@ -1,14 +1,14 @@
 import { Container, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { BannerTable } from "../components/BannerTable";
-import { banners as data } from "../../utils/temporaryData";
 import BannerManagementTop from "../components/BannerManagementTop";
 import DeleteBannerDialog from "../components/DeleteBannerDialog";
 import { getBannersFromServer } from "../service/getBanners";
+import { BannerInterface } from "../interface/BannerInterface";
 
 const BannerManagementPage = () => {
   const [openDialog, setOpenDialog] = useState(false);
-  const [banners, setBanners] = useState(data);
+  const [banners, setBanners] = useState<BannerInterface[]>([]);
 
   useEffect(() => {
     getBannersFromServer()
@@ -23,7 +23,7 @@ const BannerManagementPage = () => {
       <Typography variant="h2" padding={2} align="center">
         Banner Management
       </Typography>
-      <BannerManagementTop setBanners={setBanners} />
+      <BannerManagementTop banners={banners} setBanners={setBanners} />
       <BannerTable data={banners} setOpenDialog={setOpenDialog} />
       <DeleteBannerDialog
         openDialog={openDialog}
