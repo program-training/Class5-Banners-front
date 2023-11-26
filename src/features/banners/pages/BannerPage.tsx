@@ -81,7 +81,9 @@ const BannerPage = () => {
   const [data, setData] = useState<BannerInterface>();
   useEffect(() => {
     getBannerById(id as string)
-      .then((res) => setData(res))
+      .then((res) => {
+        setData(res[0]);
+      })
       .catch((error) => console.log(error));
   }, [id]);
   return (
