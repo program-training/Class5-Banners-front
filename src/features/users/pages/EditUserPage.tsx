@@ -1,6 +1,5 @@
-import { SetStateAction, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
@@ -8,43 +7,50 @@ import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import axios from "axios";
 import { useAppSelector } from "../../../redux/hooks";
-
-const EditProfilePage = () => {
+import { Container } from "@mui/material";
+import { useForm } from "react-hook-form";
+interface UserData {
+  name: string;
+  status: string;
+  email: string;
+}
+const EditUserPage = () => {
   const navigate = useNavigate();
   const user = useAppSelector((state) => state.user);
 
-  const [name, setName] = useState("");
-  const [status, setStatus] = useState("");
-  const [, setUserData] = useState(null);
+  const { register, handleSubmit, setValue } = useForm();
+
+  const [userData, setUserData] = useState({
+    name: "",
+    status: "inactive",
+    email: "",
+  });
 
   useEffect(() => {
-    if (!user.loggedIn) {
+    if (user.loggedIn) {
       navigate("/user/login");
     } else {
       axios.get("/api/user").then((response) => {
         setUserData(response.data);
-        setName(response.data.name);
-        setStatus(response.data.status);
+        setValue("name", response.data.name);
+        setValue("status", response.data.status === "active");
       });
     }
-  }, [user.loggedIn, navigate]);
+  }, []);
 
-  const handleNameChange = (event: {
-    target: { value: SetStateAction<string> };
-  }) => {
-    setName(event.target.value);
-  };
+  const onSubmit = (data: UserData) => {
+    const updatedUserData = {
+      ...userData,
+      name: data.name,
+      status: data.status ? "active" : "inactive",
+    };
 
-  const handleStatusChange = (event: { target: { checked: boolean } }) => {
-    setStatus(event.target.checked ? "active" : "inactive");
-  };
-
-  const handleSubmit = () => {
-    axios.put("/api/user", { name, status }).then(() => {});
+    axios.put("/api/user", updatedUserData).then(() => {});
   };
 
   return (
-    <Paper
+    <Container
+      maxWidth="sm"
       sx={{
         display: "flex",
         flexDirection: "column",
@@ -59,37 +65,35 @@ const EditProfilePage = () => {
     >
       <Typography variant="h4">Edit User Details</Typography>
       <Typography variant="subtitle1">Edit Name and Status</Typography>
-
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          handleSubmit();
-        }}
+      <Typography variant="subtitle1" gutterBottom sx={{ color: "#555" }}>
+        Email: {userData.email}
+      </Typography>
+      <TextField
+        label="Name"
+        variant="outlined"
+        fullWidth
+        {...register("name")}
+        sx={{ mb: 2 }}
+      />
+      <FormControlLabel
+        control={
+          <Checkbox
+            {...register("status")}
+            defaultChecked={userData.status === "active"}
+          />
+        }
+        label={"Admin"}
+        sx={{ mb: 2 }}
+      />
+      <Button
+        onClick={handleSubmit(() => onSubmit)}
+        variant="contained"
+        color="primary"
       >
-        <TextField
-          label="Name"
-          variant="outlined"
-          value={name}
-          onChange={handleNameChange}
-          fullWidth
-          sx={{ mb: 2 }}
-        />
-        <FormControlLabel
-          control={
-            <Checkbox
-              checked={status === "active"}
-              onChange={handleStatusChange}
-            />
-          }
-          label={"Admin"}
-          sx={{ mb: 2 }}
-        />
-        <Button type="submit" variant="contained" color="primary">
-          Save Changes
-        </Button>
-      </form>
-    </Paper>
+        Save Changes
+      </Button>
+    </Container>
   );
 };
 
-export default EditProfilePage;
+export default EditUserPage;
