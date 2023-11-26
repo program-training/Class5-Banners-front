@@ -50,7 +50,7 @@ const BannerPage = () => {
             <Stack
                 direction={"row"} // Changed to horizontal stacking
                 width={"100vw"}
-                height={"100vh"}
+                height={"100vh"} // Changed height to fill the viewport height
                 alignItems={"center"}
                 justifyContent={"space-between"}
                 overflow={"hidden"}
@@ -64,7 +64,9 @@ const BannerPage = () => {
                     <Img
                         sx={{
                             m: 0,
-                            height: "100%", // Adjusted height to fill the Stack
+                            height: "100vh", // Adjusted height to fill the viewport height
+                            width: "100%", // Ensure image width takes up entire box
+                            objectFit: "cover", // Maintain image aspect ratio
                             animation: `${slideInFromLeft} 1s ease-in-out`, // Added animation
                         }}
                         alt="ad"
@@ -72,42 +74,22 @@ const BannerPage = () => {
                     />
                 </Box>
                 <Box flex="1">
-                    {" "}
-                    {/* Added Box for details */}
-                    <Typography
-                        variant="h4"
-                        p={1}
-                        fontFamily={"fantasy"}
-                        color={"white"}
-                        textAlign="left"
-                    >
-                        {data?.title}
+                    {/* Rest of your content */}
+                    <Typography variant="h4" fontFamily="fantasy" color="white">
+                        {data?.title || "Title"}
                     </Typography>
                     <Typography
                         variant="subtitle1"
-                        fontFamily={"fantasy"}
-                        color={"white"}
-                        p={1}
-                        sx={{
-                            textShadow: "1px 1px black",
-                            textAlign: "left",
-                        }}
+                        fontFamily="fantasy"
+                        color="white"
                     >
-                        {data?.description}
+                        {data?.description || "Description"}
                     </Typography>
                     {data?.note && (
                         <Typography
                             variant="body1"
-                            fontFamily={"cursive"}
-                            borderRadius={"px"}
-                            p={1}
-                            color={"lightyellow"}
-                            sx={{
-                                textShadow: "2px 2px black",
-                                fontSize: "1.5rem",
-                                textAlign: "left",
-                                animation: `${slideInFromLeft} 1s ease-in-out`, // Changed animation
-                            }}
+                            fontFamily="cursive"
+                            color="lightyellow"
                         >
                             {data.note}
                         </Typography>

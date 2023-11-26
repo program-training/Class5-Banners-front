@@ -70,7 +70,7 @@ export const BannerTable = ({ data, setOpenDialog }: Props) => {
                                 <img
                                     onClick={() =>
                                         navigate(
-                                            `banners/vertical/products/${banner.productID}`
+                                            `banners/horizontal/products/${banner.productID}`
                                         )
                                     }
                                     src={banner.imageURL}
