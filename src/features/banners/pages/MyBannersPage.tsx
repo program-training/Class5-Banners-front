@@ -35,13 +35,15 @@ const MyBannersPage = () => {
         .get(
           `${import.meta.env.VITE_SERVER_HOST}:${
             import.meta.env.VITE_SERVER_PORT
-          }/api/users/my`
+          }/api/users/my`,
+          { headers: { Authorization: `Bearer ${user.token}` } }
+          // { headers: { Authorization: `${user.token}` } }
         )
         .then((response) => setBanners(response.data));
     } catch (error) {
       console.error("Error fetching data:", error);
     }
-  }, [navigate, user.loggedIn]);
+  }, [navigate, user.loggedIn, user.token]);
 
   return (
     <Container maxWidth="md">
