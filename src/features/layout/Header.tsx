@@ -27,7 +27,7 @@ const Header = () => {
           <Box sx={{ flexGrow: 1 }} />
           <Button
             onClick={() => {
-              navigate("my-banners/bla-bla");
+              navigate("my-banners");
             }}
             variant="outlined"
             sx={{
