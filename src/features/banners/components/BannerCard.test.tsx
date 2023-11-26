@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
-import BannerCard from "./BannerCard";
 import { describe, expect, test } from "vitest";
+import BannerCard from "./BannerCard";
 
 const sampleProduct = {
   ID: 1,
@@ -8,6 +8,7 @@ const sampleProduct = {
   description: "This is a sample product",
   image: "sample-image-url.jpg",
 };
+
 describe("banner card", () => {
   test("renders BannerCard with sample product", () => {
     render(<BannerCard selectedProduct={sampleProduct} />);
