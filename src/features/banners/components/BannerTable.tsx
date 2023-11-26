@@ -37,9 +37,9 @@ export const BannerTable = ({ data, setOpenDialog }: Props) => {
   const rows = [
     "Image",
     "Title",
+    "Description",
     "Creator",
     "Creation Date",
-    "Status",
     "Delete",
     "Edit",
   ];
@@ -61,8 +61,8 @@ export const BannerTable = ({ data, setOpenDialog }: Props) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {data.map((banner) => (
-            <StyledTableRow key={banner._id}>
+          {data.map((banner, i) => (
+            <StyledTableRow key={i}>
               <StyledTableCell align="center" sx={{ cursor: "pointer" }}>
                 <img
                   onClick={() =>
@@ -76,13 +76,13 @@ export const BannerTable = ({ data, setOpenDialog }: Props) => {
               </StyledTableCell>
               <StyledTableCell align="center">{banner.title}</StyledTableCell>
               <StyledTableCell align="center">
+                {banner.description}
+              </StyledTableCell>
+              <StyledTableCell align="center">
                 {banner.authorID}
               </StyledTableCell>
               <StyledTableCell align="center">
                 {String(banner.createdAt)}
-              </StyledTableCell>
-              <StyledTableCell align="center">
-                {banner.description}
               </StyledTableCell>
               <StyledTableCell align="center">
                 <IconButton onClick={() => handleOpenDeleteDialog()}>
