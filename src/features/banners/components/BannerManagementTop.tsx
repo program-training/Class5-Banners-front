@@ -6,16 +6,16 @@ import {
   Typography,
   Button,
 } from "@mui/material";
-import { banners } from "../../utils/temporaryData";
 import { useNavigate } from "react-router-dom";
 import { Dispatch, SetStateAction, useState } from "react";
 import { BannerInterface } from "../interface/BannerInterface";
 
 type Props = {
+  banners: BannerInterface[];
   setBanners: Dispatch<SetStateAction<BannerInterface[]>>;
 };
 
-const BannerManagementTop = ({ setBanners }: Props) => {
+const BannerManagementTop = ({ banners, setBanners }: Props) => {
   const [, setSearchValue] = useState<string>("");
   const navigate = useNavigate();
 
@@ -24,7 +24,7 @@ const BannerManagementTop = ({ setBanners }: Props) => {
     const filteredBanners = banners.filter(
       (banner) =>
         banner.title.toLowerCase().includes(value.toLowerCase()) ||
-        banner.author.toLowerCase().includes(value.toLowerCase())
+        banner.authorID.toLowerCase().includes(value.toLowerCase())
     );
     setBanners(filteredBanners);
   };
@@ -44,7 +44,7 @@ const BannerManagementTop = ({ setBanners }: Props) => {
           disableClearable
           options={banners
             .map((banner) => banner.title)
-            .concat(banners.map((banner) => banner.author))}
+            .concat(banners.map((banner) => banner.authorID))}
           renderInput={(params) => (
             <TextField
               {...params}
