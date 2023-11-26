@@ -1,170 +1,103 @@
-import React from "react";
+import { useEffect, useState } from "react";
 import { styled } from "@mui/system";
+import { keyframes } from "@mui/system";
 import Typography from "@mui/material/Typography";
 import { Box, Stack } from "@mui/material";
+import { BannerInterface } from "../interface/BannerInterface";
+import { getBannerById } from "../service/getBanners";
+import { useParams } from "react-router-dom";
+
 const Img = styled("img")({
     margin: "auto",
     display: "block",
-    // maxWidth: "100%",
-    // minWidth: "100%",
+    maxWidth: "100%",
+    minWidth: "100%",
     maxHeight: "100%",
-    minHeight: "100%",
-    // height: "100%",
     objectFit: "cover",
 });
-interface ResponsiveAdProps {
-    imageUrl: string;
-    title: string;
-    description: string;
-    note?: string;
-    to?: string;
-}
-const BannerHorizontalPage: React.FC<ResponsiveAdProps> = ({
-    imageUrl,
-    title,
-    description,
-    note,
-}) => {
+
+const slideInFromLeft = keyframes`
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+`;
+
+const BannerPage = () => {
+    const { id } = useParams();
+    const [data, setData] = useState<BannerInterface>();
+    useEffect(() => {
+        getBannerById(id as string)
+            .then((res) => {
+                setData(res[0]);
+            })
+            .catch((error) => console.log(error));
+    }, [id]);
     return (
-        // <Link to={to}>
-        <Stack
-            width={"100vw"}
-            height={"100vh"}
-            alignItems={"center"}
-            justifyContent={"space-between"}
-            overflow={"hidden"}
-        >
-            {note && (
-                <Typography
-                    variant="body2"
-                    color="text.secondary"
-                    sx={{ fontSize: "1rem", color: "#777" }}
-                >
-                    {note}
-                </Typography>
-            )}
+        <div onClick={() => open(data?.imageURL)}>
             <Box
-                display={"flex"}
+                sx={{
+                    backgroundImage: `url("/ad-background.png")`,
+                    height: "100%",
+                    width: "100%",
+                    position: "absolute",
+                    backgroundSize: "cover",
+                    zIndex: -1,
+                }}
+            ></Box>
+            <Stack
+                direction={"row"} // Changed to horizontal stacking
                 width={"100vw"}
-                height={"100vh"}
-                alignItems={"stretch"}
+                height={"100vh"} // Changed height to fill the viewport height
+                alignItems={"center"}
                 justifyContent={"space-between"}
                 overflow={"hidden"}
+                textAlign={"center"}
+                sx={{
+                    cursor: "pointer",
+                }}
             >
-                <Box
-                    alignItems={"center"}
-                    display={"flex"}
-                    flexDirection={"row"}
-                >
-                    <Typography
-                        gutterBottom
-                        variant="h6"
-                        component="div"
+                <Box flex="1">
+                    {/* Added Box for image */}
+                    <Img
                         sx={{
-                            fontSize: "2rem",
-                            fontWeight: "bold",
-                            color: "#8F31B5",
+                            m: 0,
+                            height: "100vh", // Adjusted height to fill the viewport height
+                            width: "100%", // Ensure image width takes up entire box
+                            objectFit: "cover", // Maintain image aspect ratio
+                            animation: `${slideInFromLeft} 1s ease-in-out`, // Added animation
                         }}
-                    >
-                        {title}
+                        alt="ad"
+                        src={data?.imageURL}
+                    />
+                </Box>
+                <Box flex="1">
+                    {/* Rest of your content */}
+                    <Typography variant="h4" fontFamily="fantasy" color="white">
+                        {data?.title || "Title"}
                     </Typography>
                     <Typography
-                        variant="body1"
-                        gutterBottom
-                        sx={{ fontSize: "1.2rem", color: "#333", p: 3 }}
+                        variant="subtitle1"
+                        fontFamily="fantasy"
+                        color="white"
                     >
-                        {description}
+                        {data?.description || "Description"}
                     </Typography>
+                    {data?.note && (
+                        <Typography
+                            variant="body1"
+                            fontFamily="cursive"
+                            color="lightyellow"
+                        >
+                            {data.note}
+                        </Typography>
+                    )}
                 </Box>
-                <Img
-                    sx={{
-                        m: 0,
-                        width: "100vw",
-                        height: "100vh",
-                        alignItems: "stretch",
-                        justifyContent: "space-between",
-                        overflow: "hidden",
-                    }}
-                    alt="ad"
-                    src={imageUrl}
-                />
-            </Box>
-        </Stack>
-        // </Link>
+            </Stack>
+        </div>
     );
 };
-export default BannerHorizontalPage;
-// קוד עם axios
-// import React, { useEffect, useState } from "react";
-// import { styled } from "@mui/system";
-// import { Link } from "react-router-dom";
-// import axios from "axios";
-// import Typography from "@mui/material/Typography";
-// import { Stack, Box } from "@mui/material";
-// const Img = styled("img")({
-//   margin: "auto",
-//   display: "block",
-//   maxWidth: "100%",
-//   minWidth: "100%",
-//   maxHeight: "100%",
-//   objectFit: "cover",
-// });
-// interface ResponsiveAdProps {
-//   to?: string;
-// }
-// const BannerHorizontalPage: React.FC<ResponsiveAdProps> = ({ to = "/" }) => {
-//   const [data, setData] = useState({
-//     imageUrl: "",
-//     title: "",
-//     description: "",
-//     note: "",
-//   });
-//   useEffect(() => {
-//     try {
-//       axios.get("YOUR_API_ENDPOINT")
-//         .then(response => setData(response.data));
-//     } catch (error) {
-//       console.error("Error fetching data:", error);
-//     }
-//   }, []);
-//   return (
-//     <Link to={to}>
-//       <Stack
-//         width={"100vw"}
-//         height={"100vh"}
-//         alignItems={"center"}
-//         justifyContent={"space-between"}
-//         overflow={"hidden"}
-//       >
-//         <Box>
-//           <Typography
-//             gutterBottom
-//             variant="h6"
-//             component="div"
-//             sx={{ fontSize: "2rem", fontWeight: "bold", color: "#3F51B5" }}
-//           >
-//             {data.title}
-//           </Typography>
-//           <Typography
-//             variant="body1"
-//             gutterBottom
-//             sx={{ fontSize: "1.2rem", color: "#333" }}
-//           >
-//             {data.description}
-//           </Typography>
-//           {data.note && (
-//             <Typography
-//               variant="body2"
-//               color="text.secondary"
-//               sx={{ fontSize: "1rem", color: "#777" }}
-//             >
-//               {data.note}
-//             </Typography>
-//           )}
-//         </Box>
-//         <Img sx={{ m: 0 }} alt="ad" src={data.imageUrl} />
-//       </Stack>
-//     </Link>
-//   );
-// };
-// export default BannerHorizontalPage;
+
+export default BannerPage;
