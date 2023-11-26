@@ -6,11 +6,14 @@ import Tooltip from "@mui/material/Tooltip";
 import IconButton from "@mui/material/IconButton";
 import { useNavigate } from "react-router-dom";
 import DeleteBannerDialog from "../banners/components/DeleteBannerDialog";
+import { useDispatch } from "react-redux";
+import { logOut } from "../users/user-slice";
 
 const UserMenu = () => {
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
@@ -31,7 +34,8 @@ const UserMenu = () => {
   };
 
   const handleLogout = () => {
-    // navigate("xxxxxxxx");
+    dispatch(logOut());
+    navigate("/user/login");
   };
 
   const handleOpenDeleteDialog = () => {
@@ -64,7 +68,7 @@ const UserMenu = () => {
       >
         <MenuItem onClick={handleDisplayProfile}>Display Profile</MenuItem>
         <MenuItem onClick={handleEditProfile}>Edit Profile</MenuItem>
-        <MenuItem onClick={handleLogout}>Logout</MenuItem>
+        <MenuItem onClick={handleLogout}>Sign Out</MenuItem>
         <MenuItem onClick={handleOpenDeleteDialog}>Delete Profile</MenuItem>
       </Menu>
       <DeleteBannerDialog
