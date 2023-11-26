@@ -4,6 +4,8 @@ import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import Checkbox from "@mui/material/Checkbox";
+import FormControlLabel from "@mui/material/FormControlLabel";
 import axios from "axios";
 import { useAppSelector } from "../../../redux/hooks";
 
@@ -33,10 +35,8 @@ const EditProfilePage = () => {
     setName(event.target.value);
   };
 
-  const handleStatusChange = (event: {
-    target: { value: SetStateAction<string> };
-  }) => {
-    setStatus(event.target.value);
+  const handleStatusChange = (event: { target: { checked: boolean } }) => {
+    setStatus(event.target.checked ? "active" : "inactive");
   };
 
   const handleSubmit = () => {
@@ -44,26 +44,47 @@ const EditProfilePage = () => {
   };
 
   return (
-    <Paper>
+    <Paper
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        gap: "20px",
+        padding: "20px",
+        border: "1px solid #ccc",
+        borderRadius: "8px",
+        backgroundColor: "#f9f9f9",
+        marginY: "50px",
+      }}
+    >
       <Typography variant="h4">Edit User Details</Typography>
       <Typography variant="subtitle1">Edit Name and Status</Typography>
 
-      <form>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleSubmit();
+        }}
+      >
         <TextField
           label="Name"
           variant="outlined"
           value={name}
           onChange={handleNameChange}
+          fullWidth
+          sx={{ mb: 2 }}
         />
-        <br />
-        <TextField
-          label="Status"
-          variant="outlined"
-          value={status}
-          onChange={handleStatusChange}
+        <FormControlLabel
+          control={
+            <Checkbox
+              checked={status === "active"}
+              onChange={handleStatusChange}
+            />
+          }
+          label={"Admin"}
+          sx={{ mb: 2 }}
         />
-        <br />
-        <Button variant="contained" color="primary" onClick={handleSubmit}>
+        <Button type="submit" variant="contained" color="primary">
           Save Changes
         </Button>
       </form>
