@@ -1,13 +1,22 @@
 import { Container, Typography } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BannerTable } from "../components/BannerTable";
 import { banners as data } from "../../utils/temporaryData";
 import BannerManagementTop from "../components/BannerManagementTop";
 import DeleteBannerDialog from "../components/DeleteBannerDialog";
+import { getBannersFromServer } from "../service/getBanners";
 
 const BannerManagementPage = () => {
   const [openDialog, setOpenDialog] = useState(false);
   const [banners, setBanners] = useState(data);
+
+  useEffect(() => {
+    getBannersFromServer()
+      .then((res) => {
+        setBanners(res);
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
   return (
     <Container maxWidth="md">

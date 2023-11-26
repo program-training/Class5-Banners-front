@@ -16,9 +16,8 @@ import BannerPage from "../banners/pages/BannerPage";
 const RouterDom = () => {
   return (
     <Routes>
-
       <Route path="banners">
-        <Route path="products/:productID" element={<BannerPage />} />
+        <Route path="products/:id" element={<BannerPage />} />
         <Route path="categories/:categoryName" element={<BannerPage />} />
       </Route>
 
@@ -32,10 +31,7 @@ const RouterDom = () => {
         <Route path="user/login" element={<LogInPage />} />
         <Route path="user/show/" element={<ShowUserPage />} />
         <Route path="user/edit/" element={<EditUserPage />} />
-        <Route
-          path="user/forget-password/"
-          element={<ForgetPasswordPage />}
-        />
+        <Route path="user/forget-password/" element={<ForgetPasswordPage />} />
         <Route path="reset-password/" element={<ResetPasswordPage />} />
       </Route>
 
