@@ -62,12 +62,12 @@ export const BannerTable = ({ data, setOpenDialog }: Props) => {
         </TableHead>
         <TableBody>
           {data.map((banner) => (
-            <StyledTableRow
-              onClick={() => navigate(`banners/products/${banner.productID}`)}
-              key={banner._id}
-            >
-              <StyledTableCell align="center">
+            <StyledTableRow key={banner._id}>
+              <StyledTableCell align="center" sx={{ cursor: "pointer" }}>
                 <img
+                  onClick={() =>
+                    navigate(`banners/products/${banner.productID}`)
+                  }
                   src={banner.imageURL}
                   alt={banner.title}
                   width="50"
