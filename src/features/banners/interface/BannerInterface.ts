@@ -1,11 +1,13 @@
 export interface BannerInterface {
-    title: string;
-    _id: string;
-    image: {
-        url: string;
-        alt: string;
-    };
-    text: string;
-    createdAt: string;
-    author: string;
+  _id: string;
+  productID: string;
+  title: string;
+  description: string;
+  imageURL: string;
+  productURL: string;
+  note: string | null;
+  category: string;
+  authorID: string;
+  createdAt: string;
+  updatedAt: string;
 }
