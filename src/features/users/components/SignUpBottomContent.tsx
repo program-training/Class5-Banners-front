@@ -10,7 +10,7 @@ const SignUpBottomContent = () => {
                 style={{ marginTop: "10px" }}
             >
                 Already registered?
-                <Link to="#">Log In</Link>
+                <Link to="/user/login">Log In</Link>
             </Typography>
         </>
     );
