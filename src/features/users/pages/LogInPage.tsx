@@ -5,14 +5,19 @@ import PasswordInputs from "../components/PasswordInput";
 import FormError from "../components/SignUpFormError";
 import SignUpSubmitButton from "../components/SubmitButton";
 import { Grid, Typography } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useAppDispatch } from "../../../redux/hooks";
+import { setUser } from "../user-slice";
 
 const LogIn = () => {
   const [email, setEmail] = useState("");
   const [isValidEmail, setIsValidEmail] = useState(true);
   const [password, setPassword] = useState("");
   const [isValidPassword, setIsValidPassword] = useState(true);
+  const navigate = useNavigate();
+
+  const dispatch = useAppDispatch();
 
   const isAllValid = email && isValidEmail && password && isValidPassword;
 
@@ -26,6 +31,14 @@ const LogIn = () => {
         })
         .then((response) => {
           console.log("Login successful:", response.data);
+          dispatch(
+            setUser({
+              isAdmin: true,
+              loggedIn: true,
+              token: response.data,
+            })
+          );
+          navigate("/");
         })
         .catch((error) => {
           console.error("Login failed:", error);
