@@ -11,3 +11,13 @@ export interface BannerInterface {
   createdAt: string;
   updatedAt: string;
 }
+
+export interface NewBannerInterface {
+  productID: string;
+  title: string;
+  description: string;
+  imageURL: string;
+  productURL: string;
+  note: string | null;
+  category: string;
+}
