@@ -5,16 +5,14 @@ import Avatar from "@mui/material/Avatar";
 import Tooltip from "@mui/material/Tooltip";
 import IconButton from "@mui/material/IconButton";
 import { useNavigate } from "react-router-dom";
-import DeleteBannerDialog from "../banners/components/DeleteBannerDialog";
-import { useDispatch } from "react-redux";
-import { logOut } from "../users/user-slice";
+
 // import { useAppSelector } from "../../redux/hooks";
 
 const UserMenu = () => {
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
-  const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
+
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+
   // const user = useAppSelector((state) => state.user);
 
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -29,23 +27,13 @@ const UserMenu = () => {
     setAnchorElUser(null);
   };
 
-  const handleDisplayProfile = () => {
-    navigate("/user/show");
+  const handleSignUp = () => {
+    navigate("/user/sign-up");
     handleCloseUserMenu();
   };
 
-  const handleEditProfile = () => {
-    navigate("/user/Edit");
-    handleCloseUserMenu();
-  };
-
-  const handleLogout = () => {
-    dispatch(logOut());
+  const handleLogin = () => {
     navigate("/user/login");
-  };
-
-  const handleOpenDeleteDialog = () => {
-    setOpenDeleteDialog(true);
     handleCloseUserMenu();
   };
 
@@ -72,15 +60,9 @@ const UserMenu = () => {
         open={Boolean(anchorElUser)}
         onClose={handleCloseUserMenu}
       >
-        <MenuItem onClick={handleDisplayProfile}>Display Profile</MenuItem>
-        <MenuItem onClick={handleEditProfile}>Edit Profile</MenuItem>
-        <MenuItem onClick={handleLogout}>Sign Out</MenuItem>
-        <MenuItem onClick={handleOpenDeleteDialog}>Delete Profile</MenuItem>
+        <MenuItem onClick={handleSignUp}>SignUp</MenuItem>
+        <MenuItem onClick={handleLogin}>Login</MenuItem>
       </Menu>
-      <DeleteBannerDialog
-        openDialog={openDeleteDialog}
-        setOpenDialog={setOpenDeleteDialog}
-      />
     </>
   );
 };
