@@ -23,7 +23,7 @@ const EditUserPage = () => {
   });
 
   useEffect(() => {
-    if (user.loggedIn) {
+    if (!user.loggedIn) {
       navigate("/user/login");
     } else {
       axios.get("/api/user").then((response) => {
@@ -32,7 +32,7 @@ const EditUserPage = () => {
         setValue("isAdmin", response.data.isAdmin === "true");
       });
     }
-  }, []);
+  }, [user.loggedIn, navigate, setValue]);
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     console.log(data);

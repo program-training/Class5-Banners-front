@@ -14,18 +14,18 @@ const MyBannersPage = () => {
   const navigate = useNavigate();
   const user = useAppSelector((state) => state.user);
 
-  // if (!user.loggedIn) {
-  //   navigate("/user/login");
-  // }
   useEffect(() => {
-    try {
-      getBannerByUserId("1").then((res) => {
-        setBanners(res);
-      });
-    } catch (err) {
-      console.error("Error fetching data:", err);
-    }
-  }, [navigate, user.loggedIn, user.token]);
+    if (!user.loggedIn || !user.isAdmin) {
+      navigate("/user/login");
+    } else
+      try {
+        getBannerByUserId("1").then((res) => {
+          setBanners(res);
+        });
+      } catch (err) {
+        console.error("Error fetching data:", err);
+      }
+  }, [navigate, user.loggedIn, user.isAdmin]);
 
   return (
     <Container maxWidth="md">
