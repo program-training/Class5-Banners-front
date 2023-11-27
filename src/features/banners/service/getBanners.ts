@@ -19,3 +19,12 @@ export const getBannerById = async (id: string) => {
     return Promise.reject(error);
   }
 };
+
+export const getBannerByUserId = async (userID: string) => {
+  try {
+    const banner = await axios.get(`${URL}/myBanners/${userID}`);
+    return banner.data;
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
