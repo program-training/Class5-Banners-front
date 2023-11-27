@@ -8,12 +8,7 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import axios from "axios";
 import { useAppSelector } from "../../../redux/hooks";
 import { Container } from "@mui/material";
-import { useForm, SubmitHandler } from "react-hook-form";
-
-interface FormData {
-  name: string;
-  isAdmin: boolean;
-}
+import { useForm, SubmitHandler, FieldValues } from "react-hook-form";
 
 const EditUserPage = () => {
   const navigate = useNavigate();
@@ -28,7 +23,7 @@ const EditUserPage = () => {
   });
 
   useEffect(() => {
-    if (!user.loggedIn) {
+    if (user.loggedIn) {
       navigate("/user/login");
     } else {
       axios.get("/api/user").then((response) => {
@@ -39,7 +34,9 @@ const EditUserPage = () => {
     }
   }, []);
 
-  const onSubmit: SubmitHandler<FormData> = (data) => {
+  const onSubmit: SubmitHandler<FieldValues> = (data) => {
+    console.log(data);
+
     const updatedUserData = {
       ...userData,
       name: data.name,
