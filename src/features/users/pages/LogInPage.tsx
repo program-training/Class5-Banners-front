@@ -67,7 +67,6 @@ const LogIn = () => {
           <SignUpSubmitButton onClick={handleLogin} />
         ) : (
           <>
-            <SignUpSubmitButton onClick={() => {}} />
             <FormError />
           </>
         )}
