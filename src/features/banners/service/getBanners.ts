@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const URL = "https://banner-service-back.onrender.com/api/banners";
+const URL = `${import.meta.env.VITE_SERVER_HOST}:${import.meta.env.VITE_SERVER_PORT}/api/banners`;
 
 export const getBannersFromServer = async () => {
   try {
@@ -20,9 +20,12 @@ export const getBannerById = async (id: string) => {
   }
 };
 
-export const getBannerByUserId = async (userID: string) => {
+export const getBannerByUserId = async (token: string) => {
   try {
-    const banner = await axios.get(`${URL}/myBanners/${userID}`);
+    const banner = await axios.get(`${URL}/myBanners/`, {
+      headers: {
+        Authorization: token,
+  }});
     return banner.data;
   } catch (error) {
     return Promise.reject(error);

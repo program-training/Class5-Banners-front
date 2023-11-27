@@ -5,8 +5,8 @@ import IconButton from "@mui/material/IconButton";
 import Button from "@mui/material/Button";
 import { Extension } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
-import UserMenu from "./UserMenu";
-import UserMenu2 from "./UserMenu2";
+import UserMenu from "./UserMenuLoggedIn";
+import UserMenu2 from "./UserMenuLoggedOut";
 import { useAppSelector } from "../../redux/hooks";
 
 const Header = () => {

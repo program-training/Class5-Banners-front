@@ -5,9 +5,9 @@ import Avatar from "@mui/material/Avatar";
 import Tooltip from "@mui/material/Tooltip";
 import IconButton from "@mui/material/IconButton";
 import { useNavigate } from "react-router-dom";
-import DeleteBannerDialog from "../banners/components/DeleteBannerDialog";
 import { useDispatch } from "react-redux";
 import { logOut } from "../users/user-slice";
+import DeleteUserDialog from "../banners/components/DeleteUserDialog";
 // import { useAppSelector } from "../../redux/hooks";
 
 const UserMenu = () => {
@@ -74,10 +74,10 @@ const UserMenu = () => {
       >
         <MenuItem onClick={handleDisplayProfile}>Display Profile</MenuItem>
         <MenuItem onClick={handleEditProfile}>Edit Profile</MenuItem>
-        <MenuItem onClick={handleLogout}>Sign Out</MenuItem>
+        <MenuItem onClick={handleLogout}>Log Out</MenuItem>
         <MenuItem onClick={handleOpenDeleteDialog}>Delete Profile</MenuItem>
       </Menu>
-      <DeleteBannerDialog
+      <DeleteUserDialog
         openDialog={openDeleteDialog}
         setOpenDialog={setOpenDeleteDialog}
       />

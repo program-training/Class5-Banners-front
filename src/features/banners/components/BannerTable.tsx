@@ -16,7 +16,8 @@ import { useNavigate } from "react-router-dom";
 
 type Props = {
     data: BannerInterface[];
-    setOpenDialog: Dispatch<SetStateAction<boolean>>;
+    setOpenDialog: Dispatch<SetStateAction<string | null>>;
+    page: 'banner-management' | 'my-banners'
 };
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -33,21 +34,25 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     },
 }));
 
-export const BannerTable = ({ data, setOpenDialog }: Props) => {
+export const BannerTable = ({ data, setOpenDialog, page }: Props) => {
     console.log(data);
 
     const rows = [
         "Image",
         "Title",
-        "Author",
         "Creation Date",
         "Note",
         "Delete",
         "Edit",
     ];
+
+    if (page === 'banner-management') {
+        rows.splice(2, 0, "Author"); 
+    }
+    
     const navigate = useNavigate();
-    const handleOpenDeleteDialog = () => {
-        setOpenDialog(true);
+    const handleOpenDeleteDialog = (id: string) => {
+        setOpenDialog(id);
     };
 
     return (
@@ -72,7 +77,7 @@ export const BannerTable = ({ data, setOpenDialog }: Props) => {
                                 <img
                                     onClick={() =>
                                         navigate(
-                                            `banners/horizontal/products/${banner.productID}`
+                                            `/banners/horizontal/products/${banner.productID}`
                                         )
                                     }
                                     src={banner.imageURL}
@@ -84,18 +89,18 @@ export const BannerTable = ({ data, setOpenDialog }: Props) => {
                             <StyledTableCell align="center">
                                 {banner.title}
                             </StyledTableCell>
-                            <StyledTableCell align="center">
-                                {banner.authorID}
-                            </StyledTableCell>
+                            {page === 'banner-management' && <StyledTableCell align="center">
+                                {banner.authorUsername}
+                            </StyledTableCell>}
                             <StyledTableCell align="center">
                                 {String(banner.createdAt.substring(0, 10))}
                             </StyledTableCell>
                             <StyledTableCell align="center">
-                                {banner.note || "On Sale!"}
+                                {banner.note || "none"}
                             </StyledTableCell>
                             <StyledTableCell align="center">
                                 <IconButton
-                                    onClick={() => handleOpenDeleteDialog()}
+                                    onClick={() => handleOpenDeleteDialog(banner._id)}
                                 >
                                     <Delete />
                                 </IconButton>
@@ -103,7 +108,7 @@ export const BannerTable = ({ data, setOpenDialog }: Props) => {
                             <StyledTableCell align="center">
                                 <IconButton
                                     onClick={() =>
-                                        navigate(`edit/${banner._id}`)
+                                        navigate(`/edit/${banner._id}`)
                                     }
                                 >
                                     <Edit />

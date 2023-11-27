@@ -1,13 +1,17 @@
 import { ChangeEvent, useEffect, useState } from "react";
-import { Box, Typography, TextField, Button, Container } from "@mui/material";
+import { Box, Typography, TextField, Button, Container, CircularProgress, Alert } from "@mui/material";
 import { useNavigate, useParams } from "react-router";
 import { BannerInterface } from "../interface/BannerInterface";
 import { getBannerById } from "../service/getBanners";
+import axios from "axios";
+import { useAppSelector } from "../../../redux/hooks";
 
 const EditBannerPage = () => {
   const navigate = useNavigate();
+  const user = useAppSelector(state => state.user)
   const { bannerID } = useParams<{ bannerID: string }>();
   const [banner, setBanner] = useState<BannerInterface>();
+  const [status, setStatus] = useState<'none' | 'pending' | 'success' | 'error'>('none')
 
   useEffect(() => {
     getBannerById(bannerID as string)
@@ -19,6 +23,21 @@ const EditBannerPage = () => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setStatus('pending')
+    axios.put(`${import.meta.env.VITE_SERVER_HOST}:${import.meta.env.VITE_SERVER_PORT}/api/banners/${bannerID}`, 
+      banner,
+      {headers: {
+        Authorization: `${user.token}`,
+    }})
+    .then(res => {
+      console.log(res);
+      setStatus('success')
+      navigate('/')
+    })
+    .catch(err => {
+      console.error(err);
+      setStatus('error')
+    })
   };
 
   const handleChange = (
@@ -119,7 +138,7 @@ const EditBannerPage = () => {
         />
         {/* Additional fields as per the interface */}
         <Box display="flex" justifyContent="space-evenly" marginTop={2}>
-          <Button
+        {status !== 'pending' && <><Button
             variant="contained"
             color="secondary"
             onClick={() => navigate("/")}
@@ -128,7 +147,9 @@ const EditBannerPage = () => {
           </Button>
           <Button type="submit" variant="contained" color="primary">
             Save
-          </Button>
+          </Button></>}
+          {status === 'pending' && <CircularProgress />}
+          {status === 'error' && <Alert severity="error">an internal server error had occurred. try again later.</Alert>}
         </Box>
       </form>
     </Container>

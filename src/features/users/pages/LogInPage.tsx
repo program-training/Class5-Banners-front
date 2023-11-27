@@ -4,7 +4,7 @@ import { useState } from "react";
 import PasswordInputs from "../components/PasswordInput";
 import FormError from "../components/SignUpFormError";
 import SignUpSubmitButton from "../components/SubmitButton";
-import { Grid, Typography } from "@mui/material";
+import { Alert, CircularProgress, Grid, Typography } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useAppDispatch } from "../../../redux/hooks";
@@ -15,6 +15,8 @@ const LogIn = () => {
   const [isValidEmail, setIsValidEmail] = useState(true);
   const [password, setPassword] = useState("");
   const [isValidPassword, setIsValidPassword] = useState(true);
+  const [status, setStatus] = useState<'none' | 'pending' | 'success' | 'error'>('none')
+
   const navigate = useNavigate();
 
   const dispatch = useAppDispatch();
@@ -22,14 +24,17 @@ const LogIn = () => {
   const isAllValid = email && isValidEmail && password && isValidPassword;
 
   const url = import.meta.env.VITE_SERVER_HOST;
+  const port = import.meta.env.VITE_SERVER_PORT
   const handleLogin = () => {
     if (isAllValid) {
+      setStatus('pending')
       axios
-        .post(url + "/api/users/login", {
+        .post(`${url}:${port}/api/users/login`, {
           email: email,
           password: password,
         })
         .then((response) => {
+          setStatus('success')
           console.log("Login successful:", response.data);
           dispatch(
             setUser({
@@ -41,6 +46,7 @@ const LogIn = () => {
           navigate("/");
         })
         .catch((error) => {
+          setStatus('error')
           console.error("Login failed:", error);
         });
     }
@@ -76,13 +82,15 @@ const LogIn = () => {
           isValidPassword={isValidPassword}
           setIsValidPassword={setIsValidPassword}
         />
-        {isAllValid ? (
+        {status !== 'pending' && (isAllValid ? (
           <SignUpSubmitButton onClick={handleLogin} />
         ) : (
           <>
             <FormError />
           </>
-        )}
+        ))}
+        {status === 'pending' && <CircularProgress />}
+        {status === 'error' && <Alert severity="error">an internal server error had occurred. try again later.</Alert>}
 
         <Typography
           variant="body2"

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { TextField, Grid, FormControlLabel, Checkbox } from "@mui/material";
+import { TextField, Grid, FormControlLabel, Checkbox, CircularProgress, Alert } from "@mui/material";
 import EmailInput from "../components/EmailInput";
 import PasswordInputs from "../components/PasswordInput";
 import ConfirmPasswordInput from "../components/ConfirmPasswordInput";
@@ -20,6 +20,8 @@ const SignUpPage = () => {
   const [isValidEmail, setIsValidEmail] = useState(true);
   const [isValidPassword, setIsValidPassword] = useState(true);
   const [isValidConfirmPassword, setIsValidConfirmPassword] = useState(true);
+  const [status, setStatus] = useState<'none' | 'pending' | 'success' | 'error'>('none')
+
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -30,9 +32,10 @@ const SignUpPage = () => {
     isValidEmail &&
     isValidPassword &&
     isValidConfirmPassword;
-  const url = import.meta.env.VITE_SERVER_HOST;
-  const handleSignup = () => {
+  const url = `${import.meta.env.VITE_SERVER_HOST}:${import.meta.env.VITE_SERVER_PORT}`;
+  const handleSignUp = () => {
     if (isAllValid) {
+      setStatus('pending')
       axios
         .post(url + "/api/users/sign-up", {
           username: username,
@@ -41,26 +44,28 @@ const SignUpPage = () => {
           isAdmin: isAdmin,
         })
         .then((response) => {
-          console.log("Signup successful:", response.data);
-          dispatch(
-            setUser({
-              isAdmin: true,
-              loggedIn: true,
-              token: response.data,
-            })
-          );
-          navigate("/");
+          console.log("Sign up successful:", response.data);
         })
         .then(() =>
-          axios
-            .post(url + "/api/users/login", {
+          axios.post(url + "/api/users/login", {
               email: email,
               password: password,
             })
-            .then((res) => console.log(res))
+            .then((res) => {
+              dispatch(
+                setUser({
+                  isAdmin: true,
+                  loggedIn: true,
+                  token: res.data,
+                })
+              );
+              setStatus('success')
+              navigate("/");
+            })
         )
         .catch((error) => {
-          console.error("Signup failed:", error);
+          setStatus('error')
+          console.error("Sign up failed:", error);
         });
     }
   };
@@ -117,11 +122,13 @@ const SignUpPage = () => {
           }
           label="Do you want to be registered as an administrator?"
         />
-        {isAllValid ? (
-          <SignUpSubmitButton onClick={handleSignup} />
+        {status !== 'pending' && (isAllValid ? (
+          <SignUpSubmitButton onClick={handleSignUp} />
         ) : (
           <FormError />
-        )}
+        ))}
+        {status === 'pending' && <CircularProgress />}
+        {status === 'error' && <Alert severity="error">an internal server error had occurred. try again later.</Alert>}
         <SignUpBottomContent />
       </Grid>
     </Grid>

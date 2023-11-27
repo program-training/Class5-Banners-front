@@ -3,10 +3,11 @@ import { describe, expect, test } from "vitest";
 import BannerCard from "./BannerCard";
 
 const sampleProduct = {
-  ID: 1,
+  id: 1,
   title: "Sample Product",
   description: "This is a sample product",
-  image: "sample-image-url.jpg",
+  imageUrl: "sample-image-url.jpg",
+  category: 'test'
 };
 
 describe("banner card", () => {
