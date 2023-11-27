@@ -8,6 +8,9 @@ import SignUpBottomContent from "../components/SignUpBottomContent";
 import SignUpSubmitButton from "../components/SubmitButton";
 import FormError from "../components/SignUpFormError";
 import axios from "axios";
+import { useAppDispatch } from "../../../redux/hooks";
+import { setUser } from "../user-slice";
+import { useNavigate } from "react-router-dom";
 
 const SignUpPage = () => {
   const [username, setUsername] = useState("");
@@ -17,6 +20,8 @@ const SignUpPage = () => {
   const [isValidEmail, setIsValidEmail] = useState(true);
   const [isValidPassword, setIsValidPassword] = useState(true);
   const [isValidConfirmPassword, setIsValidConfirmPassword] = useState(true);
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const isAllValid =
     username &&
@@ -37,6 +42,14 @@ const SignUpPage = () => {
         })
         .then((response) => {
           console.log("Signup successful:", response.data);
+          dispatch(
+            setUser({
+              isAdmin: true,
+              loggedIn: true,
+              token: response.data,
+            })
+          );
+          navigate("/");
         })
         .then(() =>
           axios
