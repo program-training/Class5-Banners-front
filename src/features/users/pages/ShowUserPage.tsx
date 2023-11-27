@@ -8,19 +8,20 @@ import { useAppSelector } from "../../../redux/hooks";
 const ShowUserPage = () => {
   const navigate = useNavigate();
   const user = useAppSelector((state) => state.user);
-
   const [data, setData] = useState({ username: "", email: "", isAdmin: false });
 
   useEffect(() => {
     if (!user.loggedIn) {
       navigate("/user/login");
-    }
-    try {
-      axios.get("YOUR_API_ENDPOINT").then((response) => setData(response.data));
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-  }, []);
+    } else
+      try {
+        axios
+          .get("YOUR_API_ENDPOINT")
+          .then((response) => setData(response.data));
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+  }, [user.loggedIn, navigate]);
 
   return (
     <Paper
