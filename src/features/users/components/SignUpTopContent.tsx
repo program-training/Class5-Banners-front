@@ -12,7 +12,7 @@ const SignInTopContent = () => {
                 color="textSecondary"
                 gutterBottom
             >
-                Welcome back!
+                Welcome!
             </Typography>
         </>
     );
