@@ -16,7 +16,7 @@ const ForgetPasswordPage = () => {
     handleSubmit,
     formState: { errors, isSubmitSuccessful, isValid },
   } = useForm<FormData>({
-    mode: "onChange", // Enable onChange mode for real-time validation
+    mode: "onChange",
   });
 
   const onSubmit: SubmitHandler<FormData> = (data) => {
@@ -38,7 +38,12 @@ const ForgetPasswordPage = () => {
         marginY: "50px",
       }}
     >
-      <Typography variant="h4">Forgot Password</Typography>
+      <Typography variant="h4" gutterBottom>
+        Forgot Password
+      </Typography>
+      <Typography variant="subtitle1" color="textSecondary" gutterBottom>
+        Enter your email address to reset your password.
+      </Typography>
       <TextField
         label="Email Address"
         type="email"
