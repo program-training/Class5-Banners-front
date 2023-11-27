@@ -12,6 +12,8 @@ const EditBannerPage = () => {
   useEffect(() => {
     getBannerById(bannerID as string)
       .then((res) => {
+        console.log(res);
+
         setBanner(res);
       })
       .catch((err) => console.log(err));
