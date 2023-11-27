@@ -1,7 +1,6 @@
 import axios from "axios";
 
-const URL = "http://localhost:2121/api/banners";
-// const URL = "https://banner-service-back.onrender.com/api/banners";
+const URL = "https://banner-service-back.onrender.com/api/banners";
 
 export const getBannersFromServer = async () => {
   try {
