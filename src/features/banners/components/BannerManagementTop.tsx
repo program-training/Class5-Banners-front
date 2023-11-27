@@ -42,9 +42,9 @@ const BannerManagementTop = ({ banners, setBanners }: Props) => {
         <Autocomplete
           freeSolo
           disableClearable
-          options={banners
-            .map((banner) => banner.title)
-            .concat(banners.map((banner) => banner.authorID))}
+          options={Array.from(
+            new Set(banners.map((banner) => banner.authorID))
+          ).concat(Array.from(new Set(banners.map((banner) => banner.title))))}
           renderInput={(params) => (
             <TextField
               {...params}
