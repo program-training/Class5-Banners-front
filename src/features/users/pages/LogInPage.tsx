@@ -6,7 +6,7 @@ import FormError from "../components/SignUpFormError";
 import SignUpSubmitButton from "../components/SubmitButton";
 import { Grid, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
-
+import axios from "axios";
 const LogIn = () => {
   const [email, setEmail] = useState("");
   const [isValidEmail, setIsValidEmail] = useState(true);
@@ -14,6 +14,24 @@ const LogIn = () => {
   const [isValidPassword, setIsValidPassword] = useState(true);
 
   const isAllValid = email && isValidEmail && password && isValidPassword;
+
+  const url = import.meta.env.VITE_SERVER_HOST;
+  const handleLogin = () => {
+    if (isAllValid) {
+      axios
+        .post(url + "/api/users/login", {
+          email: email,
+          password: password,
+        })
+        .then((response) => {
+          console.log("Login successful:", response.data);
+        })
+        .catch((error) => {
+          console.error("Login failed:", error);
+        });
+    }
+  };
+
   return (
     <Grid
       container
@@ -44,7 +62,15 @@ const LogIn = () => {
           isValidPassword={isValidPassword}
           setIsValidPassword={setIsValidPassword}
         />
-        {isAllValid ? <SignUpSubmitButton /> : <FormError />}
+        {isAllValid ? (
+          <SignUpSubmitButton onClick={handleLogin} />
+        ) : (
+          <>
+            <SignUpSubmitButton onClick={() => {}} />
+            <FormError />
+          </>
+        )}
+
         <Typography
           variant="body2"
           align="center"

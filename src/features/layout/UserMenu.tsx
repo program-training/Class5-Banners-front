@@ -8,15 +8,19 @@ import { useNavigate } from "react-router-dom";
 import DeleteBannerDialog from "../banners/components/DeleteBannerDialog";
 import { useDispatch } from "react-redux";
 import { logOut } from "../users/user-slice";
+import { useAppSelector } from "../../redux/hooks";
 
 const UserMenu = () => {
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const user = useAppSelector((state) => state.user);
 
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElUser(event.currentTarget);
+    if (!user.loggedIn) {
+      navigate("/user/login");
+    } else setAnchorElUser(event.currentTarget);
   };
 
   const handleCloseUserMenu = () => {
