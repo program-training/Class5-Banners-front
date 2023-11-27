@@ -24,7 +24,6 @@ const EditUserPage = () => {
         isAdmin: true,
     });
 
-
     useEffect(() => {
         if (!user.loggedIn) {
             navigate("/user/login");
