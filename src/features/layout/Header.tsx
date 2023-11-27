@@ -6,9 +6,12 @@ import Button from "@mui/material/Button";
 import { Extension } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import UserMenu from "./UserMenu";
+import UserMenu2 from "./UserMenu2";
+import { useAppSelector } from "../../redux/hooks";
 
 const Header = () => {
   const navigate = useNavigate();
+  const user = useAppSelector((state) => state.user);
 
   return (
     <>
@@ -42,8 +45,7 @@ const Header = () => {
           </Button>
 
           <Box sx={{ flexGrow: 1 }} />
-
-          <UserMenu />
+          {user.loggedIn ? <UserMenu /> : <UserMenu2 />}
         </Toolbar>
       </AppBar>
     </>
