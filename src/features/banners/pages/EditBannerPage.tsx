@@ -1,15 +1,24 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { Box, Typography, TextField, Button, Container } from "@mui/material";
 import { useNavigate, useParams } from "react-router";
-import { banners } from "../../utils/temporaryData";
 import { BannerInterface } from "../interface/BannerInterface";
+import { getBannerById } from "../service/getBanners";
 
 const EditBannerPage = () => {
   const navigate = useNavigate();
   const { bannerID } = useParams<{ bannerID: string }>();
-  const [banner, setBanner] = useState<BannerInterface | undefined>(
-    banners.find((banner) => banner._id === bannerID)
-  );
+  const [banner, setBanner] = useState<BannerInterface>();
+
+  useEffect(() => {
+    getBannerById(bannerID as string)
+      .then((res) => {
+        console.log(res);
+
+        setBanner(res);
+        console.log(res);
+      })
+      .catch((err) => console.log(err));
+  }, [bannerID]);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -44,6 +53,15 @@ const EditBannerPage = () => {
       <Typography variant="h5">Edit Banner's Details</Typography>
       <form onSubmit={handleSubmit}>
         <TextField
+          label="ProductID"
+          name="productID"
+          value={banner?.productID || ""}
+          onChange={handleChange}
+          fullWidth
+          sx={{ mb: 2 }}
+          disabled={true}
+        />
+        <TextField
           label="Title"
           name="title"
           value={banner?.title || ""}
@@ -52,43 +70,55 @@ const EditBannerPage = () => {
           sx={{ mb: 2 }}
         />
         <TextField
+          label="Description"
+          name="description"
+          value={banner?.description || ""}
+          onChange={handleChange}
+          fullWidth
+          sx={{ mb: 2 }}
+        />
+        <TextField
           label="Image URL"
-          name="image.url"
-          value={banner?.image.url || ""}
+          name="imageUrl"
+          value={banner?.imageURL || ""}
           onChange={handleChange}
           fullWidth
           sx={{ mb: 2 }}
         />
         <TextField
-          label="Image Alt Text"
-          name="image.alt"
-          value={banner?.image.alt || ""}
+          label="Category"
+          name="category"
+          value={banner?.category || ""}
           onChange={handleChange}
           fullWidth
           sx={{ mb: 2 }}
         />
         <TextField
-          label="Text"
-          name="text"
-          value={banner?.text || ""}
+          label="Author ID"
+          name="authorID"
+          value={banner?.authorID || ""}
           onChange={handleChange}
           fullWidth
           sx={{ mb: 2 }}
+          disabled={true}
         />
         <TextField
-          label="Creation Date"
+          label="Created At"
           name="createdAt"
           value={banner?.createdAt || ""}
           onChange={handleChange}
           fullWidth
           sx={{ mb: 2 }}
+          disabled={true}
         />
         <TextField
-          label="Author"
-          name="author"
-          value={banner?.author || ""}
+          label="Updated At"
+          name="updatedAt"
+          value={banner?.updatedAt || ""}
           onChange={handleChange}
           fullWidth
+          sx={{ mb: 2 }}
+          disabled={true}
         />
         {/* Additional fields as per the interface */}
         <Box display="flex" justifyContent="space-evenly" marginTop={2}>

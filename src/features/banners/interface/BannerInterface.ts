@@ -1,5 +1,18 @@
 export interface BannerInterface {
-  _id: string;
+    _id: string;
+    productID: string;
+    title: string;
+    description: string;
+    imageURL: string;
+    productURL: string;
+    note: string;
+    category: string;
+    authorID: string;
+    createdAt: string;
+    updatedAt: string;
+}
+
+export interface NewBannerInterface {
   productID: string;
   title: string;
   description: string;
@@ -7,7 +20,4 @@ export interface BannerInterface {
   productURL: string;
   note: string | null;
   category: string;
-  authorID: string;
-  createdAt: string;
-  updatedAt: string;
 }
