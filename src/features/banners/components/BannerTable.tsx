@@ -34,15 +34,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 export const BannerTable = ({ data, setOpenDialog }: Props) => {
-    const rows = [
-        "Image",
-        "Title",
-        "Creator",
-        "Creation Date",
-        "Status",
-        "Delete",
-        "Edit",
-    ];
+    const rows = ["Image", "Title", "Creation Date", "Note", "Delete", "Edit"];
     const navigate = useNavigate();
     const handleOpenDeleteDialog = () => {
         setOpenDialog(true);
@@ -83,13 +75,10 @@ export const BannerTable = ({ data, setOpenDialog }: Props) => {
                                 {banner.title}
                             </StyledTableCell>
                             <StyledTableCell align="center">
-                                {banner.authorID}
+                                {String(banner.createdAt.substring(0, 10))}
                             </StyledTableCell>
                             <StyledTableCell align="center">
-                                {String(banner.createdAt)}
-                            </StyledTableCell>
-                            <StyledTableCell align="center">
-                                {banner.description}
+                                {banner.note || "On Sale!"}
                             </StyledTableCell>
                             <StyledTableCell align="center">
                                 <IconButton
