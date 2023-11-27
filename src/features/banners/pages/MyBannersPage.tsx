@@ -35,7 +35,7 @@ const MyBannersPage = () => {
         .get(
           `${import.meta.env.VITE_SERVER_HOST}:${
             import.meta.env.VITE_SERVER_PORT
-          }/api/users/my`,
+          }/api/banners/mybanners/1`,
           { headers: { Authorization: `Bearer ${user.token}` } }
           // { headers: { Authorization: `${user.token}` } }
         )

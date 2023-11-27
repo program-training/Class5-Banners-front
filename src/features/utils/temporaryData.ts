@@ -2,62 +2,52 @@ import { BannerInterface } from "../banners/interface/BannerInterface";
 import { ProductInterface } from "../banners/interface/ProductInterface";
 
 export const banners: BannerInterface[] = [
-    {
-        _id: "1",
-        title: "Product 1",
-        image: {
-            url: "https://via.placeholder.com/50",
-            alt: "Banner 1",
-        },
-        text: "On Sale",
-        createdAt: "2023-11-20",
-        author: "John Doe",
-    },
-    {
-        _id: "2",
-        title: "Product 2",
-
-        image: {
-            url: "https://via.placeholder.com/50",
-            alt: "Banner 2",
-        },
-        text: "Best Price",
-        createdAt: "2023-11-18",
-        author: "Jane Smith",
-    },
-    {
-        _id: "3",
-        title: "Product 3",
-
-        image: {
-            url: "https://via.placeholder.com/50",
-            alt: "Banner 3",
-        },
-        text: "50% OFF!!!",
-        createdAt: "2023-11-15",
-        author: "Alice Johnson",
-    },
-    // Add more objects as needed
+  {
+    _id: "1",
+    productID: "product-1",
+    title: "Banner 1",
+    description: "Description for Banner 1",
+    imageURL: "https://example.com/banner1.jpg",
+    productURL: "https://example.com/product1",
+    note: "Note for Banner 1",
+    category: "Category 1",
+    authorID: "author-1",
+    createdAt: "2023-01-01T12:00:00Z",
+    updatedAt: "2023-01-01T12:30:00Z",
+  },
+  {
+    _id: "2",
+    productID: "product-2",
+    title: "Banner 2",
+    description: "Description for Banner 2",
+    imageURL: "https://example.com/banner2.jpg",
+    productURL: "https://example.com/product2",
+    note: null,
+    category: "Category 2",
+    authorID: "author-2",
+    createdAt: "2023-02-01T14:00:00Z",
+    updatedAt: "2023-02-01T14:45:00Z",
+  },
 ];
 
 export const sampleProducts: ProductInterface[] = [
-    {
-        ID: 1,
-        title: "Product 1",
-        description: "Description for Product 1",
-        image: "https://via.placeholder.com/150",
-    },
-    {
-        ID: 2,
-        title: "Product 2",
-        description: "Description for Product 2",
-        image: "https://via.placeholder.com/150",
-    },
-    {
-        ID: 3,
-        title: "Product 3",
-        description: "Description for Product 3",
-        image: "https://via.placeholder.com/150",
-    },
-    // Add more products as needed
+  {
+    ID: 1,
+    title: "Product 1",
+    description: "Description for Product 1",
+    image: "https://via.placeholder.com/150",
+  },
+  {
+    ID: 2,
+    title: "Product 2",
+    description: "Description for Product 2",
+    image: "https://via.placeholder.com/150",
+  },
+  {
+    ID: 3,
+    title: "Product 3",
+    description: "Description for Product 3",
+    image: "https://via.placeholder.com/150",
+  },
+  // Add more products as needed
 ];

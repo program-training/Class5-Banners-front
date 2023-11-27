@@ -13,6 +13,7 @@ const EditBannerPage = () => {
     getBannerById(bannerID as string)
       .then((res) => {
         setBanner(res);
+        console.log(res);
       })
       .catch((err) => console.log(err));
   }, [bannerID]);
@@ -97,6 +98,7 @@ const EditBannerPage = () => {
           onChange={handleChange}
           fullWidth
           sx={{ mb: 2 }}
+          disabled={true}
         />
         <TextField
           label="Created At"
