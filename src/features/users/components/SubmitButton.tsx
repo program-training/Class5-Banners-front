@@ -1,19 +1,25 @@
 import { Button } from "@mui/material";
-const SignUpSubmitButton = () => {
-    const handleSubmit = () => {
-        console.log("submitted");
-    };
+import PropTypes from "prop-types";
 
-    return (
-        <Button
-            variant="contained"
-            color="primary"
-            fullWidth
-            onClick={handleSubmit}
-        >
-            Submit
-        </Button>
-    );
+const SignUpSubmitButton = ({ onClick }: { onClick: () => void }) => {
+  const handleSubmit = () => {
+    console.log("submitted");
+    onClick();
+  };
+
+  return (
+    <Button
+      variant="contained"
+      color="primary"
+      fullWidth
+      onClick={handleSubmit}
+    >
+      Submit
+    </Button>
+  );
+};
+SignUpSubmitButton.propTypes = {
+  onClick: PropTypes.func.isRequired,
 };
 
 export default SignUpSubmitButton;

@@ -23,7 +23,7 @@ const EditUserPage = () => {
   });
 
   useEffect(() => {
-    if (user.loggedIn) {
+    if (!user.loggedIn) {
       navigate("/user/login");
     } else {
       axios.get("/api/user").then((response) => {
@@ -71,6 +71,7 @@ const EditUserPage = () => {
         variant="outlined"
         fullWidth
         {...register("name")}
+        defaultValue={userData.name}
         sx={{ mb: 2 }}
       />
       <FormControlLabel
