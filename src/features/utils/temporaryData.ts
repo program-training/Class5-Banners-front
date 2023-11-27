@@ -22,7 +22,7 @@ export const banners: BannerInterface[] = [
     description: "Description for Banner 2",
     imageURL: "https://example.com/banner2.jpg",
     productURL: "https://example.com/product2",
-    note: null,
+    note: "",
     category: "Category 2",
     authorID: "author-2",
     createdAt: "2023-02-01T14:00:00Z",
