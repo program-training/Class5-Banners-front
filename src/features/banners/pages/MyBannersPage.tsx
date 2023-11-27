@@ -19,13 +19,13 @@ const MyBannersPage = () => {
       navigate("/user/login");
     } else
       try {
-        getBannerByUserId("1").then((res) => {
+        getBannerByUserId(user.token).then((res) => {
           setBanners(res);
         });
       } catch (err) {
         console.error("Error fetching data:", err);
       }
-  }, [navigate, user.loggedIn, user.isAdmin]);
+  }, [navigate, user.loggedIn, user.isAdmin, user.token]);
 
   return (
     <Container maxWidth="md">
