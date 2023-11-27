@@ -8,12 +8,13 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import axios from "axios";
 import { useAppSelector } from "../../../redux/hooks";
 import { Container } from "@mui/material";
-import { useForm } from "react-hook-form";
-interface UserData {
+import { useForm, SubmitHandler } from "react-hook-form";
+
+interface FormData {
   name: string;
-  status: string;
-  email: string;
+  isAdmin: boolean;
 }
+
 const EditUserPage = () => {
   const navigate = useNavigate();
   const user = useAppSelector((state) => state.user);
@@ -22,27 +23,27 @@ const EditUserPage = () => {
 
   const [userData, setUserData] = useState({
     name: "",
-    status: "inactive",
+    isAdmin: "true",
     email: "",
   });
 
   useEffect(() => {
-    if (user.loggedIn) {
+    if (!user.loggedIn) {
       navigate("/user/login");
     } else {
       axios.get("/api/user").then((response) => {
         setUserData(response.data);
         setValue("name", response.data.name);
-        setValue("status", response.data.status === "active");
+        setValue("isAdmin", response.data.isAdmin === "true");
       });
     }
   }, []);
 
-  const onSubmit = (data: UserData) => {
+  const onSubmit: SubmitHandler<FormData> = (data) => {
     const updatedUserData = {
       ...userData,
       name: data.name,
-      status: data.status ? "active" : "inactive",
+      status: data.isAdmin ? "true" : "false",
     };
 
     axios.put("/api/user", updatedUserData).then(() => {});
@@ -78,15 +79,15 @@ const EditUserPage = () => {
       <FormControlLabel
         control={
           <Checkbox
-            {...register("status")}
-            defaultChecked={userData.status === "active"}
+            {...register("isAdmin")}
+            defaultChecked={userData.isAdmin === "true"}
           />
         }
         label={"Admin"}
         sx={{ mb: 2 }}
       />
       <Button
-        onClick={handleSubmit(() => onSubmit)}
+        onClick={handleSubmit(onSubmit)}
         variant="contained"
         color="primary"
       >
