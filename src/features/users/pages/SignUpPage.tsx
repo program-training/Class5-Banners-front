@@ -43,10 +43,7 @@ const SignUpPage = () => {
     isValidEmail &&
     isValidPassword &&
     isValidConfirmPassword;
-
-  const url = `${import.meta.env.VITE_SERVER_HOST}:${
-    import.meta.env.VITE_SERVER_PORT
-  }`;
+  const url = `${import.meta.env.VITE_BASE_URL}`;
   const handleSignUp = () => {
     if (isAllValid) {
       setStatus("pending");

@@ -5,8 +5,9 @@ import DeleteBannerDialog from "../components/DeleteBannerDialog";
 import { useAppSelector } from "../../../redux/hooks";
 import { useNavigate } from "react-router-dom";
 import { BannerInterface } from "../interface/BannerInterface";
-import { AddCircle, Pending } from "@mui/icons-material";
+import { AddCircle } from "@mui/icons-material";
 import { getBannerByUserId } from "../service/getBanners";
+import Pending from "../components/Pending";
 
 const MyBannersPage = () => {
     const [bannerToDelete, setBannerToDelete] = useState<string | null>(null);
@@ -34,7 +35,7 @@ const MyBannersPage = () => {
     return (
         <Container maxWidth="md">
             <Typography variant="h2" padding={2} align="center">
-                'The Banners You Created'
+                The Banners You Created
             </Typography>
             <Button onClick={() => navigate("/create")}>
                 <Typography pr={2}>Create Banner</Typography>

@@ -23,13 +23,12 @@ const LogIn = () => {
 
   const isAllValid = email && isValidEmail && password && isValidPassword;
 
-  const url = import.meta.env.VITE_SERVER_HOST;
-  const port = import.meta.env.VITE_SERVER_PORT
+  const url = import.meta.env.VITE_BASE_URL;
   const handleLogin = () => {
     if (isAllValid) {
       setStatus('pending')
       axios
-        .post(`${url}:${port}/api/users/login`, {
+        .post(`${url}/api/users/login`, {
           email: email,
           password: password,
         })

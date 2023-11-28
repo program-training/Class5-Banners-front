@@ -7,7 +7,7 @@ import { getBannersFromServer } from "../service/getBanners";
 import { BannerInterface } from "../interface/BannerInterface";
 import { useAppSelector } from "../../../redux/hooks";
 import { useNavigate } from "react-router";
-import { Pending } from "@mui/icons-material";
+import Pending from "../components/Pending";
 
 const BannerManagementPage = () => {
     const user = useAppSelector((state) => state.user);
@@ -24,7 +24,7 @@ const BannerManagementPage = () => {
             navigate("/user/login");
         } else {
             setStatus("pending");
-            getBannersFromServer()
+            getBannersFromServer(user.token)
                 .then((res) => {
                     setBanners(res);
                     setStatus("success");
