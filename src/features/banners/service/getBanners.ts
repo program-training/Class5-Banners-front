@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const URL = `${import.meta.env.VITE_SERVER_HOST}:${import.meta.env.VITE_SERVER_PORT}/api/banners`;
+const URL = `${import.meta.env.VITE_BASE_URL}/api/banners`;
 
 export const getBannersFromServer = async (token: string) => {
   try {

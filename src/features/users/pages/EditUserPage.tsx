@@ -29,7 +29,7 @@ const EditUserPage = () => {
 
     setStatus('pending')
 
-    axios.get(`${import.meta.env.VITE_SERVER_HOST}:${import.meta.env.VITE_SERVER_PORT}/api/users`, {
+    axios.get(`${import.meta.env.VITE_BASE_URL}/api/users`, {
         headers: { Authorization: `${user.token}` },
       })
       .then((response) => {
@@ -68,7 +68,7 @@ const EditUserPage = () => {
 
     setStatus('pending')
 
-    axios.put(`${import.meta.env.VITE_SERVER_HOST}:${import.meta.env.VITE_SERVER_PORT}/api/users`,
+    axios.put(`${import.meta.env.VITE_BASE_URL}/api/users`,
             {
                 updatedUserData,
             },
