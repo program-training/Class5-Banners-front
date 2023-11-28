@@ -1,14 +1,22 @@
 import { Button } from "@mui/material";
-import { useNavigate } from "react-router";
+import { ProductInterface } from "../interface/ProductInterface";
 
-const CancelButton = () => {
-    const navigate = useNavigate();
+const CancelButton = ({
+    setSelectedProduct, 
+    setBannerURL 
+}: {
+    setBannerURL: React.Dispatch<React.SetStateAction<string>> ,
+    setSelectedProduct: React.Dispatch<React.SetStateAction<ProductInterface | null>>
+}) => {
     return (
         <Button
             sx={{ ml: 2 }}
             variant="contained"
             color="secondary"
-            onClick={() => navigate("/")}
+            onClick={() => {
+                setSelectedProduct(null)
+                setBannerURL('')
+            }}
         >
             Cancel
         </Button>

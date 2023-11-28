@@ -8,6 +8,7 @@ export interface BannerInterface {
     note: string;
     category: string;
     authorID: string;
+    authorUsername: string;
     createdAt: string;
     updatedAt: string;
 }

@@ -1,19 +1,11 @@
 import { Button } from "@mui/material";
-const SignUpSubmitButton = () => {
-    const handleSubmit = () => {
-        console.log("submitted");
-    };
 
-    return (
-        <Button
-            variant="contained"
-            color="primary"
-            fullWidth
-            onClick={handleSubmit}
-        >
-            Submit
-        </Button>
-    );
+const SignUpSubmitButton = ({ onClick }: { onClick?: () => void }) => {
+  return (
+    <Button variant="contained" color="primary" fullWidth onClick={onClick}>
+      Submit
+    </Button>
+  );
 };
 
 export default SignUpSubmitButton;

@@ -7,7 +7,7 @@ const BannerCard = ({ selectedProduct }: Props) => {
       <CardMedia
         component="img"
         height="140"
-        image={selectedProduct.image}
+        image={selectedProduct.imageUrl}
         alt={selectedProduct.title}
       />
       <CardContent>

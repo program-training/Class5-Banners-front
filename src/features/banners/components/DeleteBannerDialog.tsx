@@ -4,32 +4,53 @@ import {
     DialogContentText,
     DialogActions,
     Button,
+    CircularProgress,
+    Alert,
 } from "@mui/material";
-import { Dispatch, SetStateAction } from "react";
+import axios from "axios";
+import { Dispatch, SetStateAction, useState } from "react";
+import { useAppSelector } from "../../../redux/hooks";
 type Props = {
-    openDialog: boolean;
-    setOpenDialog: Dispatch<SetStateAction<boolean>>;
+    openDialog: string | null;
+    setOpenDialog: Dispatch<SetStateAction<string | null>>;
 };
 const DeleteBannerDialog = ({ openDialog, setOpenDialog }: Props) => {
+    const [status, setStatus] = useState<'none' | 'pending' | 'success' | 'error'>('none')
+
+    const user = useAppSelector((state) => state.user);
+
     const handleDeleteBanner = () => {
-        setOpenDialog(false);
+        setStatus('pending')
+        axios.delete(`${import.meta.env.VITE_SERVER_HOST}:${import.meta.env.VITE_SERVER_PORT}/api/banners/${openDialog}`,
+        {headers: {
+            Authorization: `${user.token}`,
+        }})
+        .then(() => setOpenDialog(null))
+        .catch(err => {
+            console.error(err);
+            setStatus('error')
+        })
     };
 
     return (
-        <Dialog open={openDialog} onClose={() => setOpenDialog(false)}>
+        <Dialog open={!!openDialog} onClose={() => setOpenDialog(null)}>
             <DialogContent>
                 <DialogContentText>
                     Are you sure you want to delete this banner?
                 </DialogContentText>
+                {status === 'error' && <DialogContent>
+                    <Alert severity="error">an internal server error had occurred. try again later.</Alert>
+                </DialogContent>}
+                {status === 'pending' && <CircularProgress />}
             </DialogContent>
-            <DialogActions>
-                <Button onClick={() => setOpenDialog(false)} color="primary">
+            {status !== 'pending' &&  <DialogActions>
+                <Button onClick={() => setOpenDialog(null)} color="primary">
                     Cancel
                 </Button>
                 <Button onClick={handleDeleteBanner} color="secondary">
                     Delete
                 </Button>
-            </DialogActions>
+            </DialogActions>}
         </Dialog>
     );
 };
