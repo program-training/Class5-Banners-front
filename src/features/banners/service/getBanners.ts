@@ -2,9 +2,9 @@ import axios from "axios";
 
 const URL = `${import.meta.env.VITE_SERVER_HOST}:${import.meta.env.VITE_SERVER_PORT}/api/banners`;
 
-export const getBannersFromServer = async () => {
+export const getBannersFromServer = async (token: string) => {
   try {
-    const banners = await axios.get(URL);
+    const banners = await axios.get(URL, {headers: {Authorization: token}});
     return banners.data;
   } catch (error) {
     return Promise.reject(error);
