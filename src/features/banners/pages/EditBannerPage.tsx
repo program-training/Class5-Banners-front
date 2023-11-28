@@ -24,7 +24,7 @@ const EditBannerPage = () => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setStatus('pending')
-    axios.put(`${import.meta.env.VITE_SERVER_HOST}:${import.meta.env.VITE_SERVER_PORT}/api/banners/${bannerID}`, 
+    axios.put(`${import.meta.env.VITE_BASE_URL}/api/banners/${bannerID}`, 
       banner,
       {headers: {
         Authorization: `${user.token}`,

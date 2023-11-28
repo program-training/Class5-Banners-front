@@ -35,9 +35,7 @@ const CreateNewBannerPage = () => {
     useEffect(() => {        
         axios
             .get(
-                `${import.meta.env.VITE_SERVER_HOST}:${
-                    import.meta.env.VITE_SERVER_PORT
-                }/api/banners/products`, {
+                `${import.meta.env.VITE_BASE_URL}/api/banners/products`, {
                     headers: {
                         Authorization: `${user.token}`,
                     }
@@ -54,7 +52,7 @@ const CreateNewBannerPage = () => {
 
     const handleSave = () => {
         setStatus('pending')
-        axios.post(`${import.meta.env.VITE_SERVER_HOST}:${import.meta.env.VITE_SERVER_PORT}/api/banners/new`, {
+        axios.post(`${import.meta.env.VITE_BASE_URL}/api/banners/new`, {
             banner: {
                 productID: `${selectedProduct?.id}`,
                 title: selectedProduct?.title,

@@ -34,7 +34,7 @@ const MyBannersPage = () => {
     return (
         <Container maxWidth="md">
             <Typography variant="h2" padding={2} align="center">
-                'The Banners You Created'
+                The Banners You Created
             </Typography>
             <Button onClick={() => navigate("/create")}>
                 <Typography pr={2}>Create Banner</Typography>

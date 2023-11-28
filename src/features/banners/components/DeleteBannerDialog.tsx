@@ -21,7 +21,7 @@ const DeleteBannerDialog = ({ openDialog, setOpenDialog }: Props) => {
 
     const handleDeleteBanner = () => {
         setStatus('pending')
-        axios.delete(`${import.meta.env.VITE_SERVER_HOST}:${import.meta.env.VITE_SERVER_PORT}/api/banners/${openDialog}`,
+        axios.delete(`${import.meta.env.VITE_BASE_URL}/api/banners/${openDialog}`,
         {headers: {
             Authorization: `${user.token}`,
         }})

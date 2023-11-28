@@ -14,7 +14,7 @@ type Props = {
 const DeleteUserDialog = ({ openDialog, setOpenDialog }: Props) => {
     
     const handleDeleteBanner = () => {
-        axios.delete(`${import.meta.env.VITE_SERVER_HOST}:${import.meta.env.VITE_SERVER_PORT}/api/`)
+        axios.delete(`${import.meta.env.VITE_BASE_URL}/api/`)
         setOpenDialog(false);
     };
 
