@@ -6,61 +6,59 @@ import DeleteBannerDialog from "../components/DeleteBannerDialog";
 import { getBannersFromServer } from "../service/getBanners";
 import { BannerInterface } from "../interface/BannerInterface";
 import { useAppSelector } from "../../../redux/hooks";
-import { useNavigate } from "react-router";
 import { Pending } from "@mui/icons-material";
+import { Navigate } from "react-router-dom";
 
 const BannerManagementPage = () => {
-    const user = useAppSelector((state) => state.user);
-    const navigate = useNavigate();
-    const [BannerToDelete, setBannerToDelete] = useState<string | null>(null);
-    const [banners, setBanners] = useState<BannerInterface[]>([]);
+  const user = useAppSelector((state) => state.user);
+  const [BannerToDelete, setBannerToDelete] = useState<string | null>(null);
+  const [banners, setBanners] = useState<BannerInterface[]>([]);
 
-    const [status, setStatus] = useState<"pending" | "success" | "error">(
-        "pending"
-    );
+  const [status, setStatus] = useState<"pending" | "success" | "error">(
+    "pending"
+  );
 
-    useEffect(() => {
-        if (!user.loggedIn || !user.isAdmin) {
-            navigate("/user/login");
-        } else {
-            setStatus("pending");
-            getBannersFromServer()
-                .then((res) => {
-                    setBanners(res);
-                    setStatus("success");
-                })
-                .catch((err) => {
-                    setStatus("error");
-                    console.log(err);
-                });
-        }
-    }, [user.loggedIn, user.isAdmin, navigate, BannerToDelete]);
+  useEffect(() => {
+    setStatus("pending");
+    getBannersFromServer()
+      .then((res) => {
+        setBanners(res);
+        setStatus("success");
+      })
+      .catch((err) => {
+        setStatus("error");
+        console.log(err);
+      });
+  }, []);
 
-    return (
-        <Container maxWidth="md">
-            <Typography variant="h2" padding={2} align="center">
-                Banner Management
-            </Typography>
-            <BannerManagementTop banners={banners} setBanners={setBanners} />
-            {status === "success" && (
-                <BannerTable
-                    data={banners}
-                    setOpenDialog={setBannerToDelete}
-                    page="banner-management"
-                />
-            )}
-            {status === "pending" && <Pending />}
-            {status === "error" && (
-                <Alert severity="error">
-                    can't get banners list from server. try again later.
-                </Alert>
-            )}
-            <DeleteBannerDialog
-                openDialog={BannerToDelete}
-                setOpenDialog={setBannerToDelete}
-            />
-        </Container>
-    );
+  if (!user.loggedIn || !user.isAdmin)
+    return <Navigate replace to={"/user/login"} />;
+
+  return (
+    <Container maxWidth="md">
+      <Typography variant="h2" padding={2} align="center">
+        Banner Management
+      </Typography>
+      <BannerManagementTop banners={banners} setBanners={setBanners} />
+      {status === "success" && (
+        <BannerTable
+          data={banners}
+          setOpenDialog={setBannerToDelete}
+          page="banner-management"
+        />
+      )}
+      {status === "pending" && <Pending />}
+      {status === "error" && (
+        <Alert severity="error">
+          can't get banners list from server. try again later.
+        </Alert>
+      )}
+      <DeleteBannerDialog
+        openDialog={BannerToDelete}
+        setOpenDialog={setBannerToDelete}
+      />
+    </Container>
+  );
 };
 
 export default BannerManagementPage;

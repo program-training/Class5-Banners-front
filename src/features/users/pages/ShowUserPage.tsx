@@ -1,27 +1,24 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import axios from "axios";
 import { useAppSelector } from "../../../redux/hooks";
+import { Navigate } from "react-router-dom";
 
 const ShowUserPage = () => {
-  const navigate = useNavigate();
   const user = useAppSelector((state) => state.user);
   const [data, setData] = useState({ username: "", email: "", isAdmin: false });
 
   useEffect(() => {
-    if (!user.loggedIn) {
-      navigate("/user/login");
-    } else
-      try {
-        axios
-          .get("YOUR_API_ENDPOINT")
-          .then((response) => setData(response.data));
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-  }, [user.loggedIn, navigate]);
+    try {
+      axios.get("YOUR_API_ENDPOINT").then((response) => setData(response.data));
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  }, []);
+
+  if (!user.loggedIn || !user.isAdmin)
+    return <Navigate replace to={"/user/login"} />;
 
   return (
     <Paper
