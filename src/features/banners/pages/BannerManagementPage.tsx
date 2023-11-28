@@ -24,7 +24,7 @@ const BannerManagementPage = () => {
             navigate("/user/login");
         } else {
             setStatus("pending");
-            getBannersFromServer()
+            getBannersFromServer(user.token)
                 .then((res) => {
                     setBanners(res);
                     setStatus("success");
