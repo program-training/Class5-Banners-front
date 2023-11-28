@@ -64,7 +64,7 @@ const EditUserPage = () => {
     const onSubmit: SubmitHandler<FieldValues> = (data) => {
         const updatedUserData = {
             ...userData,
-            username: data.Username,
+            username: data.username,
             isAdmin: data.isAdmin ? true : false,
         };
 

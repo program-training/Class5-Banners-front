@@ -17,7 +17,7 @@ import { useNavigate } from "react-router-dom";
 type Props = {
     data: BannerInterface[];
     setOpenDialog: Dispatch<SetStateAction<string | null>>;
-    page: 'banner-management' | 'my-banners'
+    page: "banner-management" | "my-banners";
 };
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -35,21 +35,14 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 export const BannerTable = ({ data, setOpenDialog, page }: Props) => {
-    console.log(data);
+    // console.log(data);
 
-    const rows = [
-        "Image",
-        "Title",
-        "Creation Date",
-        "Note",
-        "Delete",
-        "Edit",
-    ];
+    const rows = ["Image", "Title", "Creation Date", "Note", "Delete", "Edit"];
 
-    if (page === 'banner-management') {
-        rows.splice(2, 0, "Author"); 
+    if (page === "banner-management") {
+        rows.splice(2, 0, "Author");
     }
-    
+
     const navigate = useNavigate();
     const handleOpenDeleteDialog = (id: string) => {
         setOpenDialog(id);
@@ -89,9 +82,11 @@ export const BannerTable = ({ data, setOpenDialog, page }: Props) => {
                             <StyledTableCell align="center">
                                 {banner.title}
                             </StyledTableCell>
-                            {page === 'banner-management' && <StyledTableCell align="center">
-                                {banner.authorUsername}
-                            </StyledTableCell>}
+                            {page === "banner-management" && (
+                                <StyledTableCell align="center">
+                                    {banner.authorUsername}
+                                </StyledTableCell>
+                            )}
                             <StyledTableCell align="center">
                                 {String(banner.createdAt.substring(0, 10))}
                             </StyledTableCell>
@@ -100,7 +95,9 @@ export const BannerTable = ({ data, setOpenDialog, page }: Props) => {
                             </StyledTableCell>
                             <StyledTableCell align="center">
                                 <IconButton
-                                    onClick={() => handleOpenDeleteDialog(banner._id)}
+                                    onClick={() =>
+                                        handleOpenDeleteDialog(banner._id)
+                                    }
                                 >
                                     <Delete />
                                 </IconButton>
