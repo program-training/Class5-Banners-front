@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useAppSelector } from "../../../redux/hooks";
+import { Navigate, useNavigate } from "react-router-dom";
 import { Box, Container, SxProps, Typography, IconButton } from "@mui/material";
 import Alert from "@mui/material/Alert";
 import Pending from "../../banners/components/Pending";
@@ -19,7 +19,7 @@ const containerStyle: SxProps = {
 };
 
 const ShowUserPage = () => {
-    const navigate = useNavigate();
+    const navigate = useNavigate()
     const user = useAppSelector((state) => state.user);
     const [data, setData] = useState({
         username: "test",
@@ -31,7 +31,6 @@ const ShowUserPage = () => {
     >("none");
 
     useEffect(() => {
-        if (!user.loggedIn) navigate("/user/login");
         setStatus("pending");
         try {
             axios
@@ -53,7 +52,10 @@ const ShowUserPage = () => {
         } catch (error) {
             setStatus("error");
         }
-    }, [user.loggedIn, navigate]);
+    }, []);
+
+    if (!user.loggedIn || !user.isAdmin)
+      return <Navigate replace to={"/user/login"} />;
 
     const handleEdit = () => {
         navigate("/user/edit");

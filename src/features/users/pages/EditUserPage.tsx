@@ -1,5 +1,4 @@
 import { ChangeEvent, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
@@ -10,9 +9,9 @@ import { useAppSelector } from "../../../redux/hooks";
 import { Alert, CircularProgress, Container } from "@mui/material";
 import { useForm, SubmitHandler, FieldValues } from "react-hook-form";
 import { UserInterface } from "../interfaces/userInterface";
+import { Navigate } from "react-router-dom";
 
 const EditUserPage = () => {
-    const navigate = useNavigate();
     const user = useAppSelector((state) => state.user);
     const { register, handleSubmit, setValue } = useForm();
     const [userData, setUserData] = useState<UserInterface>();
@@ -29,7 +28,6 @@ const EditUserPage = () => {
     };
 
     useEffect(() => {
-        if (!user.loggedIn) return navigate("/user/login");
         setStatus("pending");
 
         axios
@@ -52,6 +50,9 @@ const EditUserPage = () => {
                 setStatus("error");
             });
     }, []);
+
+    if (!user.loggedIn || !user.isAdmin)
+    return <Navigate replace to={"/user/login"} />;
 
     const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
         // Update the isAdmin state directly based on the checkbox value
