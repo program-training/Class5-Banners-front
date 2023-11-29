@@ -19,7 +19,7 @@ const UserMenu = () => {
 
     const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
         // if (!user.loggedIn) {
-        //   navigate("/user/login");
+        //   navigate("/banners/user/login");
         // }
         //  else
         setAnchorElUser(event.currentTarget);
@@ -30,18 +30,18 @@ const UserMenu = () => {
     };
 
     const handleDisplayProfile = () => {
-        navigate("/user/show");
+        navigate("/banners/user/show");
         handleCloseUserMenu();
     };
 
     const handleEditProfile = () => {
-        navigate("/user/Edit");
+        navigate("/banners/user/Edit");
         handleCloseUserMenu();
     };
 
     const handleLogout = () => {
         dispatch(logOut());
-        navigate("/user/login");
+        navigate("/banners/user/login");
     };
 
     const handleOpenDeleteDialog = () => {

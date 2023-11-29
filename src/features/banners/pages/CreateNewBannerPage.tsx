@@ -85,7 +85,7 @@ const CreateNewBannerPage = () => {
   console.log("status", status);
 
   if (!user.loggedIn || !user.isAdmin)
-    return <Navigate replace to={"/user/login"} />;
+    return <Navigate replace to={"/banners/user/login"} />;
 
   return (
     <Box sx={centeredBox}>

@@ -141,7 +141,7 @@ const EditBannerPage = () => {
         {status !== 'pending' && <><Button
             variant="contained"
             color="secondary"
-            onClick={() => navigate("/")}
+            onClick={() => navigate("/banners/")}
           >
             Cancel
           </Button>

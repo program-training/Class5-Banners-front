@@ -72,7 +72,7 @@ const SignUpPage = () => {
                 })
               );
               setStatus("success");
-              navigate("/");
+              navigate("/banners/");
             })
         )
         .catch((error) => {

@@ -55,10 +55,10 @@ const ShowUserPage = () => {
     }, []);
 
     if (!user.loggedIn || !user.isAdmin)
-      return <Navigate replace to={"/user/login"} />;
+      return <Navigate replace to={"/banners/user/login"} />;
 
     const handleEdit = () => {
-        navigate("/user/edit");
+        navigate("/banners/user/edit");
     };
 
     const handleHome = () => {
