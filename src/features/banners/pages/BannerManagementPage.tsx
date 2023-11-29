@@ -1,4 +1,4 @@
-import { Alert, Container, Typography } from "@mui/material";
+import { Alert, Container } from "@mui/material";
 import { useEffect, useState } from "react";
 import { BannerTable } from "../components/BannerTable";
 import BannerManagementTop from "../components/BannerManagementTop";
@@ -38,9 +38,6 @@ const BannerManagementPage = () => {
 
     return (
         <Container maxWidth="md">
-            <Typography variant="h2" padding={2} align="center">
-                Banner Management
-            </Typography>
             <BannerManagementTop banners={banners} setBanners={setBanners} />
             {status === "success" && (
                 <BannerTable
