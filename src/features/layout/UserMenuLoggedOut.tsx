@@ -17,7 +17,7 @@ const UserMenu = () => {
 
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     // if (!user.loggedIn) {
-    //   navigate("/user/login");
+    //   navigate("/banners/user/login");
     // }
     //  else
     setAnchorElUser(event.currentTarget);
@@ -28,12 +28,12 @@ const UserMenu = () => {
   };
 
   const handleSignUp = () => {
-    navigate("/user/sign-up");
+    navigate("/banners/user/sign-up");
     handleCloseUserMenu();
   };
 
   const handleLogin = () => {
-    navigate("/user/login");
+    navigate("/banners/user/login");
     handleCloseUserMenu();
   };
 
