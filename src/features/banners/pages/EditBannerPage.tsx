@@ -133,6 +133,7 @@ const EditBannerPage = () => {
           disabled={true}
         />
         <Box display="flex" justifyContent="space-evenly" marginTop={2}>
+<<<<<<< HEAD
           {!pending && (
             <>
               <Button
@@ -153,6 +154,20 @@ const EditBannerPage = () => {
               an internal server error had occurred. try again later.
             </Alert>
           )}
+=======
+        {status !== 'pending' && <><Button
+            variant="contained"
+            color="secondary"
+            onClick={() => navigate("/banners/")}
+          >
+            Cancel
+          </Button>
+          <Button type="submit" variant="contained" color="primary">
+            Save
+          </Button></>}
+          {status === 'pending' && <CircularProgress />}
+          {status === 'error' && <Alert severity="error">an internal server error had occurred. try again later.</Alert>}
+>>>>>>> bb61d090f79a84011913d86b12b9516dec1a8cb5
         </Box>
       </form>
     </Container>

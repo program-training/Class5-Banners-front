@@ -35,7 +35,7 @@ const ResetPasswordPage = () => {
   const onSubmit: SubmitHandler<ResetPasswordFormData> = (data) => {
     if (data.isPasswordValid) {
       console.log("Password reset successful", data);
-      navigate("/login");
+      navigate("/banners/login");
     } else {
       console.log("Password validation failed");
     }
