@@ -1,4 +1,4 @@
-import { Alert, Container, Typography } from "@mui/material";
+import { Alert, Container } from "@mui/material";
 import { useEffect, useState } from "react";
 import { BannerTable } from "../components/BannerTable";
 import BannerManagementTop from "../components/BannerManagementTop";
