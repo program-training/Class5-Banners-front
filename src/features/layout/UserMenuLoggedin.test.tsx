@@ -97,7 +97,5 @@ describe("UserMenu", () => {
 
     const logoutMenuItem = screen.getByRole("menuitem", { name: "Log Out" });
     await userEvent.click(logoutMenuItem);
-
-    // Add assertions based on the expected behavior after logging out.
   });
 });
