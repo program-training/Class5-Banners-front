@@ -1,27 +1,13 @@
-import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
-import axios from "axios";
 import { useAppSelector } from "../../../redux/hooks";
 
 const ShowUserPage = () => {
   const navigate = useNavigate();
-  const user = useAppSelector((state) => state.user);
-  const [data, setData] = useState({ username: "", email: "", isAdmin: false });
+  const user = useAppSelector((state) => state.user.userState);
 
-  useEffect(() => {
-    if (!user.loggedIn) {
-      navigate("/user/login");
-    } else
-      try {
-        axios
-          .get("YOUR_API_ENDPOINT")
-          .then((response) => setData(response.data));
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-  }, [user.loggedIn, navigate]);
+  if (!user) navigate("/user/login");
 
   return (
     <Paper
@@ -40,13 +26,13 @@ const ShowUserPage = () => {
         User Profile
       </Typography>
       <Typography variant="subtitle1" gutterBottom sx={{ color: "#555" }}>
-        Username: {data.username}
+        Username: {user?.username}
       </Typography>
       <Typography variant="subtitle1" gutterBottom sx={{ color: "#555" }}>
-        Email: {data.email}
+        user id: {user?.user_id}
       </Typography>
       <Typography variant="subtitle1" gutterBottom sx={{ color: "#555" }}>
-        Admin Status: {data.isAdmin ? "Yes" : "No"}
+        Admin Status: {user?.isAdmin ? "Yes" : "No"}
       </Typography>
     </Paper>
   );

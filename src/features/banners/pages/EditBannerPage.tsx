@@ -1,50 +1,46 @@
 import { ChangeEvent, useEffect, useState } from "react";
-import { Box, Typography, TextField, Button, Container, CircularProgress, Alert } from "@mui/material";
+import {
+  Box,
+  Typography,
+  TextField,
+  Button,
+  Container,
+  CircularProgress,
+  Alert,
+} from "@mui/material";
 import { useNavigate, useParams } from "react-router";
-import { BannerInterface } from "../interface/BannerInterface";
-import { getBannerById } from "../service/getBanners";
-import axios from "axios";
-import { useAppSelector } from "../../../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
+import {
+  editBannerReq,
+  getBannerByIdReq,
+} from "../service/bannerReqFromServer";
 
 const EditBannerPage = () => {
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const user = useAppSelector(state => state.user)
-  const { bannerID } = useParams<{ bannerID: string }>();
-  const [banner, setBanner] = useState<BannerInterface>();
-  const [status, setStatus] = useState<'none' | 'pending' | 'success' | 'error'>('none')
+  const { bannerID } = useParams();
+  const { specificBanner, error, pending } = useAppSelector(
+    (store) => store.banners
+  );
+
+  const [editedBanner, setEditedBanner] = useState(specificBanner || null);
 
   useEffect(() => {
-    getBannerById(bannerID as string)
-      .then((res) => {
-        setBanner(res);
-      })
-      .catch((err) => console.log(err));
-  }, [bannerID]);
+    bannerID && dispatch(getBannerByIdReq(bannerID));
+  }, []);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setStatus('pending')
-    axios.put(`${import.meta.env.VITE_BASE_URL}/api/banners/${bannerID}`, 
-      banner,
-      {headers: {
-        Authorization: `${user.token}`,
-    }})
-    .then(res => {
-      console.log(res);
-      setStatus('success')
-      navigate('/')
-    })
-    .catch(err => {
-      console.error(err);
-      setStatus('error')
-    })
+    editedBanner && dispatch(editBannerReq(editedBanner));
+
+    navigate("/");
   };
 
   const handleChange = (
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = event.target;
-    setBanner((prevBanner) => ({
+    setEditedBanner((prevBanner) => ({
       ...prevBanner!,
       [name]: value,
     }));
@@ -71,7 +67,7 @@ const EditBannerPage = () => {
         <TextField
           label="ProductID"
           name="productID"
-          value={banner?.productID || ""}
+          value={specificBanner?.productID || ""}
           onChange={handleChange}
           fullWidth
           sx={{ mb: 2 }}
@@ -80,7 +76,7 @@ const EditBannerPage = () => {
         <TextField
           label="Title"
           name="title"
-          value={banner?.title || ""}
+          value={specificBanner?.title || ""}
           onChange={handleChange}
           fullWidth
           sx={{ mb: 2 }}
@@ -88,7 +84,7 @@ const EditBannerPage = () => {
         <TextField
           label="Description"
           name="description"
-          value={banner?.description || ""}
+          value={specificBanner?.description || ""}
           onChange={handleChange}
           fullWidth
           sx={{ mb: 2 }}
@@ -96,7 +92,7 @@ const EditBannerPage = () => {
         <TextField
           label="Image URL"
           name="imageUrl"
-          value={banner?.imageURL || ""}
+          value={specificBanner?.imageURL || ""}
           onChange={handleChange}
           fullWidth
           sx={{ mb: 2 }}
@@ -104,7 +100,7 @@ const EditBannerPage = () => {
         <TextField
           label="Category"
           name="category"
-          value={banner?.category || ""}
+          value={specificBanner?.category || ""}
           onChange={handleChange}
           fullWidth
           sx={{ mb: 2 }}
@@ -112,7 +108,7 @@ const EditBannerPage = () => {
         <TextField
           label="Author ID"
           name="authorID"
-          value={banner?.authorID || ""}
+          value={specificBanner?.authorID || ""}
           onChange={handleChange}
           fullWidth
           sx={{ mb: 2 }}
@@ -121,7 +117,7 @@ const EditBannerPage = () => {
         <TextField
           label="Created At"
           name="createdAt"
-          value={banner?.createdAt || ""}
+          value={specificBanner?.createdAt || ""}
           onChange={handleChange}
           fullWidth
           sx={{ mb: 2 }}
@@ -130,26 +126,33 @@ const EditBannerPage = () => {
         <TextField
           label="Updated At"
           name="updatedAt"
-          value={banner?.updatedAt || ""}
+          value={specificBanner?.updatedAt || ""}
           onChange={handleChange}
           fullWidth
           sx={{ mb: 2 }}
           disabled={true}
         />
-        {/* Additional fields as per the interface */}
         <Box display="flex" justifyContent="space-evenly" marginTop={2}>
-        {status !== 'pending' && <><Button
-            variant="contained"
-            color="secondary"
-            onClick={() => navigate("/")}
-          >
-            Cancel
-          </Button>
-          <Button type="submit" variant="contained" color="primary">
-            Save
-          </Button></>}
-          {status === 'pending' && <CircularProgress />}
-          {status === 'error' && <Alert severity="error">an internal server error had occurred. try again later.</Alert>}
+          {!pending && (
+            <>
+              <Button
+                variant="contained"
+                color="secondary"
+                onClick={() => navigate("/")}
+              >
+                Cancel
+              </Button>
+              <Button type="submit" variant="contained" color="primary">
+                Save
+              </Button>
+            </>
+          )}
+          {pending && <CircularProgress />}
+          {error && (
+            <Alert severity="error">
+              an internal server error had occurred. try again later.
+            </Alert>
+          )}
         </Box>
       </form>
     </Container>

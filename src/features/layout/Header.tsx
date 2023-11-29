@@ -11,7 +11,7 @@ import { useAppSelector } from "../../redux/hooks";
 
 const Header = () => {
   const navigate = useNavigate();
-  const user = useAppSelector((state) => state.user);
+  const { userState } = useAppSelector((state) => state.user);
 
   return (
     <>
@@ -45,7 +45,7 @@ const Header = () => {
           </Button>
 
           <Box sx={{ flexGrow: 1 }} />
-          {user.loggedIn ? <UserMenu /> : <UserMenu2 />}
+          {userState ? <UserMenu /> : <UserMenu2 />}
         </Toolbar>
       </AppBar>
     </>

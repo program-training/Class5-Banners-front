@@ -14,10 +14,9 @@ import SignUpTopContent from "../components/SignUpTopContent";
 import SignUpBottomContent from "../components/SignUpBottomContent";
 import SignUpSubmitButton from "../components/SubmitButton";
 import FormError from "../components/SignUpFormError";
-import axios from "axios";
-import { useAppDispatch } from "../../../redux/hooks";
-import { setUser } from "../user-slice";
+import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
 import { useNavigate } from "react-router-dom";
+import { signUpReq } from "../user-slice";
 
 const SignUpPage = () => {
   const [username, setUsername] = useState("");
@@ -28,11 +27,9 @@ const SignUpPage = () => {
   const [isValidEmail, setIsValidEmail] = useState(true);
   const [isValidPassword, setIsValidPassword] = useState(true);
   const [isValidConfirmPassword, setIsValidConfirmPassword] = useState(true);
-  const [status, setStatus] = useState<
-    "none" | "pending" | "success" | "error"
-  >("none");
 
   const dispatch = useAppDispatch();
+  const { error, loading } = useAppSelector((store) => store.user);
   const navigate = useNavigate();
 
   const isAllValid =
@@ -43,42 +40,10 @@ const SignUpPage = () => {
     isValidEmail &&
     isValidPassword &&
     isValidConfirmPassword;
-  const url = `${import.meta.env.VITE_BASE_URL}`;
   const handleSignUp = () => {
     if (isAllValid) {
-      setStatus("pending");
-      axios
-        .post(url + "/api/users/sign-up", {
-          username: username,
-          email: email,
-          password: password,
-          isAdmin: isAdmin,
-        })
-        .then((response) => {
-          console.log("Sign up successful:", response.data);
-        })
-        .then(() =>
-          axios
-            .post(url + "/api/users/login", {
-              email: email,
-              password: password,
-            })
-            .then((res) => {
-              dispatch(
-                setUser({
-                  isAdmin: true,
-                  loggedIn: true,
-                  token: res.data,
-                })
-              );
-              setStatus("success");
-              navigate("/");
-            })
-        )
-        .catch((error) => {
-          setStatus("error");
-          console.error("Sign up failed:", error);
-        });
+      dispatch(signUpReq({ username, email, password, isAdmin }));
+      !error && navigate("/");
     }
   };
 
@@ -90,6 +55,7 @@ const SignUpPage = () => {
       sx={{ padding: "20px", mt: 2 }}
     >
       <Grid
+        item
         xs={10}
         md={6}
         lg={4}
@@ -136,14 +102,13 @@ const SignUpPage = () => {
           }
           label="Do you want to be registered as an administrator?"
         />
-        {status !== "pending" &&
-          (isAllValid ? (
-            <SignUpSubmitButton onClick={handleSignUp} />
-          ) : (
-            <FormError />
-          ))}
-        {status === "pending" && <CircularProgress />}
-        {status === "error" && (
+        {isAllValid ? (
+          <SignUpSubmitButton onClick={handleSignUp} />
+        ) : (
+          <FormError />
+        )}
+        {loading && <CircularProgress />}
+        {error && (
           <Alert severity="error">
             an internal server error had occurred. try again later.
           </Alert>

@@ -7,15 +7,13 @@ import {
   Button,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { Dispatch, SetStateAction, useState } from "react";
+import { useState } from "react";
 import { BannerInterface } from "../interface/BannerInterface";
+import { useAppDispatch } from "../../../redux/hooks";
+import { setSpecificBanner } from "../bannersSlice";
 
-type Props = {
-  banners: BannerInterface[];
-  setBanners: Dispatch<SetStateAction<BannerInterface[]>>;
-};
-
-const BannerManagementTop = ({ banners, setBanners }: Props) => {
+const BannerManagementTop = ({ banners }: { banners: BannerInterface[] }) => {
+  const dispatch = useAppDispatch();
   const [, setSearchValue] = useState<string>("");
   const navigate = useNavigate();
 
@@ -26,7 +24,7 @@ const BannerManagementTop = ({ banners, setBanners }: Props) => {
         banner.title.toLowerCase().includes(value.toLowerCase()) ||
         banner.authorID.toLowerCase().includes(value.toLowerCase())
     );
-    setBanners(filteredBanners);
+    dispatch(setSpecificBanner(filteredBanners));
   };
 
   return (
