@@ -6,17 +6,21 @@ type Props = {
   setIsValidConfirmPassword: Dispatch<SetStateAction<boolean>>;
   prevPassword: string;
   isValidConfirmPassword: boolean;
+  setConfirmPassword: Dispatch<SetStateAction<string>>;
+  ConfirmPassword: string;
 };
 const PasswordInputs = ({
   setIsValidConfirmPassword,
   prevPassword,
   isValidConfirmPassword,
+  setConfirmPassword,
+  ConfirmPassword,
 }: Props) => {
   const [showPassword, setShowPassword] = useState(false);
-  const [password, setPassword] = useState("");
+  // const [password, setPassword] = useState("");
 
   function handlePasswordChange(value: string): void {
-    setPassword(() => {
+    setConfirmPassword(() => {
       const updatedPassword = value;
       setIsValidConfirmPassword(updatedPassword === prevPassword);
       return updatedPassword;
@@ -29,7 +33,7 @@ const PasswordInputs = ({
       variant="outlined"
       type={showPassword ? "text" : "password"}
       fullWidth
-      value={password}
+      value={ConfirmPassword}
       onChange={(e) => handlePasswordChange(e.target.value)}
       error={!isValidConfirmPassword}
       helperText={!isValidConfirmPassword && "Passwords doesn't match"}

@@ -1,5 +1,12 @@
 import { useState } from "react";
-import { TextField, Grid, FormControlLabel, Checkbox, CircularProgress, Alert } from "@mui/material";
+import {
+  TextField,
+  Grid,
+  FormControlLabel,
+  Checkbox,
+  CircularProgress,
+  Alert,
+} from "@mui/material";
 import EmailInput from "../components/EmailInput";
 import PasswordInputs from "../components/PasswordInput";
 import ConfirmPasswordInput from "../components/ConfirmPasswordInput";
@@ -16,11 +23,14 @@ const SignUpPage = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [ConfirmPassword, setConfirmPassword] = useState("");
   const [isAdmin, setIsAdmin] = useState(false);
   const [isValidEmail, setIsValidEmail] = useState(true);
   const [isValidPassword, setIsValidPassword] = useState(true);
   const [isValidConfirmPassword, setIsValidConfirmPassword] = useState(true);
-  const [status, setStatus] = useState<'none' | 'pending' | 'success' | 'error'>('none')
+  const [status, setStatus] = useState<
+    "none" | "pending" | "success" | "error"
+  >("none");
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -29,13 +39,14 @@ const SignUpPage = () => {
     username &&
     email &&
     password &&
+    ConfirmPassword &&
     isValidEmail &&
     isValidPassword &&
     isValidConfirmPassword;
-  const url = `${import.meta.env.VITE_SERVER_HOST}:${import.meta.env.VITE_SERVER_PORT}`;
+  const url = `${import.meta.env.VITE_BASE_URL}`;
   const handleSignUp = () => {
     if (isAllValid) {
-      setStatus('pending')
+      setStatus("pending");
       axios
         .post(url + "/api/users/sign-up", {
           username: username,
@@ -47,7 +58,8 @@ const SignUpPage = () => {
           console.log("Sign up successful:", response.data);
         })
         .then(() =>
-          axios.post(url + "/api/users/login", {
+          axios
+            .post(url + "/api/users/login", {
               email: email,
               password: password,
             })
@@ -59,12 +71,12 @@ const SignUpPage = () => {
                   token: res.data,
                 })
               );
-              setStatus('success')
+              setStatus("success");
               navigate("/");
             })
         )
         .catch((error) => {
-          setStatus('error')
+          setStatus("error");
           console.error("Sign up failed:", error);
         });
     }
@@ -112,6 +124,8 @@ const SignUpPage = () => {
           isValidConfirmPassword={isValidConfirmPassword}
           setIsValidConfirmPassword={setIsValidConfirmPassword}
           prevPassword={password}
+          ConfirmPassword={ConfirmPassword}
+          setConfirmPassword={setConfirmPassword}
         />
         <FormControlLabel
           control={
@@ -122,13 +136,18 @@ const SignUpPage = () => {
           }
           label="Do you want to be registered as an administrator?"
         />
-        {status !== 'pending' && (isAllValid ? (
-          <SignUpSubmitButton onClick={handleSignUp} />
-        ) : (
-          <FormError />
-        ))}
-        {status === 'pending' && <CircularProgress />}
-        {status === 'error' && <Alert severity="error">an internal server error had occurred. try again later.</Alert>}
+        {status !== "pending" &&
+          (isAllValid ? (
+            <SignUpSubmitButton onClick={handleSignUp} />
+          ) : (
+            <FormError />
+          ))}
+        {status === "pending" && <CircularProgress />}
+        {status === "error" && (
+          <Alert severity="error">
+            an internal server error had occurred. try again later.
+          </Alert>
+        )}
         <SignUpBottomContent />
       </Grid>
     </Grid>
