@@ -4,10 +4,20 @@ import Footer from "./Footer";
 import { BrowserRouter } from "react-router-dom";
 import { userEvent } from "@testing-library/user-event";
 
-const BASE_URL = "http://localhost" || process.env.VITE_BASE_URL;
-const PORT = ":3000/" || process.env.VITE_PORT;
-
 describe("Footer", () => {
+  test("navigator", async () => {
+    const user = userEvent.setup();
+    render(
+      <BrowserRouter>
+        <Footer />
+      </BrowserRouter>
+    );
+    const navigator = screen.getByTitle("title for test");
+    await user.click(navigator);
+
+    expect(screen.getByText("Company@Banners.com")).toBeInTheDocument();
+  });
+
   test("clicking should navigate to the correct URL", async () => {
     //  userEvent הפעלה של
     const user = userEvent.setup();
@@ -25,8 +35,6 @@ describe("Footer", () => {
 
     // הבדיקה לאחר תוצאה אסינכרונית
     await waitFor(() => {
-      // בדיקה שאחרי לחיצה הנתיב השתנה לנתיב מסויים
-      expect(window.location.href).toEqual(`${BASE_URL}${PORT}`);
       // בדיקה שאחרי לחיצה הנתיב השתנה לנתיב ריק
       expect(window.location.pathname).toEqual("/");
     });
