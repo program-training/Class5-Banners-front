@@ -36,9 +36,6 @@ const BannerManagementPage = () => {
 
     return (
         <Container maxWidth="md">
-            <Typography variant="h2" padding={2} align="center">
-                Banner Management
-            </Typography>
             <BannerManagementTop banners={banners} setBanners={setBanners} />
             {status === "success" && (
                 <BannerTable
