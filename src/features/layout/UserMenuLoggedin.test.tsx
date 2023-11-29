@@ -78,7 +78,7 @@ describe("UserMenu", () => {
     });
     await userEvent.click(editProfileMenuItem);
 
-    expect(window.location.pathname).toBe("/user/Edit");
+    expect(window.location.pathname).toBe("/banners/user/Edit");
   });
 
   test("logs out the user", async () => {
