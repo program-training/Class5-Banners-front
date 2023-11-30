@@ -39,7 +39,7 @@ describe("UserMenu", () => {
     const signUpMenuItem = screen.getByRole("menuitem", { name: "SignUp" });
     await userEvent.click(signUpMenuItem);
 
-    expect(window.location.pathname).toBe("/user/sign-up");
+    expect(window.location.pathname).toBe("/banners/user/sign-up");
   });
 
   test("navigates to login page", async () => {

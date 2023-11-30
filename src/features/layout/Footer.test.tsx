@@ -3,6 +3,7 @@ import { describe, expect, test } from "vitest";
 import Footer from "./Footer";
 import { BrowserRouter } from "react-router-dom";
 import { userEvent } from "@testing-library/user-event";
+import ROUTES from "../router/routes";
 
 describe("Footer", () => {
   test("navigator", async () => {
@@ -36,7 +37,7 @@ describe("Footer", () => {
     // הבדיקה לאחר תוצאה אסינכרונית
     await waitFor(() => {
       // בדיקה שאחרי לחיצה הנתיב השתנה לנתיב ריק
-      expect(window.location.pathname).toEqual("/");
+      expect(window.location.pathname).toEqual(ROUTES.home);
     });
   });
 });
