@@ -25,7 +25,6 @@ describe("BannerTable", () => {
         render(
             <Router>
                 <BannerTable
-                    data={mockData}
                     setOpenDialog={() => {}}
                     page="banner-management"
                 />
@@ -63,7 +62,6 @@ describe("BannerTable", () => {
         render(
             <Router>
                 <BannerTable
-                    data={mockData}
                     setOpenDialog={() => {}}
                     page="banner-management"
                 />
@@ -79,27 +77,10 @@ describe("BannerTable", () => {
     });
 
     it("Should open delete dialog on Delete button click", () => {
-        const mockData: BannerInterface[] = [
-            {
-                _id: "2",
-                imageURL: "image2.jpg",
-                title: "Banner 2",
-                authorID: "2121",
-                authorUsername: "Yehuda",
-                category: "phone",
-                createdAt: "12-12-12",
-                description: "this is banner 2",
-                note: "hot sale",
-                productID: "5",
-                productURL: "www.product.com",
-                updatedAt: "12-12-22",
-            },
-        ];
         const setOpenDialogMock = vi.fn();
         render(
             <Router>
                 <BannerTable
-                    data={mockData}
                     setOpenDialog={setOpenDialogMock}
                     page="banner-management"
                 />
