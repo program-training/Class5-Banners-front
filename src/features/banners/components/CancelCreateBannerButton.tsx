@@ -1,15 +1,20 @@
 import { Button } from "@mui/material";
 import { ProductInterface } from "../interface/ProductInterface";
-
-const CancelCreateBannerButton = ({
-    setSelectedProduct,
-    setBannerURL,
-}: {
+interface CancelCreateBannerButtonProps {
+    setAutocompleteValue: React.Dispatch<
+        React.SetStateAction<ProductInterface | null>
+    >;
     setBannerURL: React.Dispatch<React.SetStateAction<string>>;
     setSelectedProduct: React.Dispatch<
         React.SetStateAction<ProductInterface | null>
     >;
-}) => {
+}
+
+const CancelCreateBannerButton = ({
+    setSelectedProduct,
+    setBannerURL,
+    setAutocompleteValue,
+}: CancelCreateBannerButtonProps) => {
     return (
         <Button
             sx={{ ml: 2 }}
@@ -18,6 +23,7 @@ const CancelCreateBannerButton = ({
             onClick={() => {
                 setSelectedProduct(null);
                 setBannerURL("");
+                setAutocompleteValue(null); // Reset the Autocomplete value
             }}
         >
             Cancel

@@ -10,6 +10,7 @@ describe("CancelButton", () => {
         // Render the CancelButton component with mock functions
         const { getByRole } = render(
             <CancelCreateBannerButton
+                setAutocompleteValue={vi.fn()}
                 setSelectedProduct={setSelectedProductMock}
                 setBannerURL={setBannerURLMock}
             />
