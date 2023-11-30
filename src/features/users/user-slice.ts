@@ -4,12 +4,7 @@ import {
     createSlice,
 } from "@reduxjs/toolkit";
 import axios from "axios";
-import {
-  getToken,
-  getUser,
-  removeToken,
-  setItem,
-} from "./service/localStorageService";
+import { getToken, getUser, removeToken } from "./service/localStorageService";
 import { UserInterface } from "./interfaces/userInterface";
 import {
     LoginInterface,
@@ -27,6 +22,7 @@ const initialState: initialState = {
     loading: false,
     token: getToken(),
     userState: getUser(),
+};
 
 const BASE_URL =
     import.meta.env.VITE_BASE_URL ||
@@ -106,7 +102,7 @@ export const userSlice = createSlice({
         logOut: (state) => {
             state.userState = null;
             state.token = null;
-            deleteToken();
+            removeToken();
             return state;
         },
     },
@@ -148,7 +144,7 @@ export const userSlice = createSlice({
             state.loading = true;
         });
         builder.addCase(deleteUserReq.fulfilled, (state) => {
-            deleteToken();
+            removeToken();
             state.token = null;
             state.userState = null;
             return state;
