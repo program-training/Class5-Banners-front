@@ -1,10 +1,15 @@
 import { jwtDecode } from "jwt-decode";
 import { UserInterface } from "../interfaces/userInterface";
 
+export const setItem = (key: string, value: string) =>
+  localStorage.setItem(key, value);
+
 export const getToken = () => localStorage.getItem("token") || null;
 
 export const getUser = (): UserInterface | null => {
   const token = getToken();
-  return jwtDecode(token as string) || null;
+  if (!token) return null;
+  return jwtDecode(token);
 };
-export const deleteToken = () => localStorage.removeItem("token");
+
+export const removeToken = () => localStorage.removeItem("token");
