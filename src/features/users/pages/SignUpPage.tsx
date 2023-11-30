@@ -42,44 +42,8 @@ const SignUpPage = () => {
     isValidConfirmPassword;
   const handleSignUp = () => {
     if (isAllValid) {
-<<<<<<< HEAD
       dispatch(signUpReq({ username, email, password, isAdmin }));
       !error && navigate("/");
-=======
-      setStatus("pending");
-      axios
-        .post(url + "/api/users/sign-up", {
-          username: username,
-          email: email,
-          password: password,
-          isAdmin: isAdmin,
-        })
-        .then((response) => {
-          console.log("Sign up successful:", response.data);
-        })
-        .then(() =>
-          axios
-            .post(url + "/api/users/login", {
-              email: email,
-              password: password,
-            })
-            .then((res) => {
-              dispatch(
-                setUser({
-                  isAdmin: true,
-                  loggedIn: true,
-                  token: res.data,
-                })
-              );
-              setStatus("success");
-              navigate("/banners/");
-            })
-        )
-        .catch((error) => {
-          setStatus("error");
-          console.error("Sign up failed:", error);
-        });
->>>>>>> bb61d090f79a84011913d86b12b9516dec1a8cb5
     }
   };
 

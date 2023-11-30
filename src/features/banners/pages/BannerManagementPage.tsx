@@ -1,4 +1,4 @@
-import { Alert, Container } from "@mui/material";
+import { Alert, Container, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { BannerTable } from "../components/BannerTable";
 import BannerManagementTop from "../components/BannerManagementTop";
@@ -15,7 +15,9 @@ const BannerManagementPage = () => {
   );
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const [BannerToDelete, setBannerToDelete] = useState<string | null>(null);
+  const [BannerToDelete, setBannerToDelete] = useState<string | null | boolean>(
+    null
+  );
 
   useEffect(() => {
     if (!userState) {

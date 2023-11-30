@@ -22,32 +22,7 @@ const LogIn = () => {
 
   const handleLogin = () => {
     if (isAllValid) {
-<<<<<<< HEAD
       dispatch(loginReq({ email, password }));
-=======
-      setStatus('pending')
-      axios
-        .post(`${url}/api/users/login`, {
-          email: email,
-          password: password,
-        })
-        .then((response) => {
-          setStatus('success')
-          console.log("Login successful:", response.data);
-          dispatch(
-            setUser({
-              isAdmin: true,
-              loggedIn: true,
-              token: response.data,
-            })
-          );
-          navigate("/banners/");
-        })
-        .catch((error) => {
-          setStatus('error')
-          console.error("Login failed:", error);
-        });
->>>>>>> bb61d090f79a84011913d86b12b9516dec1a8cb5
     }
   };
 

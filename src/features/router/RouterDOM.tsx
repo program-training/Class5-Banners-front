@@ -13,34 +13,47 @@ import MyBannersPage from "../banners/pages/MyBannersPage";
 import Layout from "../layout/Layout";
 import BannerPage from "../banners/pages/BannerPage";
 import BannerHorizontalPage from "../banners/pages/BannerHorizontalPage";
+import ROUTES from "./routes";
 
 const RouterDom = () => {
   return (
     <Routes>
       <Route path="banners">
         <Route
-          path="horizontal/products/:id"
+          path={ROUTES.BannerHorizontalPage}
           element={<BannerHorizontalPage />}
         />
-        <Route path="vertical/products/:id" element={<BannerPage />} />
-        <Route path="categories/:categoryName" element={<BannerPage />} />
+        <Route path={ROUTES.BannerPage} element={<BannerPage />} />
+        <Route path={ROUTES.BannerPageByCategory} element={<BannerPage />} />
       </Route>
 
-      <Route path="/" element={<Layout />}>
-        <Route path="" element={<BannerManagementPage />} />
-        <Route path="my-banners/" element={<MyBannersPage />} />
-        <Route path="create" element={<CreateNewBannerPage />} />
-        <Route path="edit/:bannerID" element={<EditBannerPage />} />
+      <Route path={ROUTES.layout} element={<Layout />}>
+        <Route
+          path={ROUTES.BannerManagementPage}
+          element={<BannerManagementPage />}
+        />
+        <Route path={ROUTES.MyBannersPage} element={<MyBannersPage />} />
+        <Route
+          path={ROUTES.CreateNewBannerPage}
+          element={<CreateNewBannerPage />}
+        />
+        <Route path={ROUTES.EditBannerPage} element={<EditBannerPage />} />
 
-        <Route path="user/sign-up" element={<SignUpPage />} />
-        <Route path="user/login" element={<LogInPage />} />
-        <Route path="user/show/" element={<ShowUserPage />} />
-        <Route path="user/edit/" element={<EditUserPage />} />
-        <Route path="user/forget-password/" element={<ForgetPasswordPage />} />
-        <Route path="reset-password/" element={<ResetPasswordPage />} />
+        <Route path={ROUTES.SignUpPage} element={<SignUpPage />} />
+        <Route path={ROUTES.LogInPage} element={<LogInPage />} />
+        <Route path={ROUTES.ShowUserPage} element={<ShowUserPage />} />
+        <Route path={ROUTES.EditUserPage} element={<EditUserPage />} />
+        <Route
+          path={ROUTES.ForgetPasswordPage}
+          element={<ForgetPasswordPage />}
+        />
+        <Route
+          path={ROUTES.ResetPasswordPage}
+          element={<ResetPasswordPage />}
+        />
       </Route>
 
-      <Route path="*" element={<ErrorPage />} />
+      <Route path={ROUTES.ErrorPage} element={<ErrorPage />} />
     </Routes>
   );
 };
