@@ -1,5 +1,6 @@
 import BottomNavigation from "@mui/material/BottomNavigation";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
+import ROUTES from "../router/routes";
 import {
   Email,
   Extension,
@@ -22,7 +23,7 @@ const Footer = () => {
       showLabels
     >
       <BottomNavigationAction
-        onClick={() => navigate("")}
+        onClick={() => navigate(ROUTES.home)}
         label="management banner"
         icon={<Extension />}
         title="title for test"
