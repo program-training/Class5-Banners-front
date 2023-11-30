@@ -33,6 +33,7 @@ const BannerPage = () => {
   }, []);
 
   const { specificBanner: banner } = useAppSelector((store) => store.banners);
+
   return (
     <div onClick={() => open(banner?.imageURL)}>
       <Box
