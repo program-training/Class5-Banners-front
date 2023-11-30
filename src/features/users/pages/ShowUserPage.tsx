@@ -2,12 +2,13 @@ import { useNavigate } from "react-router-dom";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import { useAppSelector } from "../../../redux/hooks";
+import ROUTES from "../../router/routes";
 
 const ShowUserPage = () => {
   const navigate = useNavigate();
   const user = useAppSelector((state) => state.user.userState);
 
-  if (!user) navigate("/user/login");
+  if (!user) navigate(ROUTES.LogInPage);
 
   return (
     <Paper

@@ -19,6 +19,7 @@ import {
   getUnbannerdProducts,
 } from "../service/bannerReqFromServer";
 import { Navigate } from "react-router-dom";
+import ROUTES from "../../router/routes";
 
 const CreateNewBannerPage = () => {
   const [selectedProduct, setSelectedProduct] =
@@ -35,7 +36,7 @@ const CreateNewBannerPage = () => {
     dispatch(getUnbannerdProducts());
   }, []);
 
-  if (!user) return <Navigate replace to={"/banners/user/login"} />;
+  if (!user) return <Navigate replace to={ROUTES.LogInPage} />;
 
   return (
     <Box sx={centeredBox}>

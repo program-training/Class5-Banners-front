@@ -8,6 +8,7 @@ import { Alert, CircularProgress, Grid, Typography } from "@mui/material";
 import { Link, Navigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
 import { loginReq } from "../user-slice";
+import ROUTES from "../../router/routes";
 
 const LogIn = () => {
   const [email, setEmail] = useState("");
@@ -33,7 +34,7 @@ const LogIn = () => {
 
   return (
     <>
-      {user && <Navigate replace to={"/"} />}
+      {user && <Navigate replace to={ROUTES.home} />}
       <Grid
         container
         spacing={2}
@@ -83,14 +84,14 @@ const LogIn = () => {
             style={{ marginTop: "10px" }}
           >
             Don't have am account?
-            <Link to="/user/sign-up"> Sign Up</Link>
+            <Link to={ROUTES.SignUpPage}> Sign Up</Link>
           </Typography>
           <Typography
             variant="body2"
             align="center"
             style={{ marginTop: "10px" }}
           >
-            <Link to="/user/forget-password">Forgot password?</Link>
+            <Link to={ROUTES.ForgetPasswordPage}>Forgot password?</Link>
           </Typography>
         </Grid>
       </Grid>

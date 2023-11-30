@@ -90,7 +90,7 @@ export const BannerTable = ({ setOpenDialog, page }: Props) => {
                 </IconButton>
               </StyledTableCell>
               <StyledTableCell align="center">
-                <IconButton onClick={() => navigate(`/edit/${banner._id}`)}>
+                <IconButton onClick={() => navigate(`/banners/edit/${banner._id}`)}>
                   <Edit />
                 </IconButton>
               </StyledTableCell>
