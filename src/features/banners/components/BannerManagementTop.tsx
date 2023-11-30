@@ -67,7 +67,7 @@ const BannerManagementTop = ({ banners, setBanners }: Props) => {
                     }}
                 />
                 <Typography variant="h5">Edit or Delete Banners</Typography>
-                <Button onClick={() => navigate("/create")}>
+                <Button onClick={() => navigate("/banners/create")}>
                     <Typography pr={2}>Create Banner</Typography>
                     <AddCircle />
                 </Button>

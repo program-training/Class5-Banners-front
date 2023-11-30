@@ -42,7 +42,7 @@ const LogIn = () => {
               token: response.data,
             })
           );
-          navigate("/");
+          navigate("/banners/");
         })
         .catch((error) => {
           setStatus('error')

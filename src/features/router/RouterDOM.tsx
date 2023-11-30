@@ -17,7 +17,7 @@ import BannerHorizontalPage from "../banners/pages/BannerHorizontalPage";
 const RouterDom = () => {
     return (
         <Routes>
-            <Route path="banners">
+            <Route path="banners/banners">
                 <Route
                     path="horizontal/products/:id"
                     element={<BannerHorizontalPage />}
@@ -29,7 +29,7 @@ const RouterDom = () => {
                 />
             </Route>
 
-            <Route path="/" element={<Layout />}>
+            <Route path="banners/" element={<Layout />}>
                 <Route path="" element={<BannerManagementPage />} />
                 <Route path="my-banners/" element={<MyBannersPage />} />
                 <Route path="create" element={<CreateNewBannerPage />} />

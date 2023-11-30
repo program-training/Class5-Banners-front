@@ -32,14 +32,14 @@ const MyBannersPage = () => {
   }, [user.token]);
 
   if (!user.loggedIn || !user.isAdmin)
-    return <Navigate replace to={"/user/login"} />;
+    return <Navigate replace to={"/banners/user/login"} />;
 
   return (
     <Container maxWidth="md">
       <Typography variant="h2" padding={2} align="center">
         The Banners You Created
       </Typography>
-      <Button onClick={() => navigate("/create")}>
+      <Button onClick={() => navigate("/banners/create")}>
         <Typography pr={2}>Create Banner</Typography>
         <AddCircle />
       </Button>

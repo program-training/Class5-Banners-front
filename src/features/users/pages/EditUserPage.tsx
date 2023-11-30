@@ -52,7 +52,7 @@ const EditUserPage = () => {
     }, []);
 
     if (!user.loggedIn || !user.isAdmin)
-    return <Navigate replace to={"/user/login"} />;
+    return <Navigate replace to={"/banners/user/login"} />;
 
     const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
         // Update the isAdmin state directly based on the checkbox value
