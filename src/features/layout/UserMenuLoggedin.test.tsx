@@ -56,7 +56,7 @@ describe("UserMenu", () => {
     });
     await userEvent.click(displayProfileMenuItem);
 
-    expect(window.location.pathname).toBe("/user/show");
+    expect(window.location.pathname).toBe("/banners/user/show/");
   });
 
   test("navigates to edit profile page", async () => {
@@ -78,7 +78,7 @@ describe("UserMenu", () => {
     });
     await userEvent.click(editProfileMenuItem);
 
-    expect(window.location.pathname).toBe("/banners/user/Edit");
+    expect(window.location.pathname).toBe("/banners/user/edit/");
   });
 
   test("logs out the user", async () => {

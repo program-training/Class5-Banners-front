@@ -20,7 +20,7 @@ const Header = () => {
         <Toolbar disableGutters>
           <IconButton
             onClick={() => {
-              navigate("");
+              navigate("/banners");
             }}
             size="large"
             aria-label="go to banner management page"

@@ -38,7 +38,7 @@ describe("Header", () => {
     });
 
     await userEvent.click(logoButton);
-    expect(window.location.pathname).toBe("/");
+    expect(window.location.pathname).toBe("/banners");
   });
 
   test("clicking 'My Banners' navigates to the 'my-banners' page", async () => {
@@ -53,7 +53,7 @@ describe("Header", () => {
 
     await user.click(screen.getByText("My Banners"));
 
-    expect(window.location.pathname).toBe("/my-banners");
+    expect(window.location.pathname).toBe("/banners/my-banners");
   });
 
   test("header has correct background color", () => {
