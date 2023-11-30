@@ -15,7 +15,7 @@ import { useNavigate } from "react-router-dom";
 import { useAppSelector } from "../../../redux/hooks";
 
 type Props = {
-  setOpenDialog: Dispatch<SetStateAction<string | null>>;
+  setOpenDialog: Dispatch<SetStateAction<string | null | boolean>>;
   page: "banner-management" | "my-banners";
 };
 

@@ -15,7 +15,9 @@ const BannerManagementPage = () => {
   );
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const [BannerToDelete, setBannerToDelete] = useState<string | null>(null);
+  const [BannerToDelete, setBannerToDelete] = useState<string | null | boolean>(
+    null
+  );
 
   useEffect(() => {
     if (!userState) {

@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import { describe, expect, test } from "vitest";
 import Footer from "./Footer";
 import { BrowserRouter } from "react-router-dom";
@@ -16,5 +16,27 @@ describe("Footer", () => {
     await user.click(navigator);
 
     expect(screen.getByText("Company@Banners.com")).toBeInTheDocument();
+  });
+
+  test("clicking should navigate to the correct URL", async () => {
+    //  userEvent הפעלה של
+    const user = userEvent.setup();
+    render(
+      //עטיפת הקומפוננטה בראוטר
+      <BrowserRouter>
+        <Footer />
+      </BrowserRouter>
+    );
+    // תפיסת הכפתור שלחיצה עליו אמורה לשנות נתיב
+    const Button = screen.getByTitle("title for test");
+
+    //דימוי של לחיצה על הכפתור הנל
+    user.click(Button);
+
+    // הבדיקה לאחר תוצאה אסינכרונית
+    await waitFor(() => {
+      // בדיקה שאחרי לחיצה הנתיב השתנה לנתיב ריק
+      expect(window.location.pathname).toEqual("/");
+    });
   });
 });

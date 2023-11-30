@@ -3,26 +3,26 @@ import { useEffect, useState } from "react";
 import { BannerTable } from "../components/BannerTable";
 import DeleteBannerDialog from "../components/DeleteBannerDialog";
 import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { AddCircle } from "@mui/icons-material";
 import Pending from "../components/Pending";
 import { getMyBannersReq } from "../service/bannerReqFromServer";
 
 const MyBannersPage = () => {
-  const navigate = useNavigate();
   const { bannersState, error, pending } = useAppSelector(
     (store) => store.banners
   );
-  const [bannerToDelete, setBannerToDelete] = useState<string | null>(null);
+  const [bannerToDelete, setBannerToDelete] = useState<string | null | boolean>(
+    null
+  );
   const dispatch = useAppDispatch();
-
+  const navigate = useNavigate();
   const user = useAppSelector((state) => state.user);
 
   useEffect(() => {
+    if (!user) return navigate("/user/login");
     dispatch(getMyBannersReq());
   }, []);
-
-  if (!user) return <Navigate replace to={"/banners/user/login"} />;
 
   return (
     <Container maxWidth="md">

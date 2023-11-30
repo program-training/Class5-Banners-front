@@ -11,8 +11,8 @@ import { Dispatch, SetStateAction } from "react";
 import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
 import { deleteBannerReq, getBannersReq } from "../service/bannerReqFromServer";
 type Props = {
-  openDialog: string | null;
-  setOpenDialog: Dispatch<SetStateAction<string | null>>;
+  openDialog: string | null | boolean;
+  setOpenDialog: Dispatch<SetStateAction<string | null | boolean>>;
 };
 const DeleteBannerDialog = ({ openDialog, setOpenDialog }: Props) => {
   const dispatch = useAppDispatch();
