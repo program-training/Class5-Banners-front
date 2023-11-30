@@ -15,6 +15,24 @@ import BannerPage from "../banners/pages/BannerPage";
 import BannerHorizontalPage from "../banners/pages/BannerHorizontalPage";
 
 const RouterDom = () => {
+<<<<<<< HEAD
+  return (
+    <Routes>
+      <Route path="banners">
+        <Route
+          path="horizontal/products/:id"
+          element={<BannerHorizontalPage />}
+        />
+        <Route path="vertical/products/:id" element={<BannerPage />} />
+        <Route path="categories/:categoryName" element={<BannerPage />} />
+      </Route>
+
+      <Route path="/" element={<Layout />}>
+        <Route path="" element={<BannerManagementPage />} />
+        <Route path="my-banners/" element={<MyBannersPage />} />
+        <Route path="create" element={<CreateNewBannerPage />} />
+        <Route path="edit/:bannerID" element={<EditBannerPage />} />
+=======
     return (
         <Routes>
             <Route path="banners/banners">
@@ -34,20 +52,18 @@ const RouterDom = () => {
                 <Route path="my-banners/" element={<MyBannersPage />} />
                 <Route path="create" element={<CreateNewBannerPage />} />
                 <Route path="edit/:bannerID" element={<EditBannerPage />} />
+>>>>>>> bb61d090f79a84011913d86b12b9516dec1a8cb5
 
-                <Route path="user/sign-up" element={<SignUpPage />} />
-                <Route path="user/login" element={<LogInPage />} />
-                <Route path="user/show/" element={<ShowUserPage />} />
-                <Route path="user/edit/" element={<EditUserPage />} />
-                <Route
-                    path="user/forget-password/"
-                    element={<ForgetPasswordPage />}
-                />
-                <Route path="reset-password/" element={<ResetPasswordPage />} />
-            </Route>
+        <Route path="user/sign-up" element={<SignUpPage />} />
+        <Route path="user/login" element={<LogInPage />} />
+        <Route path="user/show/" element={<ShowUserPage />} />
+        <Route path="user/edit/" element={<EditUserPage />} />
+        <Route path="user/forget-password/" element={<ForgetPasswordPage />} />
+        <Route path="reset-password/" element={<ResetPasswordPage />} />
+      </Route>
 
-            <Route path="*" element={<ErrorPage />} />
-        </Routes>
-    );
+      <Route path="*" element={<ErrorPage />} />
+    </Routes>
+  );
 };
 export default RouterDom;

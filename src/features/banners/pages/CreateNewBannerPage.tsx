@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
     Typography,
     Box,
@@ -10,9 +10,31 @@ import {
 } from "@mui/material";
 import { ProductInterface } from "../interface/ProductInterface";
 import BannerCard from "../components/BannerCard";
-import axios from "axios";
 import { centeredBox } from "../../utils/styles";
 import CancelCreateBannerButton from "../components/CancelCreateBannerButton";
+import CancelButton from "../components/CancelButton";
+<<<<<<< HEAD
+import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
+import {
+  addBannerReq,
+  getUnbannerdProducts,
+} from "../service/bannerReqFromServer";
+
+const CreateNewBannerPage = () => {
+  const [selectedProduct, setSelectedProduct] =
+    useState<ProductInterface | null>(null);
+  const [bannerURL, setBannerURL] = useState("");
+  const { pending, error, products } = useAppSelector((store) => store.banners);
+  const dispatch = useAppDispatch();
+
+  const handleSave = () => {
+    dispatch(addBannerReq({ imageURL: bannerURL }));
+  };
+  useEffect(() => {
+    dispatch(getUnbannerdProducts());
+  }, []);
+
+=======
 import { useAppSelector } from "../../../redux/hooks";
 import { Navigate } from "react-router-dom";
 
