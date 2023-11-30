@@ -4,6 +4,7 @@ import Header from "./Header";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "../../redux/store";
+import ROUTES from "../router/routes";
 
 describe("Header", () => {
   test("renders header components", () => {
@@ -38,7 +39,7 @@ describe("Header", () => {
     });
 
     await userEvent.click(logoButton);
-    expect(window.location.pathname).toBe("/banners");
+    expect(window.location.pathname).toBe(ROUTES.home);
   });
 
   test("clicking 'My Banners' navigates to the 'my-banners' page", async () => {
@@ -53,7 +54,7 @@ describe("Header", () => {
 
     await user.click(screen.getByText("My Banners"));
 
-    expect(window.location.pathname).toBe("/banners/my-banners");
+    expect(window.location.pathname).toBe(ROUTES.MyBannersPage);
   });
 
   test("header has correct background color", () => {
@@ -85,12 +86,6 @@ test("dispatches the correct action on user interaction", () => {
   const myBannersButton = screen.getByRole("button", { name: "My Banners" });
 
   userEvent.click(myBannersButton);
-
-  // Check if the Redux state is updated as expected.
-  // Add assertions based on the expected state changes.
 });
 
-test("displays error message when an error occurs", () => {
-  // Mock the Redux state to simulate an error.
-  // Render the component and check if the error message is displayed.
-});
+test("displays error message when an error occurs", () => {});

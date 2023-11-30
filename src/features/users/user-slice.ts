@@ -4,20 +4,25 @@ import {
   createSlice,
 } from "@reduxjs/toolkit";
 import axios from "axios";
-import { getToken, getUser, deleteToken } from "./service/localStorageService";
+import {
+  getToken,
+  getUser,
+  removeToken,
+  setItem,
+} from "./service/localStorageService";
 import { UserInterface } from "./interfaces/userInterface";
 import {
   LoginInterface,
   SignUpInterface,
 } from "./interfaces/userSliceInterfaces";
 
-interface initialState {
+interface InitialStateInterface {
   loading: boolean;
   userState: UserInterface | null;
   token: string | null;
   error: string | SerializedError;
 }
-const initialState: initialState = {
+const initialState: InitialStateInterface = {
   error: "",
   loading: false,
   token: getToken(),
@@ -99,7 +104,7 @@ export const userSlice = createSlice({
     logOut: (state) => {
       state.userState = null;
       state.token = null;
-      deleteToken();
+      removeToken();
       return state;
     },
   },
@@ -113,14 +118,14 @@ export const userSlice = createSlice({
         state.error = "";
         if (payload) {
           state.token = payload;
-          localStorage.setItem("token", payload);
+          setItem("token", payload);
           state.userState = getUser();
         }
         return state;
       }),
-      builder.addCase(loginReq.rejected, (state, payload) => {
+      builder.addCase(loginReq.rejected, (state, { error }) => {
         state.loading = false;
-        state.error = payload.error;
+        state.error = error;
         return state;
       });
     builder.addCase(signUpReq.pending, (state) => {
@@ -141,7 +146,7 @@ export const userSlice = createSlice({
       state.loading = true;
     });
     builder.addCase(deleteUserReq.fulfilled, (state) => {
-      deleteToken();
+      removeToken();
       state.token = null;
       state.userState = null;
       return state;

@@ -61,7 +61,7 @@ const UserMenu = () => {
         open={Boolean(anchorElUser)}
         onClose={handleCloseUserMenu}
       >
-        <MenuItem onClick={handleSignUp}>SignUp</MenuItem>
+        <MenuItem onClick={handleSignUp}>Sign Up</MenuItem>
         <MenuItem onClick={handleLogin}>Login</MenuItem>
       </Menu>
     </>

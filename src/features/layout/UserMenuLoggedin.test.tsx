@@ -4,6 +4,7 @@ import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "../../redux/store";
 import UserMenu from "./UserMenuLoggedIn";
+import ROUTES from "../router/routes";
 
 describe("UserMenu", () => {
   test("opens user menu", async () => {
@@ -56,7 +57,7 @@ describe("UserMenu", () => {
     });
     await userEvent.click(displayProfileMenuItem);
 
-    expect(window.location.pathname).toBe("/banners/user/show/");
+    expect(window.location.pathname).toBe(ROUTES.ShowUserPage);
   });
 
   test("navigates to edit profile page", async () => {
@@ -78,7 +79,7 @@ describe("UserMenu", () => {
     });
     await userEvent.click(editProfileMenuItem);
 
-    expect(window.location.pathname).toBe("/banners/user/edit/");
+    expect(window.location.pathname).toBe(ROUTES.EditUserPage);
   });
 
   test("logs out the user", async () => {

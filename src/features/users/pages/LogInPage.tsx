@@ -15,8 +15,13 @@ const LogIn = () => {
   const [isValidEmail, setIsValidEmail] = useState(true);
   const [password, setPassword] = useState("");
   const [isValidPassword, setIsValidPassword] = useState(true);
-  const { loading, error } = useAppSelector((store) => store.user);
-  const user = useAppSelector((store) => store.user.userState);
+
+  const {
+    loading,
+    error,
+    userState: user,
+  } = useAppSelector((store) => store.user);
+
   const dispatch = useAppDispatch();
 
   const isAllValid = email && isValidEmail && password && isValidPassword;
