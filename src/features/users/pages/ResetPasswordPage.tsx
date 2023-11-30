@@ -10,6 +10,7 @@ import { Container } from "@mui/material";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { validatePassword } from "../../utils/functions";
+import ROUTES from "../../router/routes";
 
 interface ResetPasswordFormData {
   password: string;
@@ -35,7 +36,7 @@ const ResetPasswordPage = () => {
   const onSubmit: SubmitHandler<ResetPasswordFormData> = (data) => {
     if (data.isPasswordValid) {
       console.log("Password reset successful", data);
-      navigate("/banners/login");
+      navigate(ROUTES.LogInPage);
     } else {
       console.log("Password validation failed");
     }

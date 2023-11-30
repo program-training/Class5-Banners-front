@@ -17,6 +17,7 @@ import FormError from "../components/SignUpFormError";
 import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
 import { useNavigate } from "react-router-dom";
 import { signUpReq } from "../user-slice";
+import ROUTES from "../../router/routes";
 
 const SignUpPage = () => {
   const [username, setUsername] = useState("");
@@ -43,7 +44,7 @@ const SignUpPage = () => {
   const handleSignUp = () => {
     if (isAllValid) {
       dispatch(signUpReq({ username, email, password, isAdmin }));
-      !error && navigate("/");
+      !error && navigate(ROUTES.home);
     }
   };
 

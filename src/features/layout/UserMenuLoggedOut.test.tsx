@@ -2,6 +2,7 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { BrowserRouter } from "react-router-dom";
 import UserMenu from "./UserMenuLoggedOut";
+import ROUTES from "../router/routes";
 
 describe("UserMenu", () => {
   test("opens user menu", async () => {
@@ -56,6 +57,6 @@ describe("UserMenu", () => {
     const loginMenuItem = screen.getByRole("menuitem", { name: "Login" });
     await userEvent.click(loginMenuItem);
 
-    expect(window.location.pathname).toBe("/user/login");
+    expect(window.location.pathname).toBe(ROUTES.LogInPage);
   });
 });

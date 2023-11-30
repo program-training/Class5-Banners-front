@@ -5,6 +5,7 @@ import Avatar from "@mui/material/Avatar";
 import Tooltip from "@mui/material/Tooltip";
 import IconButton from "@mui/material/IconButton";
 import { useNavigate } from "react-router-dom";
+import ROUTES from "../router/routes";
 
 // import { useAppSelector } from "../../redux/hooks";
 
@@ -28,12 +29,12 @@ const UserMenu = () => {
   };
 
   const handleSignUp = () => {
-    navigate("/banners/user/sign-up");
+    navigate(ROUTES.SignUpPage);
     handleCloseUserMenu();
   };
 
   const handleLogin = () => {
-    navigate("/banners/user/login");
+    navigate(ROUTES.LogInPage);
     handleCloseUserMenu();
   };
 

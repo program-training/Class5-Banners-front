@@ -7,6 +7,7 @@ import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
 import { useNavigate } from "react-router";
 import Pending from "../components/Pending";
 import { getBannersReq } from "../service/bannerReqFromServer";
+import ROUTES from "../../router/routes";
 
 const BannerManagementPage = () => {
   const { userState } = useAppSelector((state) => state.user);
@@ -21,7 +22,7 @@ const BannerManagementPage = () => {
 
   useEffect(() => {
     if (!userState) {
-      navigate("/user/login");
+      navigate(ROUTES.LogInPage);
     } else {
       dispatch(getBannersReq());
     }

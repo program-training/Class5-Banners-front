@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import UserMenu from "./UserMenuLoggedIn";
 import UserMenu2 from "./UserMenuLoggedOut";
 import { useAppSelector } from "../../redux/hooks";
+import ROUTES from "../router/routes";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -30,7 +31,7 @@ const Header = () => {
           <Box sx={{ flexGrow: 1 }} />
           <Button
             onClick={() => {
-              navigate("my-banners");
+              navigate(ROUTES.MyBannersPage);
             }}
             variant="outlined"
             sx={{

@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { AddCircle } from "@mui/icons-material";
 import Pending from "../components/Pending";
 import { getMyBannersReq } from "../service/bannerReqFromServer";
+import ROUTES from "../../router/routes";
 
 const MyBannersPage = () => {
   const { bannersState, error, pending } = useAppSelector(
@@ -20,7 +21,7 @@ const MyBannersPage = () => {
   const user = useAppSelector((state) => state.user);
 
   useEffect(() => {
-    if (!user) return navigate("/user/login");
+    if (!user) return navigate(ROUTES.LogInPage);
     dispatch(getMyBannersReq());
   }, []);
 
@@ -29,7 +30,7 @@ const MyBannersPage = () => {
       <Typography variant="h2" padding={2} align="center">
         The Banners You Created
       </Typography>
-      <Button onClick={() => navigate("/create")}>
+      <Button onClick={() => navigate(ROUTES.CreateNewBannerPage)}>
         <Typography pr={2}>Create Banner</Typography>
         <AddCircle />
       </Button>

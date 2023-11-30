@@ -11,6 +11,7 @@ import { useState } from "react";
 import { BannerInterface } from "../interface/BannerInterface";
 import { useAppDispatch } from "../../../redux/hooks";
 import { setSpecificBanner } from "../bannersSlice";
+import ROUTES from "../../router/routes";
 
 const BannerManagementTop = ({ banners }: { banners: BannerInterface[] }) => {
   const dispatch = useAppDispatch();
@@ -59,7 +60,7 @@ const BannerManagementTop = ({ banners }: { banners: BannerInterface[] }) => {
         />
       </Box>
       <Typography variant="h5">Edit or Delete Banners</Typography>
-      <Button onClick={() => navigate("/create")}>
+      <Button onClick={() => navigate(ROUTES.CreateNewBannerPage)}>
         <Typography pr={2}>Create Banner</Typography>
         <AddCircle />
       </Button>

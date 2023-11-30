@@ -14,6 +14,7 @@ import {
   editBannerReq,
   getBannerByIdReq,
 } from "../service/bannerReqFromServer";
+import ROUTES from "../../router/routes";
 
 const EditBannerPage = () => {
   const dispatch = useAppDispatch();
@@ -33,7 +34,7 @@ const EditBannerPage = () => {
     event.preventDefault();
     editedBanner && dispatch(editBannerReq(editedBanner));
 
-    navigate("/");
+    navigate(ROUTES.home);
   };
 
   const handleChange = (
@@ -138,7 +139,7 @@ const EditBannerPage = () => {
               <Button
                 variant="contained"
                 color="secondary"
-                onClick={() => navigate("/")}
+                onClick={() => navigate(ROUTES.home)}
               >
                 Cancel
               </Button>
