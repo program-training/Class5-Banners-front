@@ -18,10 +18,11 @@ const MyBannersPage = () => {
   );
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const user = useAppSelector((state) => state.user);
+  const user = useAppSelector((state) => state.user.userState);
 
+  if (!user) navigate(ROUTES.LogInPage);
   useEffect(() => {
-    if (!user) return navigate(ROUTES.LogInPage);
+    //   if (!user) return navigate(ROUTES.LogInPage);
     dispatch(getMyBannersReq());
   }, []);
 

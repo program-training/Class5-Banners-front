@@ -43,7 +43,6 @@ describe("Header", () => {
   });
 
   test("clicking 'My Banners' navigates to the 'my-banners' page", async () => {
-    const user = userEvent.setup();
     render(
       <BrowserRouter>
         <Provider store={store}>
@@ -52,7 +51,7 @@ describe("Header", () => {
       </BrowserRouter>
     );
 
-    await user.click(screen.getByText("My Banners"));
+    await userEvent.click(screen.getByText("My Banners"));
 
     expect(window.location.pathname).toBe(ROUTES.MyBannersPage);
   });
@@ -70,22 +69,4 @@ describe("Header", () => {
 
     expect(appBar).toHaveStyle({ backgroundColor: "#6d9edf" });
   });
-
-  // Add assertions based on the expected behavior of user menu interaction.
 });
-
-test("dispatches the correct action on user interaction", () => {
-  render(
-    <BrowserRouter>
-      <Provider store={store}>
-        <Header />
-      </Provider>
-    </BrowserRouter>
-  );
-
-  const myBannersButton = screen.getByRole("button", { name: "My Banners" });
-
-  userEvent.click(myBannersButton);
-});
-
-test("displays error message when an error occurs", () => {});
