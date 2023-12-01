@@ -11,7 +11,7 @@ describe("Error Page", () => {
       </BrowserRouter>
     );
     const Error = screen.getByRole("heading", {
-      name: /the page you are looking for does not exist\./i,
+      name: /Sorry, the page you were trying to view does not exist\./i,
     });
 
     expect(Error).toBeInTheDocument();
