@@ -1,17 +1,16 @@
 FROM node:18-alpine as builder
 WORKDIR /app
-COPY package*.json ./
+​
+COPY package\*.json ./
 RUN npm install
-COPY ./src ./src
-COPY ./public ./public
-COPY index.html ./
-COPY tsconfig.json ./
-COPY ./tsconfig.node.json ./
-COPY vite.config.ts ./
-ENV VITE_BASE_URL=http://ae73adf0061dc4d49ab515bf812150d9-1090975536.eu-central-1.elb.amazonaws.com/banners/api
+​
+COPY . .
 RUN npm run build
+​
 FROM nginx:alpine
 COPY --from=builder /app/dist /usr/share/nginx/html
 COPY ./src/nginx/default.conf /etc/nginx/conf.d/default.conf
-EXPOSE 80
+ENV BASE_URL_BANNER = http://a514084c400044f0990eda4eb528e51c-1130472949.eu-central-1.elb.amazonaws.com/erp
+EXPOSE 3001
+​
 CMD ["nginx", "-g", "daemon off;"]

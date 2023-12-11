@@ -4,8 +4,8 @@ import Typography from "@mui/material/Typography";
 import { Box, Stack } from "@mui/material";
 import { useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
-import { getBannerByIdReq } from "../service/bannerReqFromServer";
 import { useEffect } from "react";
+import { getBannerByBannerIdReq } from "../service/bannerReqFromServer";
 
 const Img = styled("img")({
   margin: "auto",
@@ -82,8 +82,8 @@ const BannerPage = () => {
   const { specificBanner } = useAppSelector((store) => store.banners);
 
   useEffect(() => {
-    dispatch(getBannerByIdReq(id as string));
-  }, []);
+    id && dispatch(getBannerByBannerIdReq(id));
+  }, [id]);
 
   return (
     <>

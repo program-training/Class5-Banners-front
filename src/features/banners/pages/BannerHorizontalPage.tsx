@@ -2,10 +2,10 @@ import { styled } from "@mui/system";
 import { keyframes } from "@mui/system";
 import Typography from "@mui/material/Typography";
 import { Box, Stack } from "@mui/material";
-import { getBannerByIdReq } from "../service/bannerReqFromServer";
 import { useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
 import { useEffect } from "react";
+import { getBannerByProdIdReq } from "../service/bannerReqFromServer";
 
 const Img = styled("img")({
   margin: "auto",
@@ -28,11 +28,11 @@ const slideInFromLeft = keyframes`
 const BannerPage = () => {
   const { id } = useParams();
   const dispatch = useAppDispatch();
-  useEffect(() => {
-    dispatch(getBannerByIdReq(id as string));
-  }, []);
-
   const { specificBanner: banner } = useAppSelector((store) => store.banners);
+
+  useEffect(() => {
+    id && dispatch(getBannerByProdIdReq(id));
+  }, [banner]);
 
   return (
     <div onClick={() => open(banner?.imageURL)}>
@@ -73,7 +73,6 @@ const BannerPage = () => {
           />
         </Box>
         <Box flex="1">
-          {/* Rest of your content */}
           <Typography variant="h4" fontFamily="fantasy" color="white">
             {banner?.title || "Title"}
           </Typography>
