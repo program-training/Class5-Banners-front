@@ -22,11 +22,11 @@ const MyBannersPage = () => {
 
   if (!user) navigate(ROUTES.LogInPage);
   useEffect(() => {
-    //   if (!user) return navigate(ROUTES.LogInPage);
     dispatch(getMyBannersReq());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  if (pending) return <Pending />;
   return (
     <Container maxWidth="md">
       <Typography variant="h2" padding={2} align="center">
@@ -40,7 +40,6 @@ const MyBannersPage = () => {
       {bannersState && (
         <BannerTable setOpenDialog={setBannerToDelete} page="my-banners" />
       )}
-      {pending && <Pending />}
       {!pending && !error && !bannersState && (
         <Alert severity="info">You hadn't created banners yet.</Alert>
       )}

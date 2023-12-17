@@ -11,7 +11,7 @@ import { removeTypenameFromVariables } from "@apollo/client/link/remove-typename
 const removeTypenameLink = removeTypenameFromVariables();
 const httpLink = createHttpLink({
   // uri: `${BASE_URI}${PORT}`,
-  uri: `http://localhost:2121/`,
+  uri: `http://localhost:2121/graphql`,
 });
 
 const authLink = setContext((_, { headers }) => {
