@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
 import { useEffect } from "react";
 import { getBannerByProdIdReq } from "../service/bannerReqFromServer";
+import Pending from "../components/Pending";
 
 const Img = styled("img")({
   margin: "auto",
@@ -28,12 +29,16 @@ const slideInFromLeft = keyframes`
 const BannerPage = () => {
   const { id } = useParams();
   const dispatch = useAppDispatch();
-  const { specificBanner: banner } = useAppSelector((store) => store.banners);
+  const { specificBanner: banner, pending } = useAppSelector(
+    (store) => store.banners
+  );
 
   useEffect(() => {
     id && dispatch(getBannerByProdIdReq(id));
   }, [banner]);
 
+  if (!banner) return;
+  if (pending) return <Pending />;
   return (
     <div onClick={() => open(banner?.imageURL)}>
       <Box
@@ -69,17 +74,17 @@ const BannerPage = () => {
               animation: `${slideInFromLeft} 1s ease-in-out`, // Added animation
             }}
             alt="ad"
-            src={banner?.imageURL}
+            src={banner.imageURL}
           />
         </Box>
         <Box flex="1">
           <Typography variant="h4" fontFamily="fantasy" color="white">
-            {banner?.title || "Title"}
+            {banner.title || "Title"}
           </Typography>
           <Typography variant="subtitle1" fontFamily="fantasy" color="white">
-            {banner?.description || "Description"}
+            {banner.description || "Description"}
           </Typography>
-          {banner?.note && (
+          {banner.note && (
             <Typography
               variant="body1"
               fontFamily="cursive"
