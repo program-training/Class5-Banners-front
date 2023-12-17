@@ -41,7 +41,6 @@ const EditUserPage = () => {
     dispatch(editUserReq(updatedUserData));
     dispatch(getUserReq());
   };
-  if (!userData) return;
   if (loading) return <Pending />;
   return (
     <>
@@ -69,7 +68,7 @@ const EditUserPage = () => {
           variant="outlined"
           fullWidth
           {...register("username")}
-          value={userData.username || ""}
+          value={userData?.username || ""}
           sx={{ mb: 2 }}
           onChange={handleChange}
         />
@@ -77,7 +76,7 @@ const EditUserPage = () => {
           control={
             <Checkbox
               {...register("isAdmin")}
-              defaultChecked={userData.isAdmin || false}
+              defaultChecked={userData?.isAdmin || false}
             />
           }
           label={"Admin"}
