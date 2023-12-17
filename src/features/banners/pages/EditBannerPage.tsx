@@ -15,7 +15,7 @@ import {
 } from "../service/bannerReqFromServer";
 import ROUTES from "../../router/routes";
 import { BannerInterface } from "../interface/BannerInterface";
-
+const a = 9;
 const EditBannerPage = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
