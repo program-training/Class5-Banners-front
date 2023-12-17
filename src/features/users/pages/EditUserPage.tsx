@@ -113,95 +113,90 @@ import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
 import { editUserReq, getUserReq } from "../service/asyncReq";
 
 const EditUserPage = () => {
-    const dispatch = useAppDispatch();
-    const { userState, loading, error } = useAppSelector((store) => store.user);
-    const [userData, setUserData] = useState<UserInterface | null>(userState);
-    const [successUpdate, setSuccessUpdate] = useState<boolean>(false); // State to track successful update
+  const dispatch = useAppDispatch();
+  const { userState, loading, error } = useAppSelector((store) => store.user);
+  const [userData, setUserData] = useState<UserInterface | null>(userState);
+  const [successUpdate, setSuccessUpdate] = useState<boolean>(false); // State to track successful update
 
-    useEffect(() => {
-        dispatch(getUserReq());
-        setUserData(userState);
-    }, [userData]);
+  useEffect(() => {
+    dispatch(getUserReq());
+    setUserData(userState);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [userData]);
 
-    const handleChange = (
-        event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-    ) => {
-        const { name, value } = event.target;
-        if (name.length)
-            setUserData((prev) => ({
-                ...prev!,
-                [name]: value,
-            }));
+  const handleChange = (
+    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = event.target;
+    if (name.length)
+      setUserData((prev) => ({
+        ...prev!,
+        [name]: value,
+      }));
+  };
+
+  const onSubmit = async (data: FieldValues) => {
+    const updatedUserData = {
+      ...userData,
+      username: data.username,
+      isAdmin: data.isAdmin ? true : false,
     };
+    await dispatch(editUserReq(updatedUserData));
+    setSuccessUpdate(true);
+  };
 
-    const onSubmit = async (data: FieldValues) => {
-        const updatedUserData = {
-            ...userData,
-            username: data.username,
-            isAdmin: data.isAdmin ? true : false,
-        };
-        await dispatch(editUserReq(updatedUserData));
-        setSuccessUpdate(true);
-    };
-
-    return (
-        <>
-            <Container
-                maxWidth="sm"
-                sx={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    gap: "20px",
-                    padding: "20px",
-                    border: "1px solid #ccc",
-                    borderRadius: "8px",
-                    backgroundColor: "#f9f9f9",
-                    marginY: "50px",
-                }}
-            >
-                <Typography variant="h4">Edit User Details</Typography>
-                <Typography variant="subtitle1">
-                    Hi, {userData ? userData.username : "Loading..."}!
-                </Typography>
-                <Typography
-                    variant="subtitle1"
-                    gutterBottom
-                    sx={{ color: "#555" }}
-                >
-                    Email Address: {userData?.email || "waiting to server..."}
-                </Typography>
-                <TextField
-                    label="username"
-                    variant="outlined"
-                    fullWidth
-                    value={userData?.username || ""}
-                    sx={{ mb: 2 }}
-                    onChange={handleChange}
-                />
-                <FormControlLabel
-                    control={
-                        <Checkbox defaultChecked={userData?.isAdmin || false} />
-                    }
-                    label={"Admin"}
-                    sx={{ mb: 2 }}
-                />
-                {!loading && (
-                    <Button
-                        onClick={onSubmit} // Call onSubmit directly
-                        variant="contained"
-                        color="primary"
-                    >
-                        Save Changes
-                    </Button>
-                )}
-                {loading && <CircularProgress />}
-                {successUpdate && !error && (
-                    <Alert severity="success">Update succeeded</Alert>
-                )}
-            </Container>
-        </>
-    );
+  return (
+    <>
+      <Container
+        maxWidth="sm"
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          gap: "20px",
+          padding: "20px",
+          border: "1px solid #ccc",
+          borderRadius: "8px",
+          backgroundColor: "#f9f9f9",
+          marginY: "50px",
+        }}
+      >
+        <Typography variant="h4">Edit User Details</Typography>
+        <Typography variant="subtitle1">
+          Hi, {userData ? userData.username : "Loading..."}!
+        </Typography>
+        <Typography variant="subtitle1" gutterBottom sx={{ color: "#555" }}>
+          Email Address: {userData?.email || "waiting to server..."}
+        </Typography>
+        <TextField
+          label="username"
+          variant="outlined"
+          fullWidth
+          value={userData?.username || ""}
+          sx={{ mb: 2 }}
+          onChange={handleChange}
+        />
+        <FormControlLabel
+          control={<Checkbox defaultChecked={userData?.isAdmin || false} />}
+          label={"Admin"}
+          sx={{ mb: 2 }}
+        />
+        {!loading && (
+          <Button
+            onClick={onSubmit} // Call onSubmit directly
+            variant="contained"
+            color="primary"
+          >
+            Save Changes
+          </Button>
+        )}
+        {loading && <CircularProgress />}
+        {successUpdate && !error && (
+          <Alert severity="success">Update succeeded</Alert>
+        )}
+      </Container>
+    </>
+  );
 };
 
 export default EditUserPage;

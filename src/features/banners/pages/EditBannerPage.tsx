@@ -31,6 +31,7 @@ const EditBannerPage = () => {
       dispatch(getBannerByBannerIdReq(bannerID));
       setEditedBanner(specificBanner);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [bannerID]);
 
   useEffect(() => {

@@ -32,6 +32,7 @@ const BannerPage = () => {
 
   useEffect(() => {
     id && dispatch(getBannerByProdIdReq(id));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [banner]);
 
   return (

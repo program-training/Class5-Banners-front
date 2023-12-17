@@ -24,6 +24,7 @@ const MyBannersPage = () => {
   useEffect(() => {
     //   if (!user) return navigate(ROUTES.LogInPage);
     dispatch(getMyBannersReq());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
