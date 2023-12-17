@@ -10,6 +10,7 @@ import { UserInterface } from "../interfaces/userInterface";
 import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
 import { editUserReq, getUserReq } from "../service/asyncReq";
 import Pending from "../../banners/components/Pending";
+const testEslint = 0;
 
 const EditUserPage = () => {
   const { register, handleSubmit } = useForm();
@@ -19,6 +20,7 @@ const EditUserPage = () => {
   useEffect(() => {
     dispatch(getUserReq());
     setUserData(userState);
+    //
   }, [userState]);
 
   const handleChange = (
