@@ -38,7 +38,7 @@ const BannerPage = () => {
     <div onClick={() => open(banner?.imageURL)}>
       <Box
         sx={{
-          backgroundImage: `url("/ad-background.png")`,
+          backgroundImage: `url("/banners/ad-background.png")`,
           height: "100%",
           width: "100%",
           position: "absolute",

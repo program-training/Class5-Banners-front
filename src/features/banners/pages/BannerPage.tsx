@@ -85,13 +85,16 @@ const BannerPage = () => {
     dispatch(getBannerByIdReq(id as string));
   }, []);
 
+  console.log('bns', specificBanner);
+  
+
   return (
     <>
       {specificBanner && (
         <Box onClick={() => open(specificBanner?.imageURL)}>
           <Box
             sx={{
-              backgroundImage: `url("/ad-background.png")`,
+              backgroundImage: `url("/banners/ad-background.png")`,
               height: "100%",
               width: "100%",
               position: "absolute",
