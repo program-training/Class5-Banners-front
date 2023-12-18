@@ -31,6 +31,7 @@ const CreateNewBannerPage = () => {
 
   useEffect(() => {
     dispatch(getUnbanneredProducts());
+
   }, []);
 
   const handleSave = () => {
@@ -45,6 +46,7 @@ const CreateNewBannerPage = () => {
         })
       );
   };
+
 
   if (!user) return <Navigate replace to={ROUTES.LogInPage} />;
 
