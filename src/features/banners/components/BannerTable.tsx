@@ -34,9 +34,8 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 export const BannerTable = ({ setOpenDialog, page }: Props) => {
-  const { bannersState } = useAppSelector((store) => store.banners);
+  const { bannersToDisplay } = useAppSelector((store) => store.banners);
   const rows = ["Image", "Title", "Creation Date", "Note", "Delete", "Edit"];
-
   if (page === "banner-management") {
     rows.splice(2, 0, "Author");
   }
@@ -59,8 +58,8 @@ export const BannerTable = ({ setOpenDialog, page }: Props) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {bannersState?.map((banner) => (
-            <StyledTableRow key={banner._id}>
+          {bannersToDisplay?.map((banner, i) => (
+            <StyledTableRow key={i}>
               <StyledTableCell align="center" sx={{ cursor: "pointer" }}>
                 <img
                   onClick={() =>
@@ -79,7 +78,7 @@ export const BannerTable = ({ setOpenDialog, page }: Props) => {
                 </StyledTableCell>
               )}
               <StyledTableCell align="center">
-                {String(banner.createdAt.substring(0, 10))}
+                {banner.createdAt}
               </StyledTableCell>
               <StyledTableCell align="center">
                 {banner.note || "none"}
@@ -90,7 +89,9 @@ export const BannerTable = ({ setOpenDialog, page }: Props) => {
                 </IconButton>
               </StyledTableCell>
               <StyledTableCell align="center">
-                <IconButton onClick={() => navigate(`/banners/edit/${banner._id}`)}>
+                <IconButton
+                  onClick={() => navigate(`/banners/edit/${banner._id}`)}
+                >
                   <Edit />
                 </IconButton>
               </StyledTableCell>

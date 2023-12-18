@@ -1,123 +1,103 @@
-import { useState } from "react";
-import {
-    TextField,
-    Grid,
-    FormControlLabel,
-    Checkbox,
-    CircularProgress,
-    Alert,
-} from "@mui/material";
-import EmailInput from "../components/EmailInput";
-import PasswordInputs from "../components/PasswordInput";
-import ConfirmPasswordInput from "../components/ConfirmPasswordInput";
-import SignUpTopContent from "../components/SignUpTopContent";
-import SignUpBottomContent from "../components/SignUpBottomContent";
-import SignUpSubmitButton from "../components/SignUpSubmitButton";
-import FormError from "../components/SignUpFormError";
+import { ChangeEvent, useEffect, useState } from "react";
+import Typography from "@mui/material/Typography";
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
+import Checkbox from "@mui/material/Checkbox";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import { Alert, Container } from "@mui/material";
+import { useForm, SubmitHandler, FieldValues } from "react-hook-form";
+import { UserInterface } from "../interfaces/userInterface";
 import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
-import { useNavigate } from "react-router-dom";
-import { signUpReq } from "../user-slice";
-import ROUTES from "../../router/routes";
+import { editUserReq, getUserReq } from "../service/asyncReq";
+import Pending from "../../banners/components/Pending";
 
-const SignUpPage = () => {
-    const [username, setUsername] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [ConfirmPassword, setConfirmPassword] = useState("");
-    const [isAdmin, setIsAdmin] = useState(false);
-    const [isValidEmail, setIsValidEmail] = useState(true);
-    const [isValidPassword, setIsValidPassword] = useState(true);
-    const [isValidConfirmPassword, setIsValidConfirmPassword] = useState(true);
+const EditUserPage = () => {
+  const { register, handleSubmit } = useForm();
+  const dispatch = useAppDispatch();
+  const { userState, loading, error } = useAppSelector((store) => store.user);
+  const [userData, setUserData] = useState<UserInterface | null>(null);
+  useEffect(() => {
+    dispatch(getUserReq());
+    setUserData(userState);
+  }, [userState]);
 
-    const dispatch = useAppDispatch();
-    const { error, loading } = useAppSelector((store) => store.user);
-    const navigate = useNavigate();
+  const handleChange = (
+    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = event.target;
+    if (name.length)
+      setUserData((prev) => ({
+        ...prev!,
+        [name]: value,
+      }));
+  };
 
-    const isAllValid =
-        username &&
-        email &&
-        password &&
-        ConfirmPassword &&
-        isValidEmail &&
-        isValidPassword &&
-        isValidConfirmPassword;
-    const handleSignUp = () => {
-        if (isAllValid) {
-            dispatch(signUpReq({ username, email, password, isAdmin }));
-            !error && navigate(ROUTES.home);
-        }
+  const onSubmit: SubmitHandler<FieldValues> = (data) => {
+    const updatedUserData = {
+      ...userData,
+      username: data.username,
+      isAdmin: data.isAdmin ? true : false,
     };
-
-    return (
-        <Grid
-            container
-            spacing={2}
-            justifyContent="center"
-            sx={{ padding: "20px", mt: 2 }}
-        >
-            <Grid
-                item
-                xs={10}
-                md={6}
-                lg={4}
-                style={{
-                    padding: "20px",
-                    backgroundColor: "#f9f9f9",
-                    borderRadius: "8px",
-                }}
-            >
-                <SignUpTopContent />
-                <TextField
-                    label="Username"
-                    variant="outlined"
-                    fullWidth
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                    style={{ marginBottom: "10px" }}
-                />
-                <EmailInput
-                    email={email}
-                    setEmail={setEmail}
-                    isValidEmail={isValidEmail}
-                    setIsValidEmail={setIsValidEmail}
-                />
-                <PasswordInputs
-                    password={password}
-                    setPassword={setPassword}
-                    setIsValidPassword={setIsValidPassword}
-                    isValidPassword={isValidPassword}
-                />
-                <ConfirmPasswordInput
-                    isValidConfirmPassword={isValidConfirmPassword}
-                    setIsValidConfirmPassword={setIsValidConfirmPassword}
-                    prevPassword={password}
-                    ConfirmPassword={ConfirmPassword}
-                    setConfirmPassword={setConfirmPassword}
-                />
-                <FormControlLabel
-                    control={
-                        <Checkbox
-                            checked={isAdmin}
-                            onChange={(e) => setIsAdmin(e.target.checked)}
-                        />
-                    }
-                    label="Do you want to be registered as an administrator?"
-                />
-                {isAllValid ? (
-                    <SignUpSubmitButton onClick={handleSignUp} />
-                ) : (
-                    <FormError />
-                )}
-                {loading && <CircularProgress />}
-                {error && (
-                    <Alert severity="error">
-                        an internal server error had occurred. try again later.
-                    </Alert>
-                )}
-                <SignUpBottomContent />
-            </Grid>
-        </Grid>
-    );
+    dispatch(editUserReq(updatedUserData));
+    dispatch(getUserReq());
+  };
+  if (!userData) return;
+  if (loading) return <Pending />;
+  return (
+    <>
+      <Container
+        maxWidth="sm"
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          gap: "20px",
+          padding: "20px",
+          border: "1px solid #ccc",
+          borderRadius: "8px",
+          backgroundColor: "#f9f9f9",
+          marginY: "50px",
+        }}
+      >
+        <Typography variant="h4">Edit User Details</Typography>
+        <Typography variant="subtitle1">Edit Name and Status</Typography>
+        <Typography variant="subtitle1" gutterBottom sx={{ color: "#555" }}>
+          Email Address: {userData?.email || "waiting to server..."}
+        </Typography>
+        <TextField
+          label="username"
+          variant="outlined"
+          fullWidth
+          {...register("username")}
+          value={userData.username || ""}
+          sx={{ mb: 2 }}
+          onChange={handleChange}
+        />
+        <FormControlLabel
+          control={
+            <Checkbox
+              {...register("isAdmin")}
+              defaultChecked={userData.isAdmin || false}
+            />
+          }
+          label={"Admin"}
+          sx={{ mb: 2 }}
+        />
+        {!loading && (
+          <Button
+            onClick={handleSubmit(onSubmit)}
+            variant="contained"
+            color="primary"
+          >
+            Save Changes
+          </Button>
+        )}
+        {!error && !loading && userState === userData && (
+          <Alert severity="success">update succeeded</Alert>
+        )}
+      </Container>
+    </>
+  );
 };
 
-export default SignUpPage;
+export default EditUserPage;

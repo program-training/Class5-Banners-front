@@ -1,13 +1,9 @@
 import ConfirmPasswordInput from "./ConfirmPasswordInput";
-import { render, renderHook, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
-import { useState } from "react";
 
 describe("Confirm Password Input", () => {
   test("confirm", async () => {
-    const { result } = renderHook(() => useState(true));
-    console.log(result);
-
     render(
       <BrowserRouter>
         <ConfirmPasswordInput
@@ -22,6 +18,6 @@ describe("Confirm Password Input", () => {
 
     const confirm = screen.queryByText(/passwords doesn't match/i);
 
-    expect(confirm).not.toBeInTheDocument();
+    expect(confirm).toBeInTheDocument();
   });
 });

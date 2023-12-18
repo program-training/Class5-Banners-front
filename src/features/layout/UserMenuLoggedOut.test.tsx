@@ -17,7 +17,7 @@ describe("UserMenu", () => {
     });
     await userEvent.click(userMenuButton);
 
-    const signUpMenuItem = screen.getByRole("menuitem", { name: "SignUp" });
+    const signUpMenuItem = screen.getByRole("menuitem", { name: "Sign Up" });
     const loginMenuItem = screen.getByRole("menuitem", { name: "Login" });
 
     expect(signUpMenuItem).toBeInTheDocument();
@@ -36,10 +36,10 @@ describe("UserMenu", () => {
     });
     await userEvent.click(userMenuButton);
 
-    const signUpMenuItem = screen.getByRole("menuitem", { name: "SignUp" });
+    const signUpMenuItem = screen.getByRole("menuitem", { name: "Sign Up" });
     await userEvent.click(signUpMenuItem);
 
-    expect(window.location.pathname).toBe("/banners/user/sign-up");
+    expect(window.location.pathname).toBe(ROUTES.SignUpPage);
   });
 
   test("navigates to login page", async () => {
