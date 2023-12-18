@@ -19,6 +19,7 @@ const BannerManagementPage = () => {
 
   useEffect(() => {
     dispatch(getBannersReq());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (!userState) return <Navigate replace to={ROUTES.LogInPage} />;
@@ -32,6 +33,7 @@ const BannerManagementPage = () => {
           <>
             <BannerManagementTop banners={bannersState} />
             <BannerTable
+              banners={bannersState}
               setOpenDialog={setBannerToDelete}
               page="banner-management"
             />

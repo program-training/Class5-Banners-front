@@ -24,7 +24,11 @@ describe("BannerTable", () => {
     ];
     render(
       <Router>
-        <BannerTable setOpenDialog={() => {}} page="banner-management" />
+        <BannerTable
+          banners={mockData}
+          setOpenDialog={() => {}}
+          page="banner-management"
+        />
       </Router>
     );
 
@@ -58,7 +62,11 @@ describe("BannerTable", () => {
 
     render(
       <Router>
-        <BannerTable setOpenDialog={() => {}} page="banner-management" />
+        <BannerTable
+          banners={mockData}
+          setOpenDialog={() => {}}
+          page="banner-management"
+        />
       </Router>
     );
 
@@ -75,6 +83,7 @@ describe("BannerTable", () => {
     render(
       <Router>
         <BannerTable
+          banners={null}
           setOpenDialog={setOpenDialogMock}
           page="banner-management"
         />

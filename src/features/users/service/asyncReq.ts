@@ -68,7 +68,7 @@ export const editUserReq = createAsyncThunk(
         mutation: UPDATE_USER,
         variables: { user: { ...editedUser } },
       });
-      return data;
+      return data.updatedUserService[0];
     } catch (error) {
       return Promise.reject(error);
     }

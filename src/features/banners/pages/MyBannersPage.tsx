@@ -10,19 +10,20 @@ import { getMyBannersReq } from "../service/bannerReqFromServer";
 import ROUTES from "../../router/routes";
 
 const MyBannersPage = () => {
-  const { bannersState, error, pending } = useAppSelector(
+  const { bannersToDisplay, error, pending } = useAppSelector(
     (store) => store.banners
   );
+  const user = useAppSelector((state) => state.user.userState);
   const [bannerToDelete, setBannerToDelete] = useState<string | null | boolean>(
     null
   );
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const user = useAppSelector((state) => state.user.userState);
 
   if (!user) navigate(ROUTES.LogInPage);
   useEffect(() => {
     dispatch(getMyBannersReq());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (pending) return <Pending />;
@@ -36,10 +37,14 @@ const MyBannersPage = () => {
         <AddCircle />
       </Button>
 
-      {bannersState && (
-        <BannerTable setOpenDialog={setBannerToDelete} page="my-banners" />
+      {bannersToDisplay && (
+        <BannerTable
+          setOpenDialog={setBannerToDelete}
+          page="my-banners"
+          banners={bannersToDisplay}
+        />
       )}
-      {!pending && !error && !bannersState && (
+      {!pending && !error && !bannersToDisplay && (
         <Alert severity="info">You hadn't created banners yet.</Alert>
       )}
       <DeleteBannerDialog

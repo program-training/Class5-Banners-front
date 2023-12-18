@@ -10,6 +10,8 @@ import { UserInterface } from "../interfaces/userInterface";
 import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
 import { editUserReq, getUserReq } from "../service/asyncReq";
 import Pending from "../../banners/components/Pending";
+import { Navigate } from "react-router-dom";
+import ROUTES from "../../router/routes";
 
 const EditUserPage = () => {
   const { register, handleSubmit } = useForm();
@@ -19,13 +21,15 @@ const EditUserPage = () => {
   useEffect(() => {
     dispatch(getUserReq());
     setUserData(userState);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userState]);
 
   const handleChange = (
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = event.target;
-    if (name.length)
+
+    if (value.length)
       setUserData((prev) => ({
         ...prev!,
         [name]: value,
@@ -38,10 +42,12 @@ const EditUserPage = () => {
       username: data.username,
       isAdmin: data.isAdmin ? true : false,
     };
+
     dispatch(editUserReq(updatedUserData));
-    dispatch(getUserReq());
   };
+
   if (loading) return <Pending />;
+  if (!userState) return <Navigate replace to={ROUTES.LogInPage} />;
   return (
     <>
       <Container
@@ -61,7 +67,7 @@ const EditUserPage = () => {
         <Typography variant="h4">Edit User Details</Typography>
         <Typography variant="subtitle1">Edit Name and Status</Typography>
         <Typography variant="subtitle1" gutterBottom sx={{ color: "#555" }}>
-          Email Address: {userData?.email || "waiting to server..."}
+          Email Address: {loading ? "waiting to server..." : userData?.email}
         </Typography>
         <TextField
           label="username"
@@ -76,7 +82,7 @@ const EditUserPage = () => {
           control={
             <Checkbox
               {...register("isAdmin")}
-              defaultChecked={userData?.isAdmin || false}
+              defaultChecked={userData?.isAdmin}
             />
           }
           label={"Admin"}

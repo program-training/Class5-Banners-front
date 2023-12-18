@@ -21,6 +21,7 @@ export const GET_ALL_BANNERS = gql`
 export const GET_USER_BANNERS = gql`
   query GetMyBanners($authorID: ID) {
     getBannerByUserService(authorID: $authorID) {
+      _id
       productID
       title
       description

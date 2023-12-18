@@ -91,7 +91,7 @@ export const bannersSlice = createSlice({
     });
     builder.addCase(getMyBannersReq.fulfilled, (state, { payload }) => {
       state.pending = false;
-      state.bannersState = payload;
+      state.bannersToDisplay = payload;
       state.error = "";
       return state;
     });
@@ -126,7 +126,12 @@ export const bannersSlice = createSlice({
         state.bannersState.findIndex((banner) => banner._id === payload._id),
         1
       );
-      state.bannersToDisplay = state.bannersState;
+      state.bannersToDisplay?.splice(
+        state.bannersToDisplay.findIndex(
+          (banner) => banner._id === payload._id
+        ),
+        1
+      );
       state.pending = false;
       state.error = "";
       return state;

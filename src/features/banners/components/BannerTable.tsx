@@ -12,11 +12,12 @@ import {
 } from "@mui/material";
 import { Dispatch, SetStateAction } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAppSelector } from "../../../redux/hooks";
+import { BannerInterface } from "../interface/BannerInterface";
 
 type Props = {
   setOpenDialog: Dispatch<SetStateAction<string | null | boolean>>;
   page: "banner-management" | "my-banners";
+  banners: BannerInterface[] | null;
 };
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -33,13 +34,11 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-export const BannerTable = ({ setOpenDialog, page }: Props) => {
-  const { bannersToDisplay } = useAppSelector((store) => store.banners);
+export const BannerTable = ({ setOpenDialog, page, banners }: Props) => {
   const rows = ["Image", "Title", "Creation Date", "Note", "Delete", "Edit"];
   if (page === "banner-management") {
     rows.splice(2, 0, "Author");
   }
-
   const navigate = useNavigate();
   const handleOpenDeleteDialog = (id: string) => {
     setOpenDialog(id);
@@ -58,7 +57,7 @@ export const BannerTable = ({ setOpenDialog, page }: Props) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {bannersToDisplay?.map((banner, i) => (
+          {banners?.map((banner, i) => (
             <StyledTableRow key={i}>
               <StyledTableCell align="center" sx={{ cursor: "pointer" }}>
                 <img

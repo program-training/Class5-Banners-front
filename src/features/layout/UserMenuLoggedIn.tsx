@@ -49,7 +49,7 @@ const UserMenu = () => {
     <>
       <Tooltip title="Open user menu">
         <IconButton onClick={handleOpenUserMenu} sx={{ p: 1 }}>
-          <Avatar>{userState?.username[0]}</Avatar>
+          <Avatar>{userState?.username[0] || ""}</Avatar>
         </IconButton>
       </Tooltip>
       <Menu
