@@ -38,8 +38,9 @@ export const userSlice = createSlice({
     },
     logOut: (state) => {
       client.clearStore();
-      state = initialState;
       removeToken();
+      state.token = null;
+      state.userState = null;
       return state;
     },
   },

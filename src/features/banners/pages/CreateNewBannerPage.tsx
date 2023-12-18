@@ -27,15 +27,26 @@ const CreateNewBannerPage = () => {
   const { userState: user } = useAppSelector((store) => store.user);
   const dispatch = useAppDispatch();
   const [autocompleteValue, setAutocompleteValue] =
-    useState<ProductInterface | null>(null); // New state for Autocomplete value
+    useState<ProductInterface | null>(null);
 
-  const handleSave = () => {
-    dispatch(addBannerReq({ imageURL: bannerURL }));
-  };
   useEffect(() => {
     dispatch(getUnbanneredProducts());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [products]);
+
+  }, []);
+
+  const handleSave = () => {
+    selectedProduct &&
+      dispatch(
+        addBannerReq({
+          title: selectedProduct.title,
+          imageURL: bannerURL,
+          productID: selectedProduct?.id.toString(),
+          category: selectedProduct.category,
+          description: selectedProduct.description,
+        })
+      );
+  };
+
 
   if (!user) return <Navigate replace to={ROUTES.LogInPage} />;
 
@@ -54,9 +65,10 @@ const CreateNewBannerPage = () => {
       <Autocomplete
         disablePortal
         options={products || []}
-        loading={pending} // assuming 'pending' is a boolean indicating loading state
-        loadingText="Loading..." // optional, add a loading text if needed
+        loading={pending}
+        loadingText="Loading..."
         sx={{ width: 300 }}
+        isOptionEqualToValue={(opt) => typeof opt.category === "string"}
         getOptionLabel={(option) => option.title}
         renderInput={(params) => (
           <TextField {...params} label="Product Title" />

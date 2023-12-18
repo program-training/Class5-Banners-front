@@ -30,7 +30,7 @@ export const addBannerReq = createAsyncThunk(
     try {
       const { data: banner } = await client.mutate({
         mutation: ADD_BANNER,
-        variables: { newBanner },
+        variables: { banner: newBanner },
       });
       return banner.addBannerService;
     } catch (error) {
@@ -86,7 +86,6 @@ export const editBannerReq = createAsyncThunk(
   "banners/editBannerReq",
   async (banner: BannerInterface) => {
     try {
-      console.log(banner);
       const { data } = await client.mutate({
         mutation: UPDATE_BANNER,
         variables: { bannerId: banner._id, properties: { ...banner } },
