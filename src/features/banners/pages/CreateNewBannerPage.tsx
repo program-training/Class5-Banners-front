@@ -31,10 +31,19 @@ const CreateNewBannerPage = () => {
 
   useEffect(() => {
     dispatch(getUnbanneredProducts());
-  }, [products]);
+  }, []);
 
   const handleSave = () => {
-    dispatch(addBannerReq({ imageURL: bannerURL }));
+    selectedProduct &&
+      dispatch(
+        addBannerReq({
+          title: selectedProduct.title,
+          imageURL: bannerURL,
+          productID: selectedProduct?.id.toString(),
+          category: selectedProduct.category,
+          description: selectedProduct.description,
+        })
+      );
   };
 
   if (!user) return <Navigate replace to={ROUTES.LogInPage} />;
@@ -57,6 +66,7 @@ const CreateNewBannerPage = () => {
         loading={pending}
         loadingText="Loading..."
         sx={{ width: 300 }}
+        isOptionEqualToValue={(opt) => typeof opt.category === "string"}
         getOptionLabel={(option) => option.title}
         renderInput={(params) => (
           <TextField {...params} label="Product Title" />

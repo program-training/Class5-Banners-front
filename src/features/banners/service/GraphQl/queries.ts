@@ -13,6 +13,7 @@ export const GET_ALL_BANNERS = gql`
       productURL
       authorID
       createdAt
+      authorUsername
     }
   }
 `;
@@ -69,7 +70,10 @@ export const GET_UNBANNERED_PRODUCTS = gql`
   query GetUnbanneredProducts {
     getProductForBanners {
       title
+      category
+      description
       imageUrl
+      id
     }
   }
 `;
