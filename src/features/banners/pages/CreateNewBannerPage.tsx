@@ -27,14 +27,15 @@ const CreateNewBannerPage = () => {
   const { userState: user } = useAppSelector((store) => store.user);
   const dispatch = useAppDispatch();
   const [autocompleteValue, setAutocompleteValue] =
-    useState<ProductInterface | null>(null); // New state for Autocomplete value
+    useState<ProductInterface | null>(null);
+
+  useEffect(() => {
+    dispatch(getUnbanneredProducts());
+  }, [products]);
 
   const handleSave = () => {
     dispatch(addBannerReq({ imageURL: bannerURL }));
   };
-  useEffect(() => {
-    dispatch(getUnbanneredProducts());
-  }, [products]);
 
   if (!user) return <Navigate replace to={ROUTES.LogInPage} />;
 
@@ -53,8 +54,8 @@ const CreateNewBannerPage = () => {
       <Autocomplete
         disablePortal
         options={products || []}
-        loading={pending} // assuming 'pending' is a boolean indicating loading state
-        loadingText="Loading..." // optional, add a loading text if needed
+        loading={pending}
+        loadingText="Loading..."
         sx={{ width: 300 }}
         getOptionLabel={(option) => option.title}
         renderInput={(params) => (
