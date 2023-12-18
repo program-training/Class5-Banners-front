@@ -9,13 +9,14 @@ import { useDispatch } from "react-redux";
 import { logOut } from "../users/user-slice";
 import DeleteUserDialog from "../users/components/DeleteUserDialog";
 import ROUTES from "../router/routes";
+import { useAppSelector } from "../../redux/hooks";
 
 const UserMenu = () => {
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  const { userState } = useAppSelector((store) => store.user);
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
   };
@@ -48,7 +49,7 @@ const UserMenu = () => {
     <>
       <Tooltip title="Open user menu">
         <IconButton onClick={handleOpenUserMenu} sx={{ p: 1 }}>
-          <Avatar />
+          <Avatar>{userState?.username[0]}</Avatar>
         </IconButton>
       </Tooltip>
       <Menu
