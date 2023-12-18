@@ -1,11 +1,9 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import client from "../../../apollo/apolloApi";
 import { UserInterface } from "../interfaces/userInterface";
 import {
   LoginInterface,
   SignUpInterface,
 } from "../interfaces/userSliceInterfaces";
-import { LOGIN, SIGNUP, DELETE_USER, GET_USER, UPDATE_USER } from "./queries";
 
 export const loginReq = createAsyncThunk(
   "user/loginReq",
