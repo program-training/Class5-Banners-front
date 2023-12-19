@@ -19,6 +19,7 @@ const EditUserPage = () => {
   useEffect(() => {
     dispatch(getUserReq());
     setUserData(userState);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userState]);
 
   const handleChange = (

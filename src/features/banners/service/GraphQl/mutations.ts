@@ -35,6 +35,7 @@ export const UPDATE_BANNER = gql`
 export const DELETE_BANNER = gql`
   mutation DeleteBanner($bannerId: ID) {
     deleteBannerService(bannerId: $bannerId) {
+      _id
       productID
       title
       description
