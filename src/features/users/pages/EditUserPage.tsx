@@ -10,8 +10,6 @@ import { UserInterface } from "../interfaces/userInterface";
 import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
 import { editUserReq, getUserReq } from "../service/asyncReq";
 import Pending from "../../banners/components/Pending";
-import { Navigate } from "react-router-dom";
-import ROUTES from "../../router/routes";
 
 const EditUserPage = () => {
   const { register, handleSubmit } = useForm();
@@ -47,7 +45,6 @@ const EditUserPage = () => {
   };
 
   if (loading) return <Pending />;
-  if (!userState) return <Navigate replace to={ROUTES.LogInPage} />;
   return (
     <>
       <Container

@@ -14,6 +14,8 @@ export const GET_ALL_BANNERS = gql`
       authorID
       createdAt
       authorUsername
+      views
+      viewsTime
     }
   }
 `;
