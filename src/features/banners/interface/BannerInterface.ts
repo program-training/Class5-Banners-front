@@ -12,6 +12,8 @@ export interface BannerInterface {
   createdAt: string;
   updatedAt: string;
   __typename?: string;
+  views?: number;
+  viewsTime?: string[];
 }
 
 export interface NewBannerInterface {
