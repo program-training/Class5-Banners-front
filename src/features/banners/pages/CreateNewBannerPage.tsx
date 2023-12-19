@@ -76,7 +76,7 @@ const CreateNewBannerPage = () => {
         value={autocompleteValue}
         onChange={(_, value) => {
           const selected = products?.find(
-            (product) => product.id === value?.id
+            (product: ProductInterface) => product.id === value?.id
           );
           setSelectedProduct(selected || null);
           setAutocompleteValue(selected || null); // Set Autocomplete value
