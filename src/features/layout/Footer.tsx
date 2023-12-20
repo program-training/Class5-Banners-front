@@ -4,7 +4,7 @@ import ROUTES from "../router/routes";
 import {
     Email,
     Extension,
-    Facebook,
+    WhatsApp,
     Instagram,
     GitHub,
     Phone,
@@ -37,7 +37,7 @@ const Footer = () => {
 
             <BottomNavigationAction label="Twitter / X" icon={<Twitter />} />
             <BottomNavigationAction label="Instagram" icon={<Instagram />} />
-            <BottomNavigationAction label="Facebook" icon={<Facebook />} />
+            <BottomNavigationAction label="WhatsApp" icon={<WhatsApp />} />
             <BottomNavigationAction
                 href="https://github.com/program-training/Class5-Banners-front"
                 target="_blank"
